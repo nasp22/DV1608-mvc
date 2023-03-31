@@ -1,0 +1,47 @@
+body {
+    margin: 0 auto;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+h1 {
+    border-bottom: 4px double #ccc;
+}
+
+.site-header {
+    background-size: cover;
+    height: 100%;
+}
+
+.site-title {
+    color: #fff;
+    font-size: 2em;
+}
+
+.flex {
+    margin: 0 auto;
+    display: grid;
+    gap: 4px;
+    grid-column: 2;
+    width: 100%;
+}
+
+.flex .one {
+    grid-column: 1 / span 1;
+}
+
+.flex .two {
+    grid-column: 2 / span 1;
+    font-size: small;
+    border-left: 4px solid #ccc;
+    padding-left: 2rem;
+}
+
+
+img {
+    width: 100%;
+}
+/* *npm run build */
