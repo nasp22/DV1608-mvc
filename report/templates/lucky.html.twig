@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block body %}
+    <h1>Your lucky animal is: </h1>
+    <h2> {{ animal }}</h2>
+    <br>
+    <img src="img/{{ animal }}.jpg" alt="{{ animal }}" width="50%";>
+{% endblock %}

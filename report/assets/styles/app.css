@@ -1,0 +1,113 @@
+body {
+    margin: 0 auto;
+    background-color: #db6e33;
+}
+
+main {
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 80%;
+    align-items: center;
+    background-color: #ececec;
+}
+
+.center {
+    text-align: center;
+}
+
+h1 {
+    border-bottom: 4px double #ccc;
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+.site-header {
+    position: relative;
+    background-size: cover;
+}
+
+.site-title {
+    color: #fff;
+    font-size: 2em;
+}
+
+.flex {
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    grid-column: 2;
+}
+
+.flex .one {
+    grid-column: 1 / span 1;
+}
+
+.flex .two {
+    grid-column: 2 / span 1;
+    font-size: small;
+    border-left: 4px solid #ccc;
+    padding-left: 2rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.two-col-layout {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+
+}
+
+.article {
+    padding-left: 1rem;
+}
+.two-col-layout > .main {
+    width: calc(100% / 16 * 12); /* 12/16 width */
+
+}
+
+.two-col-layout > .aside {
+    width: calc(100% / 16 * 4); /* 4/16 width */
+}
+
+.aside {
+    border-right: 4px solid #ccc;
+    padding: 2rem;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover:not(.active) {
+    background-color: #111;
+}
+
+/* *npm run build */

@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <a href="{{ asset('img/mvc.jpg') }}">
+            <img src="{{ asset('img/mvc.jpg') }}" alt="" style="width: 100%;">
+        </a>
+        <h1>Objektorienterade webbteknologier, 7,5 hp</h1>
+    </div>
+    <div class="flex">
+        <div class="one">
+            <h4>Objektorienterade webbteknologier (DV1608), 7,5 hp</h4>
+            <p>
+                Kursens fokus är objektorienterade programmeringstekniker i programmeringsspråket PHP. Klassiska objektorienterade
+                konstruktioner hanteras tillsammans med objektorienterad programmering i webbaserat ramverk tillsammans med databaser samt enhetstestning.
+            </p>
+        </div>
+        <div class="two">
+            <p>Kursen omfattar följande områden:</p>
+            <ul>
+                <li>Programmering i webbmiljö, syntax, semantik, koppling mot data</li>
+            </ul>
+            <ul>
+                <li>Objektorienterad programmering i PHP med språkkonstruktioner och begrepp. </li>
+            </ul>
+            <ul>
+                <li>Utveckling av webbapplikationer i ett ramverk.</li>
+            </ul>
+            <ul>
+                <li>Användning av verktyg och tekniker som lämpar sig för utveckling av webbapplikationer</li>
+            </ul>
+        </div>
+    </div>
+    <a href="https://github.com/dbwebb-se/mvc">
+        <p>Länk till kursens GitHub</p>
+    </a>
+    <a href="https://github.com/nasp22/DV1608-mvc">
+        <p>Länk till nasp22 GitHub</p>
+    </a>
+{% endblock %}
