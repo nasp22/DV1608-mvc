@@ -1,0 +1,9 @@
+Då avslutar vi med kmom06, bara projektet kvar.
+
+Jag läser igenom din redovisningstext för att se hur du upplevde kursmomentet allmänt.
+
+Sedan kikar jag på din metrics rapport och ser hur du utförde ditt kvalitetsarbete och hur du allmänt resonerade kring begreppen.
+
+Sen vill jag gärna se ett antal gröna badges i din README på ditt repo.
+
+$TEACHER_SIGNATURE

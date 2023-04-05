@@ -1,0 +1,808 @@
+<!doctype html>
+<html class="theme-5">
+<meta charset="utf-8" />
+<link href="../html-slideshow.bundle.min.css" rel="stylesheet" />
+<link href="../style.css" rel="stylesheet" />
+<script src="https://dbwebb.se/cdn/js/html-slideshow_v1.1.0.bundle.min.js"></script>
+
+<title>Classes and Objects (PHP)</title>
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# Classes and Objects (PHP)
+## Compose and reuse OO code<br>Inheritance, composition, interface, trait
+### Mikael Roos
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Agenda
+
+* Inheritance
+* Composition
+* Interface
+* Trait
+* Properties of good and clean OO codestructure
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# A class to extend
+
+```
+namespace Mos\Dice;
+
+class Dice
+{
+    private int  $faces;
+    private ?int $lastRoll = null;
+
+    public function __construct(int $faces = 6)
+    {
+        $this->faces = $faces;
+    }
+
+    public function roll(): int {}
+    public function getLastRoll(): ?int {}
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# OO Design principles
+
+* Adhere to object orientation
+    * what is right and wrong in terms of OO
+* Reusability of code
+* Encapsulation - hide implementation details
+* Single responsibility - do only one thing
+* Cohesion - gather things that belong together
+* Coupling - limit dependency to other classes
+
+<p class="footnote">https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)<br>https://en.wikipedia.org/wiki/Single-responsibility_principle<br>https://en.wikipedia.org/wiki/Cohesion_(computer_science)<br>https://en.wikipedia.org/wiki/Coupling_(computer_programming)</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# Inheritance
+## Extend or specialize an existing class
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Inheritance
+
+* A dog <u>is an</u> animal
+* A student <u>is a</u> person
+* A graphic dice <u>is a</u> dice
+* A subclass inherits from a base/super/parent class
+    * Extend or specialize
+* A subclass should be able to replace the parent class in all places
+
+<p class="footnote">https://en.wikipedia.org/wiki/Liskov_substitution_principle</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="center">
+# UML inheritance
+
+<figure>
+<img src="img/dice-graphic-uml.png" width="25%">
+<figcaption>How to represent inheritance using an arrow in UML.</figcaption>
+</figure>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Inheritance
+
+```
+namespace Mos\Dice;
+
+class DiceGraphic extends Dice
+{ }
+```
+
+* All public/protected are visible in subclass
+* All private in the parent is hidden from subclass
+
+<p class="footnote">The keyword is 'extends'.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceGraphic properties
+
+```
+class DiceGraphic extends Dice
+{
+    private const FACES = 6;
+    private array $graphic = [
+        1 => "⚀",
+        2 => "⚁",
+        3 => "⚂",
+        4 => "⚃",
+        5 => "⚄",
+        6 => "⚅",
+    ];
+
+    public function __construct() {}
+    public function graphic(): string {}
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceGraphic methods
+
+```
+class DiceGraphic extends Dice
+{
+    public function __construct()
+    {
+        parent::__construct(self::FACES);
+    }
+
+    public function graphic(): string
+    {
+        return $this->graphic[$this->getLastRoll()];
+    }
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceGraphic use it
+
+```
+$die = new DiceGraphic(); // DiceGraphic calls Dice constructor
+
+$die->roll();             // Dice::roll()
+echo $die->getLastRoll(); // Dice::getLastRoll()
+echo $die->graphic();     // DiceGraphic::graphic()
+```
+
+```
+6
+⚅
+```
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Object Inheritance
+
+> "When extending a class, the subclass inherits all of the public and protected methods, properties and constants from the parent class. Unless a class overrides those methods, they will retain their original functionality."
+
+> "The visibility of methods, properties and constants can be relaxed, e.g. a protected method can be marked as public, but they cannot be restricted, e.g. marking a public property as private."
+
+<p class="footnote">A subclass should be able to replace the parent class.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Scope Resolution Operator (::)
+
+* Double colon aka "Paamayim Nekudotayim"
+* Allows access to static, constant, and overridden properties or methods of a class
+
+<p class="footnote">From Hebrew פעמיים נקודתיים‎ (“double colon”); introduced in the Israeli-developed Zend Engine 0.5 used in PHP 3.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# :: outside class definition
+
+```
+class Dice
+{
+    public const FACES = 6;
+}
+
+$die = new Dice();
+
+echo $die::FACES;
+echo Dice::FACES;
+```
+
+<p class="footnote">Access public constants and static members of the class from outside.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# :: inside class definition
+
+```
+class DiceGraphic extends Dice
+{
+    private const FACES = 6;
+
+    public function __construct()
+    {
+        parent::__construct(self::FACES);
+    }
+}
+```
+
+<p class="footnote">Use self and parent to access constants, static and parent members (properties and methods) of the class from inside.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# Composition
+## A class contains a class
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Composition versus inheritance
+
+* Inheritance "is a" (extends, specialize)
+* Composition "has a"
+    * "contains", "uses"
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="center">
+# UML composition
+
+<figure>
+<img src="img/uml-dicehand-dice.png" width="70%">
+<figcaption>How to represent composition using a "diamond" in UML.</figcaption>
+</figure>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# PHP Composition
+
+```
+class DiceHand
+{
+    private array $dices;
+    private int   $numberDices;
+
+    public function __construct(int $numberDices)
+    {
+        $this->numberDices = $numberDices;
+
+        for ($i = 1; $i <= $this->numberDices; $i++) {
+            $this->dices[$i] = new Dice();
+        }
+    }
+
+    public function roll(): void {}
+    public function getHand(): string {}
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Using the Dicehand
+
+```
+$hand = new DiceHand(5);
+
+$hand->roll();
+echo $hand->getHand();
+```
+
+```
+Your hand rolled 5 dices:
+5 6 5 6 2
+Sum = 24
+Average = 4.8
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Composition vs aggregation
+
+* How strong the relation is between the objects
+
+> "A house has rooms" (composition, a fixed part of the house)
+
+> "A house has inherent" (aggregation, moveable people living in the house)
+
+> "A hand has dices" (aggregation, dices can exists without the hand)
+
+<p class="footnote">https://en.wikipedia.org/wiki/Object_composition.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="center">
+# UML composition/aggregation
+
+<figure>
+<img src="img/oophp20-uml-composition-aggregate.png" width="60%">
+<figcaption>Representing composition (ownership) "filled diamond" versus aggregation (independent) "open diamond" in UML.</figcaption>
+</figure>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# OO preferences
+
+> "Prefer composition over inheritance"
+
+<p class="footnote">https://en.wikipedia.org/wiki/Composition_over_inheritance</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# Interface
+## A contract of the class structure
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Object Interfaces
+
+> "Object interfaces allow you to create code which specifies which methods a class must implement, without having to define how these methods are implemented."
+
+* All methods declared in an interface must be public; this is the nature of an interface.
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Dice interface
+
+```
+interface DiceInterface
+{
+    public function roll(): int;
+    public function getLastRoll(): ?int;
+    public function asString(): string;
+}
+```
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Dice implements DiceInterface
+
+```
+class Dice implements DiceInterface
+{
+    public function asString(): string
+    {
+        return (string) $this->lastRoll;
+    }
+}
+```
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceGraphic overloads
+
+```
+class DiceGraphic extends Dice
+{
+    public function asString(): string
+    {
+        return $this->graphic[$this->getLastRoll()];
+    }
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceCheat
+
+```
+class DiceCheat implements DiceInterface
+{
+    public function roll(): int
+    {
+        return 6;
+    }
+
+    public function getLastRoll(): ?int
+    {
+        return 6;
+    }
+
+    public function asString(): string
+    {
+        return "6 (cheating)";
+    }
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# 3 dices, one dicehand?
+
+* We have three different dices
+    * Dice implements DiceInterface
+    * DiceGraphic extends Dice
+    * DiceCheat implements DiceInterface
+* All are implementing the DiceInterface thus supporting a common set of methods
+
+<p class="footnote">Can we create a Dicehand that can use any type of dice, as long as they implement the DiceInterface?</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceHand trust interface
+
+```
+class DiceHand
+{
+    public function addDice(DiceInterface $dice)
+    {
+        $this->numberDices++;
+        $this->dices[] = $dice;
+    }
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceHand using
+
+```
+$hand = new DiceHand();
+
+$hand->addDice(new Dice());
+$hand->addDice(new DiceGraphic());
+$hand->addDice(new DiceCheat());
+
+$hand->roll();
+echo $hand->getHand();
+```
+
+```
+Your hand rolled 3 dices:
+Values: 6 3 6
+As string representation: 6 : ⚂ : 6 (cheating) :
+Sum = 15
+Average = 5
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# OO preferences
+
+> "Depend on abstractions, not on concretions"
+
+* Code to depend on interfaces (or other abstractions) and not concrete classes
+* Dependency inversion principle
+
+<p class="footnote"><br>https://en.wikipedia.org/wiki/Dependency_inversion_principle</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# OO preferences...
+
+> "Dependencys should be injected"
+
+> "Dependency injection is a technique in which an object receives other objects that it depends on"
+
+* Passing the dice to the diceHand, rather than allowing diceHand to build/find the dice itself
+
+<p class="footnote">https://en.wikipedia.org/wiki/Dependency_injection<br>https://en.wikipedia.org/wiki/Separation_of_concerns<br>https://en.wikipedia.org/wiki/Inversion_of_control</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# Trait
+## Reusable parts to use in a class
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Trait
+
+* Reusable building blocks
+* Add to classes to extend their features
+* Reuse when multiple inheritance is not an option
+* Looks like a `class` but is called `trait`
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Trait histogram
+
+* A histogram to be implemented in the dices and in the dicehand
+* Start with a HistogramInterface to show the contract
+* Implement using a HistogramTrait
+* Use trait in the classes where needed
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# HistogramInterface
+
+```
+interface HistogramInterface
+{
+    public function printHistogram(): string;
+}
+```
+
+<p class="footnote">The interface shows the smallest amount of public methods needed.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# HistogramTrait
+
+```
+trait HistogramTrait
+{
+    protected array $histogramValues = [];
+
+    protected function addToHistogram(int $value): void
+    {
+        $this->histogramValues[] = $value;
+    }
+
+    public function printHistogram(): string
+    {
+        // Print the histogram from the
+        // $this->histogramValues[]
+    }
+}
+```
+
+<p class="footnote">The trait provides one reusable implementation of the HistogramInterface. There may be many more ways to implement the interface.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Dice uses trait
+
+```
+class Dice implements DiceInterface, HistogramInterface
+{
+    use HistogramTrait;
+
+    public function roll(): int
+    {
+        $this->lastRoll = rand(1, $this->faces);
+        $this->addToHistogram($this->lastRoll);
+
+        return $this->lastRoll;
+    }
+}
+```
+
+<p class="footnote">The class implements the interface and uses the trait to fulfill the contract.</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Print histogram
+
+```
+$dice = new Dice();
+
+for ($i= 0; $i < 9; $i++) {
+    $roll = $dice->roll();
+    echo $roll . ", ";
+}
+
+echo $dice->printHistogram();
+```
+
+```
+5, 5, 1, 5, 6, 3, 6, 4, 4,
+1: *
+3: *
+4: **
+5: ***
+6: **
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# Lets use the HistogramTrait once more...
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# DiceHand uses trait
+
+```
+class DiceHand implements HistogramInterface
+{
+    use HistogramTrait;
+
+    public function roll(): void
+    {
+        for ($i = 0; $i < $this->numberDices; $i++) {
+            $this->dices[$i]->roll();
+            $this->addToHistogram(
+                $this->dices[$i]->getLastRoll()
+            );
+        }
+    }
+}
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Print histogram
+
+```
+$hand = new DiceHand();
+
+$hand->addDice(new Dice());
+$hand->addDice(new DiceGraphic());
+$hand->addDice(new DiceCheat());
+
+for ($i= 0; $i < 5; $i++) {
+    $hand->roll();
+}
+
+echo $hand->printHistogram();
+```
+
+```
+1: ***
+2:
+3: *
+4: ***
+5: **
+6: ******
+```
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Trait summary
+
+* Reusable code usable in any class
+* Common to use both interface and trait
+* Can trait be a better way than inheritance?
+* It solves the need of multiple inheritance for code reuse
+* Our HistogramTrait is reusable in many different classes that handle a integer value
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Summary
+
+* Inheritance
+* Composition
+* Interface
+* Trait
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Summary...
+
+* Reusability of code
+* Encapsulation - hide implementation details
+* Single responsibility - do only one thing
+* Cohesion - gather things that belong together
+* Coupling - limit dependency to other classes
+* A subclass should be able to replace the parent class in all places (Liskov)
+* Prefer composition over inheritance
+* Depend on abstractions, not on concretions (Dependency inversion principle)
+* Dependencys should be injected (Dependecy injection)
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+# Summary...
+
+* Intention is to create "good and clean code"
+* Read more on these OO principles
+    * or wait until the "pattern" course
+
+<p class="footnote">https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)<br>https://en.wikipedia.org/wiki/Single-responsibility_principle<br>https://en.wikipedia.org/wiki/Cohesion_(computer_science)<br>https://en.wikipedia.org/wiki/Coupling_(computer_programming)<br>https://en.wikipedia.org/wiki/Liskov_substitution_principle<br>https://en.wikipedia.org/wiki/Composition_over_inheritance<br>https://en.wikipedia.org/wiki/Dependency_inversion_principle<br>https://en.wikipedia.org/wiki/Dependency_injection<br>https://en.wikipedia.org/wiki/Separation_of_concerns<br>https://en.wikipedia.org/wiki/Inversion_of_control</p>
+
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown class="titlepage center">
+# The end
+</script>
+
+
+
+<script data-role="slide" type="text/html" data-markdown>
+</script>
+
+</html>

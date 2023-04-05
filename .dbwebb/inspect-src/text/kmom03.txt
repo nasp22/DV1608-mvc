@@ -1,0 +1,11 @@
+Då var det dags för kmom03.
+
+Jag körde igenom 'dbwebb test kmom03' och tittade kort på dit Git repo.
+
+Därefter spelar jag framförallt ditt spel ett par gånger och försöker vinna över banken.
+
+Jag tittar igenom din dokumentation, med pseudokod och flödesdiagram och klassbeskrivningar.
+
+Jag läste igenom din rapport för att få en känsla av hur det gick för dig att utveckla spelet.
+
+$TEACHER_SIGNATURE
