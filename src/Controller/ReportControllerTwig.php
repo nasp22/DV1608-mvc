@@ -10,7 +10,6 @@ class ReportControllerTwig extends AbstractController
 {
     #[Route("/lucky", name: "lucky")]
     public function lucky(): Response
-
     {
         $number = random_int(0, 5);
         $animals = array("CAT", "DOG", "MOUSE", "ELEPHANT", "TIGER", "EAGLE");
