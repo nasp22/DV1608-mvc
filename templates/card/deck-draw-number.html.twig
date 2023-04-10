@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<a href="{{ path('card_start') }}"><button>TILLBAKA</button></a>
+<h1> Cards in hand of {{ number }}</h1>
+<p>
+{% for value in draw%}
+    <img src="../../../img/cards/{{ value }}.png" alt="{{ value }}" style= "width: 10%;">
+{% endfor %}
+<h1> Cards left in deck </h1>
+{% for value in deck%}
+    <img src="../../../img/cards/{{ value }}.png" alt="{{ value }}" style= "width: 5%;">
+{% endfor %}
+</p>
+
+{% endblock %}
