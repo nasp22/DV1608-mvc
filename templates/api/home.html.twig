@@ -5,16 +5,28 @@
 {% block body %}
 
 <h1>API JSON</h1>
+
 <p>Här är dom routes som används för api:</p>
+
 <ul>
     <li><a href="{{ path('quote') }}"> DAGLIGT CITAT (kmom01)</a></li>
     <br>
-    <li><a href="{{ path('json_deck') }}"> VISA BEFINTLIG SORTERAD KORTLEK</a></li>
-    <li><a href="{{ path('json_shuffle') }}">VISA BEFINTLIG BLANDAD KORTLEK</a></li>
-    <li><a href="{{ path('json_draw') }}">DRAR ETT KORT</a></li>
-    <li><a href="{{ path('json-draw-number', {num: 5}) }}">DRAR FLERA KORT (5)</a></li>
-    <br>
     <li><a href="{{ path('api_init') }}"> RESET SESSION</a></li>
+    <br>
+
+    <form method="post" action="">
+        <li><input type="submit" name="show" value="VISAR BEFINTLIG SORTERAD KORTLEK"
+            onClick="this.form.action='{{ path('json_deck') }}';"
+        ></li><br>
+        <li><input type="submit" name="shuffle" value="VISAR BEFINTLIG BLANDAD KORTLEK"
+            onClick="this.form.action='{{ path('json_shuffle') }}';"
+        ></li><br>
+    </form>
+    <form method="post" action='{{ path('json_draw') }}'>
+        <li><label>Ange antal kort att dra:</label>
+        <input type="number" name="num_cards" min="1">
+        <input type="submit" name="do_it" value="DRAR ANTAL KORT"></li><br>
+    </form>
 </ul>
 
 {% endblock %}

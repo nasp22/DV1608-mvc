@@ -149,4 +149,38 @@ class CardGameController extends AbstractController
 
         return $this->render('card/deck-draw.html.twig', $data);
     }
+
+    #[Route("/api/deck/shuffle", name: "json_shuffle", methods: ['POST'])]
+    public function api_shuffle_post(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("left");
+        $session->set("left", $deck);
+
+        return $this->redirectToRoute('json_shuffle_get');
+    }
+
+    #[Route("/api/deck", name: "json_deck", methods: ['POST'])]
+    public function api_deck_post(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("left");
+        $session->set("left", $deck);
+
+        return $this->redirectToRoute('json_deck_get');
+    }
+
+    #[Route("/api/draw", name: "json_draw", methods: ['POST'])]
+    public function api_draw_post(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $numCards = $request->request->get('num_cards');
+
+        $deck = $session->get("left");
+        $session->set("left", $deck);
+        $session->set("num", $numCards);
+
+        return $this->redirectToRoute('json_draw_get');
+    }
 }

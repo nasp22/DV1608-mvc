@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class APIControllerJson
 {
@@ -52,7 +53,7 @@ class APIControllerJson
         return $response;
     }
 
-    #[Route("/api/deck", name: "json_deck", methods: ['GET'])]
+    #[Route("/api/deck", name: "json_deck_get", methods: ['GET'])]
         public function jsonDeck(
             Request $request,
             SessionInterface $session
@@ -67,7 +68,7 @@ class APIControllerJson
             return $response;
         }
 
-    #[Route("/api/deck/shuffle", name: "json_shuffle", methods: ['GET'])]
+        #[Route("/api/deck/shuffle", name: "json_shuffle_get", methods: ['GET'])]
         public function jsonShuffle(
             Request $request,
             SessionInterface $session
@@ -81,43 +82,14 @@ class APIControllerJson
             );
             return $response;
         }
-
-        #[Route("/api/deck/draw", name: "json_draw", methods: ['GET'])]
+        #[Route("/api/deck/draw", name: "json_draw_get", methods: ['GET'])]
         public function jsonDraw(
             Request $request,
             SessionInterface $session
         ): Response {
             $deck = $session->get("left");
             $deckString = $deck->getValue();
-
-            $hand = new CardHand();
-            $handArr = $hand->draw(1, $deckString);
-            $hand->setValue($handArr);
-
-            $newDeck = $deck->remove($handArr);
-            $deck->setValue($newDeck);
-
-            $data = [
-                "hand" => $hand->getAsString(),
-                "resterande kort" => $deck->getAsString()
-            ];
-
-            $session->set("left", $deck);
-
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        }
-        #[Route("/api/deck/draw/{num<\d+>}", name: "json-draw-number", methods: ['GET'])]
-        public function jsonDrawNumber(
-            int $num,
-            SessionInterface $session
-        ): Response {
-            $deck = $session->get("left");
-            $deckString = $deck->getValue();
-
+            $num = $session->get("num");
             $hand = new CardHand();
             $handArr = $hand->draw($num, $deckString);
             $hand->setValue($handArr);
