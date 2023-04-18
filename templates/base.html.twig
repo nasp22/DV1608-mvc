@@ -15,9 +15,6 @@
     </head>
     <body>
         <header class="site-header" style="background-image: url({{ asset('img/header.jpg') }})">
-            <a href="{{ asset('/') }}">
-                <span class="site-title">My Symfony Site</span>
-            </a>
         </header>
         <nav class="navbar">
             <ul>
@@ -26,7 +23,8 @@
                 <li><a href="{{ path('report') }}">Redovisa</a></li>
                 <li><a href="{{ path('lucky') }}">Lucky animal</a></li>
                 <li><a href="{{ path('quote') }}"> Dagens citat</a></li>
-                <li><a href="{{ path('card_start') }}"> Card Game</a></li>
+                <li><a href="{{ path('card_start') }}"> Cards (kmom02)</a></li>
+                <li><a href="{{ path('21_init') }}"> Card Game - 21 (kmom03) </a></li>
                 <li><a href="{{ path('api') }}"> API JSON</a></li>
             </ul>
         </nav>

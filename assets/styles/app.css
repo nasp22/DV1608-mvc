@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    background-color: #db6e33;
+    background-color: #E9DCD1;
 }
 
 main {
@@ -48,11 +48,8 @@ h1 .crazy{
 }
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
+    background-color: #6793D1;
+    padding: 1%;
     color: white;
     text-align: center;
 }
@@ -80,9 +77,25 @@ footer {
 
 .flex .two {
     grid-column: 2 / span 1;
-    border-left: 4px solid #ccc;
     padding-left: 2rem;
 }
+
+
+.flex .left {
+    grid-column: 1 / span 1;
+    text-align: right;
+}
+
+.flex .center {
+    grid-column: 2 / span 1;
+    text-align: center
+}
+
+.flex .right {
+    grid-column: 3 / span 1;
+    text-align: left;
+}
+
 
 a {
     text-decoration: none;
@@ -117,7 +130,7 @@ a {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #C9A290;
 }
 
 .navbar li {
@@ -133,7 +146,61 @@ a {
 }
 
 .navbar li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #505050;
 }
 
+
+.site-header {
+    padding: 12%;
+}
 /* *npm run build */
+
+.board {
+    padding: 10%;
+    background-color: rgb(1, 99, 1);
+    border-radius: 8px;
+    top:0;
+}
+
+.stop{
+    background-image: url("../../img/stop.png")
+}
+
+.flash-success {
+    padding: 0.5em;
+    color: #03791f;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.flash-notice {
+    padding: 0.5em;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.flash-notice:before {
+    content: "ⓘ";
+}
+
+.flash-warning {
+    padding: 0.5em;
+    color: #e90707;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.flash-warning:before {
+    content: "⚠";
+}
+
+.flash-error {
+    padding: 0.5em;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}

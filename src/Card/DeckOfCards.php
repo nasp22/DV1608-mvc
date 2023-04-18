@@ -6,7 +6,7 @@ use App\Card\Card;
 
 class DeckOfCards
 {
-    protected $value;
+    public $value;
 
     public function __construct()
     {

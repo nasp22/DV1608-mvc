@@ -4,6 +4,7 @@ namespace App\Card;
 
 use App\Card\Card;
 use App\Card\DeckOfCards;
+use Symfony\Component\Validator\Constraints\Length;
 
 class CardHand extends DeckOfCards
 {
@@ -12,7 +13,7 @@ class CardHand extends DeckOfCards
         if ($number > Count($deck)) {
             throw new \Exception("Kan inte dra fler kort än vad som är kvar i leken!");
         }
-
+        // var_dump($deck);
         $handArr=[];
         $amountCards=[];
         $count = $number;
@@ -37,5 +38,19 @@ class CardHand extends DeckOfCards
 
         return $handArr;
     }
+    public function getPoints(): string
+    {
+        $points=0;
+        foreach ($this->value as $card) {
+            $points += $card->getPoints();
+        }
+        return strval($points);
+    }
+    public function addCard($newCard, $hand)
+    {
+        $hand->value[] = $newCard;
 
+        return $hand;
+
+    }
 }

@@ -1,0 +1,15 @@
+((
+
+// PHPMD - PHP Mess Detector
+tools/phpmd/vendor/bin/phpmd . text phpmd.xml
+
+
+// PHPStan - Find bugs before they reach production
+(change level in phpstan.neon)
+
+tools/phpstan/vendor/bin/phpstan
+
+))
+
+
+---> composer Lint

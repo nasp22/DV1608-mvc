@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+
+<div class = "board">
+    {{ include('flash.html.twig') }}
+    <div class="flex">
+        <div class="one">
+            <h1> My hand: {{ playersPoints }} p</h1>
+            {% for value in hand%}
+                <img src="../../../img/cards/{{ value }}.png" alt="{{ value }}" style= "width: 15%;">
+            {% endfor %}
+        </div>
+        <div class="two">
+        </div>
+    </div>
+    <h1></h1>
+    <div class="flex">
+        <div class="center">
+            <a href="{{ path('21_new') }}"> <img src="{{ asset('img/restart.png') }}" alt="" style="border-radius: 8px; width: 15%;"> </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

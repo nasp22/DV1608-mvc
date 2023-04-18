@@ -97,7 +97,14 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "phpmd": "tools/phpmd/vendor/bin/phpmd . text phpmd.xml || true",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan || true",
+        "lint": [
+            "@phpmd",
+            "@phpstan"
         ]
+
     },
     "conflict": {
         "symfony/symfony": "*"

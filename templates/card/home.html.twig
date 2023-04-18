@@ -11,9 +11,10 @@
     <li><a href="{{ path('deck-shuffle') }}">VISAR KORTLEKEN BLANDAD</a></li>
     <li><a href="{{ path('deck-sorted') }}">VISAR KORTLEKEN SORTERAD</a></li>
     <li><a href="{{ path('deck-draw') }}">DRAR ETT KORT</a></li>
+    <li><a href="{{ path('deck-draw') }}">DRAR ETT KORT</a></li>
     <li><a href="{{ path('deck-draw-number', {num: 5}) }}">DRAR FLERA KORT (5st)</a></li>
     <br>
-    <li><a href="{{ path('card_init') }}"> RESET SESSION</a></li>
+    <li><a href="{{ path('card_init') }}"> RESET:A KORTLEKEN</a></li>
 </ul>
 
 
@@ -33,5 +34,9 @@
         <img src="{{ asset('img/cards/klassUML.png') }}" alt="" style= "width: 80%;">
     </div>
 </div>
+<h1> Cards left in deck </h1>
+{% for value in deck%}
+    <img src="../img/cards/{{ value }}.png" alt="{{ value }}" style= "width: 5%;">
+{% endfor %}
 
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Card game - 21 </h1>
+
+
+<h3>Spelregler:</h3>
+<p>
+    Klasserna DeckOfCards, CardHand och Cards ligger till grund för denna uppgift hittills. Ett kort instantieras inuti DeckOfCards
+    och därmed är relationen mellan DeckofCards och Card komposition där kortleken äger kortet.
+    En kortlek kan beroende på om den är komplett eller ej, innehålla allt fån ett kort till max 52 kort. CardHand tar på sig den funktion
+    som kortleken har och ärver därmed från DeckOfCards. CardHand har däremot ytterligare en metod vilken kan dra valfritt antal kort från den
+    angivna kortleken. På samma sätt som Card har en komposotionsrelation med DeckOfCards så har även CardHand detta med Cards.
+    En hand kan ta max 52 st kort i en giv och ett kort kan delas ut till max 52 olika händer om respektive hand har minst ett kort i varje.
+</p>
+
+<a href="{{ path('21_new') }}"> Nytt spel </a>
+
+{% endblock %}
