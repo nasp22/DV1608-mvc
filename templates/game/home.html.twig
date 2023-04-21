@@ -4,7 +4,8 @@
 
 {% block body %}
 <h1>Card game - 21 </h1>
-
+<a href="{{ path('21_new') }}"><button ><h2>Nytt spel</h2></button> </a>
+<a href="{{ path('doc') }}"><button ><h2>Doc</h2></button> </a>
 
 <h3>Spelregler:</h3>
 <ul>
@@ -34,8 +35,5 @@
 <ul>
     <li>Därefter kan man påbörja en ny omgång.</li>
 </ul>
-
-
-<a href="{{ path('21_new') }}"><button >Nytt spel</button> </a>
 
 {% endblock %}

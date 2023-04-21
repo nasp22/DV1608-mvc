@@ -27,6 +27,12 @@ class TwentyOneController extends AbstractController
         return $this->redirectToRoute('21_start');
     }
 
+    #[Route("/game/doc", name: "doc")]
+    public function doc(
+    ): Response {
+        return $this->render('game/doc.html.twig');
+    }
+
     #[Route("/game/newGame", name: "21_new")]
     public function twentyonenew(
         SessionInterface $session
