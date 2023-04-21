@@ -49,19 +49,19 @@
                 I detta fall kan alltså objektet leva vidare om det ägande objektet raderas, vilket då inte är möjligt vid komposition.
                 Genom interface kan krav sättas för skapandet av klasser i andra klasser. Det fungerar som ett kontrakt där interface:t meddelar vilka
                 krav som måste uppfyllas för att kunna instanserna objektet i klassen.
-                </p
+                </p>
                 <p>
                 Jag är nöjd med min implementation. Däremot hade jag missat att klassen CardHand skulle finnas med så jag skapade färdigt min kod utefter
                 endast 2 klasser, Card och DeckIOfCards. Detta då jag även såg handen som en ”kortlek” då dom har samma uppgift, att hålla x antal kort.
                 Detta löste jag enkelt med att CardHand ärvde från klass DeckOfCard och fick utökad funktion ”draw”. För att utveckla min kod hade jag
                 kunnat använda mig av interface och trait. Jag kände mig dock inte tillräckligt påläst kring det för
-                 att börja implementera det i detta kmom, men ser det som utvecklingspotential. Även style är under utveckling och anses behövas förbättras.
-                </p
+                att börja implementera det i detta kmom, men ser det som utvecklingspotential. Även style är under utveckling och anses behövas förbättras.
+                </p>
                 <p>
                 Från början kändes det helt omöjligt att hinna med samtliga krav för denna uppgift. Dels för att syntaxen med php fortfarande känns så ny .
                 Bara en liten for-loop eller if-sats kunde ta,  i mina mått mätta, evigheter då jag
                 var tvungen att kolla upp hur syntaxen ser ut. Efter en stund började det sätta sig såklart och jag fick till ett bra flow i arbetet.
-                </p
+                </p>
                 <p>
                 Mitt TIL i detta kmom är att läsa klart hela instruktionen innan jag börjar koda. Mycket fick jag ändra på under arbetets gång och jag hade
                 sparat mycket tid om jag bara hade läst igenom, lagt upp en tydligare plan innan jag började koda. Jag är ganska otålig som person och vill
@@ -70,6 +70,32 @@
                 Ju mer man övar och tänker objektorienterat, desto mer tror jag såklart att man kan ha en tydlig bild över relationerna innan man sätter igång.
                 </p>
                 <h2 id="kmom03">kmom03</h2>
+                <p>
+
+                </p>
+                    Att innan man börjat kod försöka modellera ett kortspel med flödesdiagram och psuedokod var extremt svårt.
+                    Jag var ganska säker på att jag kom långt med den kod jag hade från kmom02 och kunde därmed utgå från att grundkoden skulle vara densamma.
+                    Det som inte implementerades i kmom02 var poängräkning vilket jag nu förstod att jag behövde implementera.
+                    Jag tänkte att det enklaste var att beräkna poäng i respektive klass med en metod som sätter poängen för objektet.
+                    Poängen går sedan att hämta frå sig för vare sig det är en hand genom CardHand.getPoints() eller om det är ett kort Card.getpoints().
+                    Min psuedokod, eller rättare sagt tanke stämde ganska väl med vad som krävdes för att slutföra kmom03.
+                <p>
+                    Jag är som sagt mycket nöjd med min implementation från uppgiften. Både till utseende och funktion. Jag tycker jag gjorde den estetiskt tilltalande
+                    och extra användarvänlig med tydligt stora ikoner och färdiga kort som bilder. Jag hade i slutet av uppgiften ganska mycket kod och ifsatser i mina routes
+                    och det kändes inte helt rätt. Jag önskade få så lite kod som möjligt i scr och sorterade ut dessa i klasserna och dess metoder. Jag exempelvis ytterligare
+                    för kontroll av ess i handen för att ändra poäng
+                    från 14 till ett för just det kortet i handen.
+                    Klassen för att beräkna resultatet fick även hålla meddelanden för flash så minimalt med if-satser kunde vara i CardGameController.
+                </p>
+                <p>
+                    Det känns tryckt och roligt att koda i symfony. Jag känner fortfarande lite osäkerhet i just php-syntaxen men det går bättre för varje kmom.
+                </p>
+                <p>
+                    Mitt TIL för detta kmom är nog att jag kan mer än vad jag faktiskt tror. Mina funderingar och vision inför detta kmom visade sig stämma ganska bra och liknar verkligen slutresultatet.
+                    Jag har även förstått att jag är extremt kräsen rent estetiskt. Om inte korten eller spelplanen är i närheten av vad jag tycker är presentabelt har jag svårt att gå vidare med koden.
+                    Detta är såklart en nackdel då det tar upp mycket tid från det funktionella som faktiskt är det viktigaste i slutändan. Men jag tänker också att om spelet
+                    inte kan förstås eller användas på rätt sätt är det också ganska värdelöst. På något sätt lyckas jag få ihop det i slutändan ändå, detta då jag aldrig skulle ge mig.
+                </p>
                 <h2 id="kmom04">kmom04</h2>
                 <h2 id="kmom05">kmom05</h2>
                 <h2 id="kmom06">kmom06</h2>
