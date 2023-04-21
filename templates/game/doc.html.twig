@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+
+
+<div class = "center">
+<h1>Doc</h1>
+    <div class="center">
+        <h4>Klasser:</h4>
+        <p>
+        Inför skapandet av spelet 21 antas grunden i kmom02 räcka långt. Jag tror mig inte behöva fler klasser än en sådan som kan beräkna resultat.
+        Uppdatering av befintliga klasserna CardHand och Card kommer behöva göras då det kommer att krävas tilldelning av poäng för respektive kort och hand.
+        Poängställning tänks hållas i sessionener för respektiva datorns hand och spelarens hand.
+        </p>
+    </div>
+    <div class="flex">
+        <div class="one">
+        <h4>Flödesschema:</h4>
+        <img src="{{ asset('img/flodesschema.png') }}" alt="" style="width: 100%;">
+        </div>
+        <div class="two">
+        <h4>Psuedokod:</h4>
+        <img src="{{ asset('img/kod.png') }}" alt="" style="width: 100%;">
+        </div>
+    </div>
+</div>
+
+{% endblock %}
