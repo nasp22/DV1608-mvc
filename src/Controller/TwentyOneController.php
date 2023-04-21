@@ -48,6 +48,10 @@ class TwentyOneController extends AbstractController
         if ($deck == null) {
             return $this->redirectToRoute('21_init');
         }
+        /**
+         * @var TwentyOneController The current deck $deck
+        */
+
         $data = [
             "deck" => $deck->getAsString()
         ];
@@ -80,7 +84,7 @@ class TwentyOneController extends AbstractController
         ];
 
         $session->set("twentyOneDeck", $deck);
-        $session->set("player", $handPoints );
+        $session->set("player", $handPoints);
 
         return $this->render('game/board.html.twig', $data);
     }
@@ -112,7 +116,7 @@ class TwentyOneController extends AbstractController
             $aceH = $hand->value[$index];
             $aceH->points = 1;
             $playersPoints = $hand->getPoints();
-        } if ( $playersPoints > 21 && in_array("ace_of_diamonds", $hand->getAsString())) {
+        } if ($playersPoints > 21 && in_array("ace_of_diamonds", $hand->getAsString())) {
             $index = array_search("ace_of_diamonds", array_values($hand->getAsString()));
             $aceD = $hand->value[$index];
             $aceD->points = 1;
@@ -172,7 +176,7 @@ class TwentyOneController extends AbstractController
         $computerHand->setValue($computerHandArr);
 
         $computerPoints = $computerHand->getPoints();
-        $session->set("computer", $computerPoints );
+        $session->set("computer", $computerPoints);
 
         while ($computerPoints <=17) {
             $newCard = $computerHand->draw(1, $deckString)[0];
@@ -190,7 +194,7 @@ class TwentyOneController extends AbstractController
             $aceH = $computerHand->value[$index];
             $aceH->points = 1;
             $computerPoints = $computerHand->getPoints();
-        } if ( $computerPoints > 21 && in_array("ace_of_diamonds", $computerHand->getAsString())) {
+        } if ($computerPoints > 21 && in_array("ace_of_diamonds", $computerHand->getAsString())) {
             $index = array_search("ace_of_diamonds", array_values($computerHand->getAsString()));
             $aceD = $computerHand->value[$index];
             $aceD->points = 1;
@@ -211,9 +215,9 @@ class TwentyOneController extends AbstractController
         $deck->setValue($newDeck);
 
         $session->set("twentyOneDeck", $deck);
-        $session->set("player", $playersPoints );
-        $session->set("computer", $computerPoints );
-        $session->set("computerHand", $computerHand );
+        $session->set("player", $playersPoints);
+        $session->set("computer", $computerPoints);
+        $session->set("computerHand", $computerHand);
         return $this->redirectToRoute('21_result');
     }
 
@@ -233,32 +237,32 @@ class TwentyOneController extends AbstractController
                 'success',
                 'You Won!'
             );
-        } else if ($playersPoints == 21) {
+        } elseif ($playersPoints == 21) {
             $this->addFlash(
                 'warning',
                 'You lost!'
             );
-        } else if ($playersPoints == 21) {
+        } elseif ($playersPoints == 21) {
             $this->addFlash(
                 'success',
                 'You Won!'
             );
-        } else if ($computerPoints > $playersPoints) {
-        $this->addFlash(
-            'warning',
-            'You lost!'
-        );
-        } else if ($playersPoints > 21) {
+        } elseif ($computerPoints > $playersPoints) {
             $this->addFlash(
                 'warning',
                 'You lost!'
             );
-        } else if ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
+        } elseif ($playersPoints > 21) {
             $this->addFlash(
                 'warning',
                 'You lost!'
             );
-        } else if ($playersPoints < 21 && $computerPoints < 21 && $computerPoints < $playersPoints) {
+        } elseif ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
+            $this->addFlash(
+                'warning',
+                'You lost!'
+            );
+        } elseif ($playersPoints < 21 && $computerPoints < 21 && $computerPoints < $playersPoints) {
             $this->addFlash(
                 'success',
                 'You Won!'

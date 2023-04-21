@@ -4,18 +4,17 @@ namespace App\Card;
 
 class Card
 {
-    public $value;
-    public $points;
-
-    public function __construct()
+    public array $value;
+    public int $points;
+    public function __construct(array $value = [], int $points = 0)
     {
-        $this->value = null;
-        $this->points = null;
+        $this->value = $value;
+        $this->points = $points;
     }
-    public function specificCard($cardArray)
+
+    public function specificCard(array $cardArray):void
     {
         $this->value = $cardArray;
-
         if ($cardArray[0][0] == "a") {
             $this->points = 14;
         }

@@ -6,7 +6,7 @@ use App\Card\Card;
 
 class DeckOfCards
 {
-    public $value;
+    public array $value;
 
     public function __construct()
     {
@@ -51,7 +51,7 @@ class DeckOfCards
         return $values;
     }
 
-    public function setValue($cards)
+    public function setValue(array $cards): void
     {
         $values = [];
         foreach ($cards as $card) {
@@ -60,7 +60,7 @@ class DeckOfCards
         $this->value = $values;
     }
 
-    public function remove($cards)
+    public function remove(array $cards): array
     {
         $handArr=[];
         $thisArr=[];
@@ -80,15 +80,15 @@ class DeckOfCards
             unset($thisArr[$key]);
         };
 
-        $ArrwithCards=[];
+        $arr_with_cards=[];
 
         foreach ($thisArr as $card) {
             $cardObject = new Card();
             $cardObject->specificCard([$card[0], $card[1]]);
-            $ArrwithCards[]=$cardObject;
+            $arr_with_cards[]=$cardObject;
         }
 
-        $this->value = $ArrwithCards;
+        $this->value = $arr_with_cards;
         return $this->value;
     }
 }

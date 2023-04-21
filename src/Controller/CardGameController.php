@@ -16,7 +16,6 @@ class CardGameController extends AbstractController
 {
     #[Route("/card/init", name: "card_init")]
     public function initCallback(
-        Request $request,
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();
@@ -26,7 +25,6 @@ class CardGameController extends AbstractController
 
     #[Route("/api/init", name: "api_init")]
     public function initApiCallback(
-        Request $request,
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();

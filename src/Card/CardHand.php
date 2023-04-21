@@ -8,12 +8,12 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class CardHand extends DeckOfCards
 {
-    public function draw($number, $deck)
+    public function draw(int $number, array $deck): array
     {
         if ($number > Count($deck)) {
             throw new \Exception("Kan inte dra fler kort än vad som är kvar i leken!");
         }
-        // var_dump($deck);
+
         $handArr=[];
         $amountCards=[];
         $count = $number;
@@ -31,9 +31,9 @@ class CardHand extends DeckOfCards
         }
 
         foreach ($amountCards as $card) {
-            $Newcard = new Card();
-            $Newcard->specificCard([$card[0], $card[1]]);
-            $handArr[]=$Newcard;
+            $new_card = new Card();
+            $new_card->specificCard([$card[0], $card[1]]);
+            $handArr[]=$new_card;
         };
 
         return $handArr;
@@ -46,7 +46,7 @@ class CardHand extends DeckOfCards
         }
         return strval($points);
     }
-    public function addCard($newCard, $hand)
+    public function addCard(object $newCard, object $hand): object
     {
         $hand->value[] = $newCard;
 

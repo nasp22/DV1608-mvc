@@ -110,4 +110,24 @@ class APIControllerJson
             );
             return $response;
         }
+
+        #[Route("/api/game", name: "api_game", methods: ['GET'])]
+        public function Game(
+            Request $request,
+            SessionInterface $session
+        ): Response {
+            $player = $session->get("player");
+            $computer =  $session->get("computer");
+
+            $data = [
+                'Player current score' => $player,
+                'Computer current score' => $computer,
+            ];
+
+            $response = new JsonResponse($data);
+            $response->setEncodingOptions(
+                $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            );
+            return $response;
+        }
 }

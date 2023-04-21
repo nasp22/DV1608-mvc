@@ -27,9 +27,8 @@
         <input type="number" name="num_cards" min="1">
         <input type="submit" name="do_it" value="DRAR ANTAL KORT"></li><br>
     </form>
+    <li><a href="{{ path('api_game') }}"> Game</a></li>
 </ul>
 <h1> Cards left in deck </h1>
-{% for value in deck%}
-    <img src="../img/cards/{{ value }}.png" alt="{{ value }}" style= "width: 5%;">
-{% endfor %}
+
 {% endblock %}
