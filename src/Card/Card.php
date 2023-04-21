@@ -2,16 +2,29 @@
 
 namespace App\Card;
 
+/**
+* @property int $points
+* @property array<int, string> $value
+ */
 class Card
 {
+    /**
+    * @var array<int, string> $value
+    */
     public array $value;
     public int $points;
+
+    /**
+    * @param array<int, string> $value
+    */
     public function __construct(array $value = [], int $points = 0)
     {
         $this->value = $value;
         $this->points = $points;
     }
-
+    /**
+    * @param array<int, string> $cardArray
+    */
     public function specificCard(array $cardArray):void
     {
         $this->value = $cardArray;
@@ -55,16 +68,23 @@ class Card
             $this->points = 13;
         }
     }
+    /**
+    * @return array<int, string> $this-value
+    */
     public function getValue(): array
     {
         return $this->value;
     }
+
+    /**
+    * @return int $this->points;
+    */
     public function getPoints(): int
     {
         return $this->points;
     }
 
-    public function setPoints($points)
+    public function setPoints(int $points):void
     {
         $this->points = $points;
     }

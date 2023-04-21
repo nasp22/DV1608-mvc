@@ -6,6 +6,9 @@ use App\Card\Card;
 
 class DeckOfCards
 {
+    /**
+    * @var array<int, Card> $value
+    */
     public array $value;
 
     public function __construct()
@@ -22,7 +25,9 @@ class DeckOfCards
             }
         }
     }
-
+    /**
+    * @return array<int, string> $values
+    */
     public function shuffle(): array
     {
         $values = [];
@@ -33,6 +38,9 @@ class DeckOfCards
         return $values;
     }
 
+    /**
+    * @return array<int, array<int, string>> $values
+    */
     public function getValue(): array
     {
         $values=[];
@@ -41,7 +49,9 @@ class DeckOfCards
         }
         return $values;
     }
-
+    /**
+    * @return array<int, string> $values
+    */
     public function getAsString(): array
     {
         $values = [];
@@ -50,7 +60,9 @@ class DeckOfCards
         }
         return $values;
     }
-
+    /**
+    * @param array<int, Card> $cards
+    */
     public function setValue(array $cards): void
     {
         $values = [];
@@ -59,7 +71,10 @@ class DeckOfCards
         }
         $this->value = $values;
     }
-
+    /**
+    * @param array<int, Card> $cards
+    * @return array<int, Card> $values
+    */
     public function remove(array $cards): array
     {
         $handArr=[];
@@ -80,15 +95,15 @@ class DeckOfCards
             unset($thisArr[$key]);
         };
 
-        $arr_with_cards=[];
+        $arrWithCards=[];
 
         foreach ($thisArr as $card) {
             $cardObject = new Card();
             $cardObject->specificCard([$card[0], $card[1]]);
-            $arr_with_cards[]=$cardObject;
+            $arrWithCards[]=$cardObject;
         }
 
-        $this->value = $arr_with_cards;
+        $this->value = $arrWithCards;
         return $this->value;
     }
 }

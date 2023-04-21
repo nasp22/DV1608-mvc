@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CardGameController extends AbstractController
 {
     #[Route("/card/init", name: "card_init")]
-    public function initCallback(
+    public function initcallback(
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();
@@ -24,7 +24,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/api/init", name: "api_init")]
-    public function initApiCallback(
+    public function initapicallback(
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();
@@ -49,7 +49,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/api", name: "api")]
-    public function json_start(
+    public function jsonstart(
         SessionInterface $session
     ): Response {
         $deck = $session->get("left");
@@ -65,7 +65,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck", name: "deck-sorted")]
-    public function Deck(
+    public function deck(
         SessionInterface $session
     ): Response {
         $deck = $session->get("left");
@@ -80,19 +80,19 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck/shuffle", name: "deck-shuffle")]
-    public function DeckShuffle(
+    public function deckshuffle(
         SessionInterface $session
     ): Response {
-        $shuffled_deck = $session->get("left");
+        $shuffledDeck = $session->get("left");
         $data = [
-            "deck" =>$shuffled_deck->shuffle()
+            "deck" =>$shuffledDeck->shuffle()
         ];
 
         return $this->render('card/deck-shuffle.html.twig', $data);
     }
 
     #[Route("/card/deck/draw-one", name: "deck-draw")]
-    public function DeckDraw(
+    public function deckdraw(
         SessionInterface $session
     ): Response {
 
@@ -120,7 +120,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck/draw/{num<\d+>}", name: "deck-draw-number")]
-    public function DeckDrawNumber(
+    public function deckdrawnumber(
         int $num,
         SessionInterface $session
     ): Response {
@@ -149,7 +149,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/api/deck/shuffle", name: "json_shuffle", methods: ['POST'])]
-    public function api_shuffle_post(
+    public function apishufflepost(
         SessionInterface $session
     ): Response {
         $deck = $session->get("left");
@@ -159,7 +159,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/api/deck", name: "json_deck", methods: ['POST'])]
-    public function api_deck_post(
+    public function apideckpost(
         SessionInterface $session
     ): Response {
         $deck = $session->get("left");
@@ -169,7 +169,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/api/draw", name: "json_draw", methods: ['POST'])]
-    public function api_draw_post(
+    public function apidrawpost(
         Request $request,
         SessionInterface $session
     ): Response {

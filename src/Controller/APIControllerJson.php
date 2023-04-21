@@ -37,15 +37,6 @@ class APIControllerJson
             'tidstampel' => $time
         ];
 
-        // $response = new Response();
-        // $response->setContent(json_encode($data));
-        // $response->headers->set('Content-Type', 'application/json');
-        // return $response;
-
-        // alt. rätt:
-        // return new JsonResponse($data);
-
-        // alt. rätt snygg utskrift json:
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT
@@ -55,7 +46,6 @@ class APIControllerJson
 
     #[Route("/api/deck", name: "json_deck_get", methods: ['GET'])]
         public function jsonDeck(
-            Request $request,
             SessionInterface $session
         ): Response {
             $deck = $session->get("left");
@@ -70,7 +60,6 @@ class APIControllerJson
 
         #[Route("/api/deck/shuffle", name: "json_shuffle_get", methods: ['GET'])]
         public function jsonShuffle(
-            Request $request,
             SessionInterface $session
         ): Response {
             $deck = $session->get("left");
@@ -84,7 +73,6 @@ class APIControllerJson
         }
         #[Route("/api/deck/draw", name: "json_draw_get", methods: ['GET'])]
         public function jsonDraw(
-            Request $request,
             SessionInterface $session
         ): Response {
             $deck = $session->get("left");
@@ -112,8 +100,7 @@ class APIControllerJson
         }
 
         #[Route("/api/game", name: "api_game", methods: ['GET'])]
-        public function Game(
-            Request $request,
+        public function game(
             SessionInterface $session
         ): Response {
             $player = $session->get("player");

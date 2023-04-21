@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
 use App\Card\Player;
+use App\Card\Result;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TwentyOneController extends AbstractController
 {
     #[Route("/game/init", name: "21_init")]
-    public function TwentyOneInit(
-        Request $request,
+    public function twentyoneinit(
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();
@@ -28,8 +28,7 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/newGame", name: "21_new")]
-    public function TwentyOneNew(
-        Request $request,
+    public function twentyonenew(
         SessionInterface $session
     ): Response {
         $deck = new DeckOfCards();
@@ -41,16 +40,13 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game", name: "21_start")]
-    public function twentyOneHome(
+    public function twentyonehome(
         SessionInterface $session
     ): Response {
         $deck = $session->get("twentyOneDeck");
         if ($deck == null) {
             return $this->redirectToRoute('21_init');
         }
-        /**
-         * @var TwentyOneController The current deck $deck
-        */
 
         $data = [
             "deck" => $deck->getAsString()
@@ -61,7 +57,7 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/board", name: "21_board")]
-    public function Board(
+    public function board(
         SessionInterface $session
     ): Response {
         $deck = $session->get("twentyOneDeck");
@@ -90,7 +86,7 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/draw", name: "21_draw")]
-    public function drawOne(
+    public function drawone(
         SessionInterface $session
     ): Response {
         $deck = $session->get("twentyOneDeck");
@@ -103,36 +99,19 @@ class TwentyOneController extends AbstractController
         $cardPoints = $newCard->getPoints();
         $playersPoints = $playersPoints + $cardPoints;
 
+        $newCardArr = [];
+
         $session->set("hand", $hand);
         $newCardArr[] = $newCard;
 
-        if ($playersPoints > 21 && in_array("ace_of_spades", $hand->getAsString())) {
-            $index = array_search("ace_of_spades", array_values($hand->getAsString()));
-            $aceS = $hand->value[$index];
-            $aceS->points = 1;
-            $playersPoints = $hand->getPoints();
-        } if ($playersPoints > 21 && in_array("ace_of_hearts", $hand->getAsString())) {
-            $index = array_search("ace_of_hearts", array_values($hand->getAsString()));
-            $aceH = $hand->value[$index];
-            $aceH->points = 1;
-            $playersPoints = $hand->getPoints();
-        } if ($playersPoints > 21 && in_array("ace_of_diamonds", $hand->getAsString())) {
-            $index = array_search("ace_of_diamonds", array_values($hand->getAsString()));
-            $aceD = $hand->value[$index];
-            $aceD->points = 1;
-            $playersPoints = $hand->getPoints();
-        } if ($playersPoints > 21 && in_array("ace_of_clubs", $hand->getAsString())) {
-            $index = array_search("ace_of_clubs", array_values($hand->getAsString()));
-            $aceC = $hand->value[$index];
-            $aceC->points = 1;
-            $playersPoints = $hand->getPoints();
-        };
-
+        $hand->checkforace($playersPoints);
         $playersPoints = $hand->getPoints();
 
         $newDeck = $deck->remove($newCardArr);
         $deck->setValue($newDeck);
 
+        // computer wins, player is FAT:
+        // $playersPoints = 22;
 
         $data = [
             "hand"=>$hand->getAsString(),
@@ -147,10 +126,11 @@ class TwentyOneController extends AbstractController
         if ($playersPoints > 21) {
             return $this->redirectToRoute('21_fat');
         }
+
         return $this->render('game/player.html.twig', $data);
     }
     #[Route("/game/stay", name: "21_stay", methods: ['POST'])]
-    public function twentyOneStay(
+    public function twentyonestay(
         Request $request,
         SessionInterface $session
     ): Response {
@@ -184,28 +164,7 @@ class TwentyOneController extends AbstractController
             $computerPoints = $computerHand->getPoints();
         }
 
-        if ($computerPoints > 21 && in_array("ace_of_spades", $computerHand->getAsString())) {
-            $index = array_search("ace_of_spades", array_values($computerHand->getAsString()));
-            $aceS = $computerHand->value[$index];
-            $aceS->points = 1;
-            $computerPoints = $computerHand->getPoints();
-        } if ($computerPoints > 21 && in_array("ace_of_hearts", $computerHand->getAsString())) {
-            $index = array_search("ace_of_hearts", array_values($computerHand->getAsString()));
-            $aceH = $computerHand->value[$index];
-            $aceH->points = 1;
-            $computerPoints = $computerHand->getPoints();
-        } if ($computerPoints > 21 && in_array("ace_of_diamonds", $computerHand->getAsString())) {
-            $index = array_search("ace_of_diamonds", array_values($computerHand->getAsString()));
-            $aceD = $computerHand->value[$index];
-            $aceD->points = 1;
-            $computerPoints = $computerHand->getPoints();
-        } if ($computerPoints > 21 && in_array("ace_of_clubs", $computerHand->getAsString())) {
-            $index = array_search("ace_of_clubs", array_values($computerHand->getAsString()));
-            $aceC = $computerHand->value[$index];
-            $aceC->points = 1;
-            $computerPoints = $computerHand->getPoints();
-        };
-
+        $computerHand->checkforace($computerPoints);
         $computerPoints = $computerHand->getPoints();
 
         $hand = $hand->getAsString();
@@ -222,7 +181,7 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/result", name: "21_result")]
-    public function computerResult(
+    public function computerresult(
         SessionInterface $session
     ): Response {
         $deck = $session->get("twentyOneDeck");
@@ -232,42 +191,32 @@ class TwentyOneController extends AbstractController
         $hand = $hand->getAsString();
         $computerHand = $session->get("computerHand");
 
-        if ($computerPoints > 21) {
-            $this->addFlash(
-                'success',
-                'You Won!'
-            );
-        } elseif ($playersPoints == 21) {
-            $this->addFlash(
-                'warning',
-                'You lost!'
-            );
-        } elseif ($playersPoints == 21) {
-            $this->addFlash(
-                'success',
-                'You Won!'
-            );
-        } elseif ($computerPoints > $playersPoints) {
-            $this->addFlash(
-                'warning',
-                'You lost!'
-            );
-        } elseif ($playersPoints > 21) {
-            $this->addFlash(
-                'warning',
-                'You lost!'
-            );
-        } elseif ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
-            $this->addFlash(
-                'warning',
-                'You lost!'
-            );
-        } elseif ($playersPoints < 21 && $computerPoints < 21 && $computerPoints < $playersPoints) {
-            $this->addFlash(
-                'success',
-                'You Won!'
-            );
-        }
+        // TEST RESULTS:
+        // If player is fat -> route "21_fat"
+
+        // you lost:
+        // $playersPoints = 21;
+        // $computerPoints= 21;
+
+        // you won:
+        // $playersPoints = 21;
+        // $computerPoints= 22;
+
+        // you won:
+        // $playersPoints = 10;
+        // $computerPoints= 22;
+
+        // you lost:
+        // $playersPoints = 18;
+        // $computerPoints= 18;
+
+        $result = new Result();
+        $result = $result->checkresult($computerPoints, $playersPoints);
+
+        $this->addFlash(
+            $result[0],
+            $result[1]
+        );
 
         $data = [
             "playersPoints" => $playersPoints,
@@ -283,7 +232,7 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/fat", name: "21_fat")]
-    public function computerFat(
+    public function computerfat(
         SessionInterface $session
     ): Response {
         $deck = $session->get("twentyOneDeck");
@@ -301,31 +250,15 @@ class TwentyOneController extends AbstractController
 
         $session->set("twentyOneDeck", $deck);
 
-        if ($playersPoints> 21) {
-            $this->addFlash(
-                'warning',
-                'You got over 21 and you lost the game!'
-            );
-        }
+        $result = new Result();
+        $result = $result->checkresult(0, 500);
+
+        $this->addFlash(
+            $result[0],
+            $result[1]
+        );
 
         return $this->render('game/fat.html.twig', $data);
     }
 
 }
-
-
-
-
-// if ($computerPoints > 21 && in_array("ace_of_spades", [$newCard->getAsString()])) {
-//     $newCard->setPoints(1);
-// } else if ($computerPoints > 21 && in_array("ace_of_hearts", [$newCard->getAsString()])) {
-//     $newCard->setPoints(1);
-// } else if ($computerPoints > 21 && in_array("ace_of_diamonds", [$newCard->getAsString()])) {
-//     $newCard->setPoints(1);
-// } else if ($computerPoints > 21 && in_array("ace_of_clubs", [$newCard->getAsString()])) {
-//     $newCard->setPoints(1);
-// };
-
-// $cardPoints = $newCard->getPoints();
-// $computerPoints = $session->get("computer");
-// $computerPoints = $computerPoints + $cardPoints;
