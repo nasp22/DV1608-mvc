@@ -5,7 +5,7 @@ namespace App\Card;
 use App\Card\Card;
 use App\Card\DeckOfCards;
 use Symfony\Component\Validator\Constraints\Length;
-use Exception;
+use App\Card\DrawException;
 
 class CardHand extends DeckOfCards
 {
@@ -16,7 +16,7 @@ class CardHand extends DeckOfCards
     public function draw(int $number, array $deck): array
     {
         if ($number > Count($deck)) {
-            throw new Exception("Kan inte dra fler kort än vad som är kvar i leken!");
+            throw new DrawException("Kan inte dra fler kort än vad som är kvar i leken!");
         }
 
         $handArr=[];

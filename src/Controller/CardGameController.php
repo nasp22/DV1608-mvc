@@ -103,7 +103,6 @@ class CardGameController extends AbstractController
         $handArr = $hand->draw(1, $deckString);
         $hand->setValue($handArr);
 
-
         $newDeck = $deck->remove($handArr);
         $deck->setValue($newDeck);
 
@@ -131,7 +130,6 @@ class CardGameController extends AbstractController
         $hand = new CardHand();
         $handArr = $hand->draw($num, $deckString);
         $hand->setValue($handArr);
-
 
         $newDeck = $deck->remove($handArr);
         $deck->setValue($newDeck);

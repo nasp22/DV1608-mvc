@@ -17,6 +17,14 @@ class CardTest extends TestCase
     {
         $card = new Card();
         $this->assertInstanceOf("\App\Card\Card", $card);
+    }
 
+    public function testSetPoints()
+    {
+        $card = new Card();
+        $card->setPoints(22);
+        $res = $card->getPoints();
+        $exp = 22;
+        $this->assertEquals($res, $exp);
     }
 }
