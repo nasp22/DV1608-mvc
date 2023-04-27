@@ -2,13 +2,21 @@
 
 namespace App\Card;
 
+/**
+ * class for Result
+ */
 class Result
 {
     /**
     * @var array<int, string> $message
     */
+    /**
+     * array to hold message
+     */
     public array $message = [];
-
+    /**
+     * construct method to set this->message
+     */
     public function __construct()
     {
         $this->message = [];
@@ -19,6 +27,9 @@ class Result
     * @param int $playersPoints
     * @return array<int, string> $this->message
     */
+    /**
+     * method to check result, returns message
+     */
     public function checkresult(int $computerPoints, int $playersPoints): array
     {
         if ($computerPoints > 21) {

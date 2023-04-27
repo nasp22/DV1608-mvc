@@ -6,17 +6,29 @@ namespace App\Card;
 * @property int $points
 * @property array<int, string> $value
  */
+/**
+ * class for Card
+ */
 class Card
 {
     /**
     * @var array<int, string> $value
     */
+    /**
+     * array to hold value
+     */
     public array $value;
+    /**
+     * int to hold points
+     */
     public int $points;
 
     /**
     * @param array<int, string> $value
     */
+    /**
+     * construct method to set value and points
+     */
     public function __construct(array $value = [], int $points = 0)
     {
         $this->value = $value;
@@ -25,6 +37,9 @@ class Card
     /**
     * @param array<int, string> $cardArray
     */
+    /**
+     * method to set points and value as incoming argument
+     */
     public function specificCard(array $cardArray):void
     {
         $this->value = $cardArray;
@@ -71,24 +86,33 @@ class Card
     /**
     * @return array<int, string> $this-value
     */
+    /**
+     * method to get value of the card
+     */
     public function getValue(): array
     {
         return $this->value;
     }
-
     /**
     * @return int $this->points;
     */
+    /**
+     * method to get points of the card
+     */
     public function getPoints(): int
     {
         return $this->points;
     }
-
+    /**
+     * method to set points of the card
+     */
     public function setPoints(int $points):void
     {
         $this->points = $points;
     }
-
+    /**
+     * method to get value as a string
+     */
     public function getAsString(): string
     {
         return implode("", $this->value);

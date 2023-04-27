@@ -7,5 +7,4 @@ namespace App\Card;
  */
 class DrawException extends \Exception
 {
-
 }

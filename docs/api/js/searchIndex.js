@@ -3,132 +3,132 @@ Search.appendIndex(
                 {
             "fqsen": "\\App\\Card\\Card",
             "name": "Card",
-            "summary": "",
+            "summary": "class\u0020for\u0020Card",
             "url": "classes/App-Card-Card.html"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "construct\u0020method\u0020to\u0020set\u0020value\u0020and\u0020points",
             "url": "classes/App-Card-Card.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AspecificCard\u0028\u0029",
             "name": "specificCard",
-            "summary": "",
+            "summary": "method\u0020to\u0020set\u0020points\u0020and\u0020value\u0020as\u0020incoming\u0020argument",
             "url": "classes/App-Card-Card.html#method_specificCard"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "method\u0020to\u0020get\u0020value\u0020of\u0020the\u0020card",
             "url": "classes/App-Card-Card.html#method_getValue"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetPoints\u0028\u0029",
             "name": "getPoints",
-            "summary": "",
+            "summary": "method\u0020to\u0020get\u0020points\u0020of\u0020the\u0020card",
             "url": "classes/App-Card-Card.html#method_getPoints"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AsetPoints\u0028\u0029",
             "name": "setPoints",
-            "summary": "",
+            "summary": "method\u0020to\u0020set\u0020points\u0020of\u0020the\u0020card",
             "url": "classes/App-Card-Card.html#method_setPoints"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003AgetAsString\u0028\u0029",
             "name": "getAsString",
-            "summary": "",
+            "summary": "method\u0020to\u0020get\u0020value\u0020as\u0020a\u0020string",
             "url": "classes/App-Card-Card.html#method_getAsString"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A\u0024value",
             "name": "value",
-            "summary": "",
+            "summary": "array\u0020to\u0020hold\u0020value",
             "url": "classes/App-Card-Card.html#property_value"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A\u0024points",
             "name": "points",
-            "summary": "",
+            "summary": "int\u0020to\u0020hold\u0020points",
             "url": "classes/App-Card-Card.html#property_points"
         },                {
             "fqsen": "\\App\\Card\\CardHand",
             "name": "CardHand",
-            "summary": "",
+            "summary": "class\u0020for\u0020CardHand",
             "url": "classes/App-Card-CardHand.html"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
-            "summary": "",
+            "summary": "method\u0020to\u0020draw\u0020cards,\u0020returns\u0020array\u0020with\u0020cards",
             "url": "classes/App-Card-CardHand.html#method_draw"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AgetPoints\u0028\u0029",
             "name": "getPoints",
-            "summary": "",
+            "summary": "method\u0020to\u0020get\u0020points\u0020of\u0020the\u0020hand,\u0020returns\u0020string",
             "url": "classes/App-Card-CardHand.html#method_getPoints"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AaddCard\u0028\u0029",
             "name": "addCard",
-            "summary": "",
+            "summary": "method\u0020to\u0020add\u0020a\u0020card,\u0020returns\u0020handobject",
             "url": "classes/App-Card-CardHand.html#method_addCard"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003Acheckforace\u0028\u0029",
             "name": "checkforace",
-            "summary": "",
+            "summary": "method\u0020to\u0020check\u0020for\u0020ace,\u0020returns\u0020total\u0020point\u0020of\u0020the\u0020hand",
             "url": "classes/App-Card-CardHand.html#method_checkforace"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards",
             "name": "DeckOfCards",
-            "summary": "",
+            "summary": "class\u0020for\u0020DeckofCards",
             "url": "classes/App-Card-DeckOfCards.html"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "construct\u0020method",
             "url": "classes/App-Card-DeckOfCards.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003Ashuffle\u0028\u0029",
             "name": "shuffle",
-            "summary": "",
+            "summary": "method\u0020to\u0020shuffle\u0020the\u0020deck,\u0020returns\u0020array\u0020with\u0020cards\u0020\u0028values\u0029",
             "url": "classes/App-Card-DeckOfCards.html#method_shuffle"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AgetValue\u0028\u0029",
             "name": "getValue",
-            "summary": "",
+            "summary": "method\u0020to\u0020get\u0020value\u0020of\u0020deck,\u0020returns\u0020array\u0020with\u0020cards\u0020\u0028values\u0029",
             "url": "classes/App-Card-DeckOfCards.html#method_getValue"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AgetAsString\u0028\u0029",
             "name": "getAsString",
-            "summary": "",
+            "summary": "method\u0020to\u0020get\u0020value\u0020of\u0020deck\u0020in\u0020string,\u0020returns\u0020array\u0020with\u0020string",
             "url": "classes/App-Card-DeckOfCards.html#method_getAsString"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003AsetValue\u0028\u0029",
             "name": "setValue",
-            "summary": "",
+            "summary": "method\u0020to\u0020set\u0020specific\u0020value\u0020of\u0020deck",
             "url": "classes/App-Card-DeckOfCards.html#method_setValue"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003Aremove\u0028\u0029",
             "name": "remove",
-            "summary": "",
+            "summary": "method\u0020to\u0020remove\u0020specific\u0020card\/cards\u0020from\u0020deck",
             "url": "classes/App-Card-DeckOfCards.html#method_remove"
         },                {
             "fqsen": "\\App\\Card\\DeckOfCards\u003A\u003A\u0024value",
             "name": "value",
-            "summary": "",
+            "summary": "array\u0020to\u0020hold\u0020value",
             "url": "classes/App-Card-DeckOfCards.html#property_value"
         },                {
             "fqsen": "\\App\\Card\\Result",
             "name": "Result",
-            "summary": "",
+            "summary": "class\u0020for\u0020Result",
             "url": "classes/App-Card-Result.html"
         },                {
             "fqsen": "\\App\\Card\\Result\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "",
+            "summary": "construct\u0020method\u0020to\u0020set\u0020this\u002D\u003Emessage",
             "url": "classes/App-Card-Result.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\Result\u003A\u003Acheckresult\u0028\u0029",
             "name": "checkresult",
-            "summary": "",
+            "summary": "method\u0020to\u0020check\u0020result,\u0020returns\u0020message",
             "url": "classes/App-Card-Result.html#method_checkresult"
         },                {
             "fqsen": "\\App\\Card\\Result\u003A\u003A\u0024message",
             "name": "message",
-            "summary": "",
+            "summary": "array\u0020to\u0020hold\u0020message",
             "url": "classes/App-Card-Result.html#property_message"
         },                {
             "fqsen": "\\App\\Controller\\APIControllerJson",
@@ -320,6 +320,11 @@ Search.appendIndex(
             "name": "Kernel",
             "summary": "",
             "url": "classes/App-Kernel.html"
+        },                {
+            "fqsen": "\\App\\Card\\DrawException",
+            "name": "DrawException",
+            "summary": "Exception\u0020class\u0020for\u0020CardHand",
+            "url": "classes/App-Card-DrawException.html"
         },                {
             "fqsen": "\\",
             "name": "\\",
