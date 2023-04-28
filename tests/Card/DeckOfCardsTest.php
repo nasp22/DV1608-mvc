@@ -12,7 +12,7 @@ class DeckOfCardsTest extends TestCase
     /**
      * test to create a Deck of Cards
      */
-    public function testCreateDeckOfCards()
+    public function testCreateDeckOfCards():void
     {
         $deck= new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
@@ -28,7 +28,7 @@ class DeckOfCardsTest extends TestCase
     /**
      * test method shuffle()
      */
-    public function testShuffle()
+    public function testShuffle():void
     {
         $deck= new DeckOfCards();
         $this->assertInstanceOf("\App\Card\DeckOfCards", $deck);
@@ -42,7 +42,7 @@ class DeckOfCardsTest extends TestCase
     /**
      * test method GetValue()
      */
-    public function testGetValue()
+    public function testGetValue():void
     {
         $deck = new DeckOfCards();
         $cards = [];
@@ -57,7 +57,7 @@ class DeckOfCardsTest extends TestCase
     /**
      * test method getAsString
      */
-    public function testgetAsString()
+    public function testgetAsString():void
     {
         $deck = new DeckOfCards();
         $cards = [];
@@ -72,7 +72,7 @@ class DeckOfCardsTest extends TestCase
     /**
      * test method setValue
      */
-    public function testSetValue()
+    public function testSetValue():void
     {
         $deck = new DeckOfCards();
         $deck2 = new DeckOfCards();
@@ -84,7 +84,7 @@ class DeckOfCardsTest extends TestCase
         $card = new Card();
         $card->specificCard(["2", "_of_spades"]);
         $cards = [$card];
-        $deck->setValue([$cards]);
+        $deck->setValue($cards);
 
         $res = $deck->value;
         $exp = $deck2->value;
@@ -97,7 +97,7 @@ class DeckOfCardsTest extends TestCase
     /**
      * test method remove
      */
-    public function testRemove()
+    public function testRemove():void
     {
         $deck = new DeckOfCards();
         $deck2 = new DeckOfCards();

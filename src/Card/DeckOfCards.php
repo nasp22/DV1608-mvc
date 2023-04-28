@@ -3,17 +3,16 @@
 namespace App\Card;
 
 use App\Card\Card;
+
 /**
  * class for DeckofCards
  */
 class DeckOfCards
 {
     /**
+    * array to hold value
     * @var array<int, Card> $value
     */
-    /**
-     * array to hold value
-     */
     public array $value;
     /**
      * construct method
@@ -33,11 +32,9 @@ class DeckOfCards
         }
     }
     /**
+    * method to shuffle the deck, returns array with cards (values)
     * @return array<int, string> $values
     */
-    /**
-     * method to shuffle the deck, returns array with cards (values)
-     */
     public function shuffle(): array
     {
         $values = [];
@@ -49,11 +46,9 @@ class DeckOfCards
     }
 
     /**
+    * method to get value of deck, returns array with cards (values)
     * @return array<int, array<int, string>> $values
     */
-    /**
-     * method to get value of deck, returns array with cards (values)
-     */
     public function getValue(): array
     {
         $values=[];
@@ -63,11 +58,9 @@ class DeckOfCards
         return $values;
     }
     /**
+    * method to get value of deck in string, returns array with string
     * @return array<int, string> $values
     */
-    /**
-     * method to get value of deck in string, returns array with string
-     */
     public function getAsString(): array
     {
         $values = [];
@@ -77,11 +70,9 @@ class DeckOfCards
         return $values;
     }
     /**
+    * method to set specific value of deck
     * @param array<int, Card> $cards
     */
-    /**
-     * method to set specific value of deck
-     */
     public function setValue(array $cards): void
     {
         $values = [];
@@ -91,12 +82,10 @@ class DeckOfCards
         $this->value = $values;
     }
     /**
+    * method to remove specific card/cards from deck
     * @param array<int, Card> $cards
     * @return array<int, Card> $values
     */
-    /**
-     * method to remove specific card/cards from deck
-     */
     public function remove(array $cards): array
     {
         $handArr=[];

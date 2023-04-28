@@ -3,44 +3,36 @@
 namespace App\Card;
 
 /**
+*  class for Card
 * @property int $points
 * @property array<int, string> $value
- */
-/**
- * class for Card
- */
+*/
 class Card
 {
     /**
     * @var array<int, string> $value
+    * array to hold value
     */
-    /**
-     * array to hold value
-     */
     public array $value;
     /**
-     * int to hold points
-     */
+    * this->value, an array to hold points
+    */
     public int $points;
 
     /**
+    * construct method to set value and points
     * @param array<int, string> $value
     */
-    /**
-     * construct method to set value and points
-     */
     public function __construct(array $value = [], int $points = 0)
     {
         $this->value = $value;
         $this->points = $points;
     }
     /**
+    * method to set points and value as incoming argument
     * @param array<int, string> $cardArray
     */
-    /**
-     * method to set points and value as incoming argument
-     */
-    public function specificCard(array $cardArray):void
+    public function specificCard(array $cardArray): void
     {
         $this->value = $cardArray;
         if ($cardArray[0][0] == "a") {
@@ -84,20 +76,16 @@ class Card
         }
     }
     /**
+    * method to get value of the card
     * @return array<int, string> $this-value
     */
-    /**
-     * method to get value of the card
-     */
     public function getValue(): array
     {
         return $this->value;
     }
     /**
-    * @return int $this->points;
-    */
-    /**
      * method to get points of the card
+     * @return int $this->points;
      */
     public function getPoints(): int
     {
@@ -106,7 +94,7 @@ class Card
     /**
      * method to set points of the card
      */
-    public function setPoints(int $points):void
+    public function setPoints(int $points): void
     {
         $this->points = $points;
     }

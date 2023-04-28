@@ -13,13 +13,13 @@ class ResultTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use no arguments.
      */
-    public function testCreateResult()
+    public function testCreateResult():void
     {
         $result= new Result();
         $this->assertInstanceOf("\App\Card\Result", $result);
     }
 
-    public function testCheckResult()
+    public function testCheckResult():void
     {
         $result= new Result();
         $this->assertInstanceOf("\App\Card\Result", $result);

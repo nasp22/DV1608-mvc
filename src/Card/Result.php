@@ -8,11 +8,9 @@ namespace App\Card;
 class Result
 {
     /**
+     * array to hold message
     * @var array<int, string> $message
     */
-    /**
-     * array to hold message
-     */
     public array $message = [];
     /**
      * construct method to set this->message
@@ -23,32 +21,30 @@ class Result
     }
 
     /**
+    * method to check result, returns message
     * @param int $computerPoints
     * @param int $playersPoints
     * @return array<int, string> $this->message
     */
-    /**
-     * method to check result, returns message
-     */
     public function checkresult(int $computerPoints, int $playersPoints): array
     {
         if ($computerPoints > 21) {
             $this->message = ['success', 'You Won!'];
-        } else if ($computerPoints == 21) {
+        } elseif ($computerPoints == 21) {
             $this->message = ['warning', 'You lost!'];
-        } else if ($playersPoints == 21) {
+        } elseif ($playersPoints == 21) {
             $this->message = ['success', 'You Won!'];
-        } else if ($computerPoints > $playersPoints) {
+        } elseif ($computerPoints > $playersPoints) {
             $this->message = ['warning', 'You lost!'];
-        } else if ($playersPoints > 21) {
+        } elseif ($playersPoints > 21) {
             $this->message = ['warning', 'You lost!'];
         } if ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
             $this->message = ['warning', 'You lost!'];
         } if ($playersPoints < 21 && $computerPoints < 21 && $computerPoints < $playersPoints) {
             $this->message = ['success', 'You Won!'];
-        } else if ($playersPoints == $computerPoints) {
+        } elseif ($playersPoints == $computerPoints) {
             $this->message = ['warning', 'You lost!'];
-        } else if ($playersPoints == 500) {
+        } elseif ($playersPoints == 500) {
             $this->message = ['warning', 'You got over 21 and you lost the game!'];
         }
 

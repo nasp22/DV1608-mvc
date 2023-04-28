@@ -6,18 +6,17 @@ use App\Card\Card;
 use App\Card\DeckOfCards;
 use Symfony\Component\Validator\Constraints\Length;
 use App\Card\DrawException;
+
 /**
  * class for CardHand
  */
 class CardHand extends DeckOfCards
 {
     /**
-    * @param array<int, DeckOfCards> $deck
+    * method to draw cards, returns array with cards
+    * @param array<int, array<int, string>> $deck
     * @return array<int, Card> $handArr
     */
-    /**
-     * method to draw cards, returns array with cards
-     */
     public function draw(int $number, array $deck): array
     {
         if ($number > Count($deck)) {
@@ -81,7 +80,7 @@ class CardHand extends DeckOfCards
     /**
      * method to check for ace, returns total point of the hand
      */
-    public function checkforace(int $points):void
+    public function checkforace(int $points): void
     {
         if (intval($points) > 21 && in_array("ace_of_spades", $this->getAsString())) {
             $index = array_search("ace_of_spades", array_values($this->getAsString()));

@@ -13,7 +13,7 @@ class CardHandTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use no arguments.
      */
-    public function testDraw()
+    public function testDraw():void
 
     {
         $deck = new DeckOfCards();
@@ -22,7 +22,7 @@ class CardHandTest extends TestCase
         $handOne= new CardHand();
 
 
-        $hand->value = $hand->draw(5, $deck->getValue());
+        $hand->value = $hand->draw(5, $hand->getValue());
         $handOne->value = $handOne->draw(1, $deck->getValue());
 
         foreach($hand->value as $card) {
@@ -41,7 +41,7 @@ class CardHandTest extends TestCase
         $this->assertEquals($res, $exp);
     }
 
-    public function testGetPoints()
+    public function testGetPoints():void
     {
         $hand = new CardHand();
         $card = new Card();
@@ -54,7 +54,7 @@ class CardHandTest extends TestCase
         $this->assertEquals($res, $exp);
     }
 
-    public function testAddCard()
+    public function testAddCard():void
     {
         $hand = new CardHand();
 
@@ -71,7 +71,7 @@ class CardHandTest extends TestCase
         $this->assertEquals($res, $exp);
     }
 
-    public function testCheckForAce()
+    public function testCheckForAce():void
     {
         $hand = new CardHand();
 

@@ -38,12 +38,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A\u0024value",
             "name": "value",
-            "summary": "array\u0020to\u0020hold\u0020value",
+            "summary": "",
             "url": "classes/App-Card-Card.html#property_value"
         },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A\u0024points",
             "name": "points",
-            "summary": "int\u0020to\u0020hold\u0020points",
+            "summary": "this\u002D\u003Evalue,\u0020an\u0020array\u0020to\u0020hold\u0020points",
             "url": "classes/App-Card-Card.html#property_points"
         },                {
             "fqsen": "\\App\\Card\\CardHand",
