@@ -28,8 +28,8 @@ class TwentyOneController extends AbstractController
     }
 
     #[Route("/game/doc", name: "doc")]
-    public function doc(
-    ): Response {
+    public function doc(): Response
+    {
         return $this->render('game/doc.html.twig');
     }
 
@@ -266,5 +266,4 @@ class TwentyOneController extends AbstractController
 
         return $this->render('game/fat.html.twig', $data);
     }
-
 }

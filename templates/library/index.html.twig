@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Välkommen till {{ controller_name }}!</h1>
+
+    <h3>Vad vill du göra?</h3><br>
+
+    <div class="librarydiv" style="border: solid 1px black;">
+        <h3>Sök efter specifik bok:<h3>
+        <form>
+            <input type="text" name="search" required>
+            <input type="submit" name="do_it" value="Sök"><br>
+            <br>
+        </form>
+        <h5>(Titel, ISBN-kod eller författare)</h5>
+    </div>
+
+    <div class="librarydiv" style="border: solid 1px black;">
+        <h3>Se/ändra alla böcker i biblioteket:<h3><br>
+            <a href="{{ path('book_show_all') }}"><button ><h2>Till alla böcker</h2></button> </a>
+    </div>
+    <div class="librarydiv" style="border: solid 1px black;">
+        <h3>Lägg till en ny bok:<h3><br>
+        <form method="post" action='{{ path('book_create_post') }}'>
+            <label>Titel:</label>
+                    <input type="text" name="title" required><br>
+                <label>Författare:</label>
+                    <input type="text" name="author" required><br>
+                <label>ISBN:</label>
+                    <input type="text" name="isbn" required><br>
+                <label>Img-URL:</label>
+                    <input type="text" name="img" required><br>
+                <input type="submit" name="do_it" value="Lägg till ny bok"><br>
+            <br>
+        </form>
+    </div>
+</div>
+{% endblock %}

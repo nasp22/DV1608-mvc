@@ -21,7 +21,7 @@ class DeckOfCardsTest extends TestCase
         $exp = 52;
         $this->assertEquals($res, $exp);
 
-        foreach($deck->value as $card) {
+        foreach ($deck->value as $card) {
             $this->assertInstanceOf("\App\Card\Card", $card);
         }
     }
@@ -37,8 +37,8 @@ class DeckOfCardsTest extends TestCase
         $res = $deckShuffled;
 
         $this->assertNotEquals($res, $exp);
-
     }
+
     /**
      * test method GetValue()
      */
@@ -46,7 +46,7 @@ class DeckOfCardsTest extends TestCase
     {
         $deck = new DeckOfCards();
         $cards = [];
-        foreach($deck->value as $card) {
+        foreach ($deck->value as $card) {
             $cards[] = $card->getValue();
         }
 
@@ -61,7 +61,7 @@ class DeckOfCardsTest extends TestCase
     {
         $deck = new DeckOfCards();
         $cards = [];
-        foreach($deck->value as $card) {
+        foreach ($deck->value as $card) {
             $cards[] = $card->getAsString();
         }
 
@@ -123,6 +123,5 @@ class DeckOfCardsTest extends TestCase
         $res = $deck->remove($cards);
         $exp = [];
         $this->assertEquals($res, $exp);
-
     }
 }

@@ -45,76 +45,77 @@ class APIControllerJson
     }
 
     #[Route("/api/deck", name: "json_deck_get", methods: ['GET'])]
-        public function jsonDeck(
-            SessionInterface $session
-        ): Response {
-            $deck = $session->get("left");
-            $data = $deck->getAsString();
+    public function jsonDeck(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("left");
+        $data = $deck->getAsString();
 
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        }
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
 
-        #[Route("/api/deck/shuffle", name: "json_shuffle_get", methods: ['GET'])]
-        public function jsonShuffle(
-            SessionInterface $session
-        ): Response {
-            $deck = $session->get("left");
-            $data = $deck->shuffle();
+    #[Route("/api/deck/shuffle", name: "json_shuffle_get", methods: ['GET'])]
+    public function jsonShuffle(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("left");
+        $data = $deck->shuffle();
 
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        }
-        #[Route("/api/deck/draw", name: "json_draw_get", methods: ['GET'])]
-        public function jsonDraw(
-            SessionInterface $session
-        ): Response {
-            $deck = $session->get("left");
-            $deckString = $deck->getValue();
-            $num = $session->get("num");
-            $hand = new CardHand();
-            $handArr = $hand->draw($num, $deckString);
-            $hand->setValue($handArr);
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
 
-            $newDeck = $deck->remove($handArr);
-            $deck->setValue($newDeck);
+    #[Route("/api/deck/draw", name: "json_draw_get", methods: ['GET'])]
+    public function jsonDraw(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("left");
+        $deckString = $deck->getValue();
+        $num = $session->get("num");
+        $hand = new CardHand();
+        $handArr = $hand->draw($num, $deckString);
+        $hand->setValue($handArr);
 
-            $data = [
-                "hand" => $hand->getAsString(),
-                "resterande kort" => $deck->getAsString()
-            ];
+        $newDeck = $deck->remove($handArr);
+        $deck->setValue($newDeck);
 
-            $session->set("left", $deck);
+        $data = [
+            "hand" => $hand->getAsString(),
+            "resterande kort" => $deck->getAsString()
+        ];
 
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        }
+        $session->set("left", $deck);
 
-        #[Route("/api/game", name: "api_game", methods: ['GET'])]
-        public function game(
-            SessionInterface $session
-        ): Response {
-            $player = $session->get("player");
-            $computer =  $session->get("computer");
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
 
-            $data = [
-                'Player current score' => $player,
-                'Computer current score' => $computer,
-            ];
+    #[Route("/api/game", name: "api_game", methods: ['GET'])]
+    public function game(
+        SessionInterface $session
+    ): Response {
+        $player = $session->get("player");
+        $computer =  $session->get("computer");
 
-            $response = new JsonResponse($data);
-            $response->setEncodingOptions(
-                $response->getEncodingOptions() | JSON_PRETTY_PRINT
-            );
-            return $response;
-        }
+        $data = [
+            'Player current score' => $player,
+            'Computer current score' => $computer,
+        ];
+
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
 }

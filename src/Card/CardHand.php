@@ -75,8 +75,8 @@ class CardHand extends DeckOfCards
         $hand->value[] = $newCard;
 
         return $hand;
-
     }
+
     /**
      * method to check for ace, returns total point of the hand
      */

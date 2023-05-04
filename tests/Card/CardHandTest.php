@@ -14,7 +14,6 @@ class CardHandTest extends TestCase
      * properties, use no arguments.
      */
     public function testDraw():void
-
     {
         $deck = new DeckOfCards();
         $card = new Card();
@@ -25,7 +24,7 @@ class CardHandTest extends TestCase
         $hand->value = $hand->draw(5, $hand->getValue());
         $handOne->value = $handOne->draw(1, $deck->getValue());
 
-        foreach($hand->value as $card) {
+        foreach ($hand->value as $card) {
             $this->assertInstanceOf("\App\Card\Card", $card);
         }
 
