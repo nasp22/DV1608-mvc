@@ -23,7 +23,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/library/createPost', name: 'book_create_post', methods: ['POST'])]
+    #[Route('/library/create', name: 'book_create_post', methods: ['POST'])]
     public function createBookPost(
         ManagerRegistry $doctrine,
         Request $request,
@@ -37,41 +37,35 @@ class BookController extends AbstractController
         'img' => $request->request->get('img')
         ];
 
-        $session->set("newBook", $newBook );
-
-        return $this->redirectToRoute('book_create_get');
-    }
-
-    #[Route('/library/create', name: 'book_create_get')]
-    public function createBook(
-        ManagerRegistry $doctrine,
-        SessionInterface $session
-    ): Response {
-
-        $newBook = $session->get("newBook");
-
         $entityManager = $doctrine->getManager();
+
         $book = new Book();
         $book->setTitle($newBook['title']);
         $book->setAuthor($newBook['author']);
         $book->setIsbn($newBook['isbn']);
         $book->setImg($newBook['img']);
 
-        // tell Doctrine you want to (eventually) save the Product
-        // (no queries yet)
         $entityManager->persist($book);
 
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+
+        $session->set("newBook", $book);
+
+        return $this->redirectToRoute('book_create_get');
+    }
+
+    #[Route('/library/create', name: 'book_create_get')]
+    public function createBook(
+        SessionInterface $session
+    ): Response {
 
         $session->set("newBook", "");
 
-        return $this->render('library/created.html.twig', [
-            'title' => $book->getTitle(),
-            'author' => $book->getAuthor(),
-            'isbn' => $book->getIsbn(),
-            'img' => $book->getImg(),
-        ]);
+        $this->addFlash(
+            "success",
+            "Boken finns nu i biblioteket!"
+        );
+        return $this->redirectToRoute('book_show_all');
     }
 
     #[Route('/library/show', name: 'book_show_all')]
@@ -88,7 +82,8 @@ class BookController extends AbstractController
             'title' => $book->getTitle(),
             'author'=> $book->getAuthor(),
             'isbn' => $book->getIsbn(),
-            'img' => $book->getImg()
+            'img' => $book->getImg(),
+            'id' => $book->getId()
             ];
 
             $library[] = $book;
@@ -101,51 +96,142 @@ class BookController extends AbstractController
         return $this->render('library/showAll.html.twig', $data);
     }
 
-    #[Route('/library/show/{id}', name: 'book_by_id')]
-    public function showBookById(
-        BookRepository $bookRepository,
-        int $id
-    ): Response {
-        $book = $bookRepository
-            ->find($id);
-
-        return $this->json($book);
-    }
-
-    #[Route('/library/delete/{id}', name: 'book_delete_by_id')]
+    #[Route('/library/deleted', name: 'book_delete_yes', methods: ['POST'])]
     public function deleteBookById(
         BookRepository $bookRepository,
-        int $id
+        Request $request,
     ): Response {
+
+        $id = $request->request->get('id');
+        $id = (int)$id;
         $book = $bookRepository->find($id);
 
         if (!$book) {
-            throw $this->createNotFoundException(
-                'No book found for id '.$id
+            $this->addFlash(
+                "warning",
+                "Boken finns inte i biblioteket!"
             );
+
+            return $this->redirectToRoute('book_show_all');
         }
 
         $bookRepository->remove($book, true);
 
+        $this->addFlash(
+            "success",
+            "Boken är nu raderad!"
+        );
+
         return $this->redirectToRoute('book_show_all');
     }
 
-    #[Route('/library/update/{oldValue<\d+>}/{newValue<\d+>}', name: 'book_update')]
+    #[Route('/library/show/{id}', name: 'book_show_one')]
+    public function showBookById(
+        BookRepository $bookRepository,
+        int $id,
+        Request $request
+    ): Response {
+        $book = $bookRepository->find($id);
+
+        $book= [
+            'title' => $book->getTitle(),
+            'author'=> $book->getAuthor(),
+            'isbn' => $book->getIsbn(),
+            'img' => $book->getImg(),
+            'id' => $book->getId()
+            ];
+
+            return $this->render('library/show.html.twig', $book);
+    }
+
+    #[Route('/library/update', name: 'book_update', methods: ['POST'])]
     public function updateBook(
         BookRepository $bookRepository,
-        string $oldValue,
-        string $newValue
+        Request $request,
+        SessionInterface $session
     ): Response {
-        $book = $bookRepository->find($oldValue);
+        $data = [
+            'title' => $request->request->get('title'),
+            'author' => $request->request->get('author'),
+            'isbn' => $request->request->get('isbn'),
+            'img' => $request->request->get('img'),
+            'id' => $request->request->get('id'),
+        ];
+        $session->set("book", $data);
+
+        return $this->redirectToRoute('book_update_get');
+    }
+
+    #[Route('/library/delete', name: 'book_delete', methods: ['POST'])]
+    public function deleteBook(
+        BookRepository $bookRepository,
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $data = [
+            'title' => $request->request->get('title'),
+            'author' => $request->request->get('author'),
+            'isbn' => $request->request->get('isbn'),
+            'img' => $request->request->get('img'),
+            'id' => $request->request->get('id'),
+        ];
+        $session->set("book", $data);
+
+        return $this->redirectToRoute('book_delete_get');
+    }
+
+    #[Route('/library/update', name: 'book_update_get')]
+    public function updateBookGet(
+        BookRepository $bookRepository,
+        SessionInterface $session,
+        Request $request,
+    ): Response {
+        $data = $session->get("book");
+        $session->set("book", "");
+        return $this->render('library/update-form.html.twig', $data);
+    }
+
+
+    #[Route('/library/delete', name: 'book_delete_get')]
+    public function deleteBookGet(
+        BookRepository $bookRepository,
+        SessionInterface $session,
+        Request $request,
+    ): Response {
+        $data = $session->get("book");
+        $session->set("book", "");
+        return $this->render('library/delete-form.html.twig', $data);
+    }
+
+    #[Route('/library/updated', name: 'book_update_form', methods: ['POST'])]
+    public function updateBookForm(
+        BookRepository $bookRepository,
+        Request $request,
+    ): Response {
+
+        $id = $request->request->get('id');
+        $id = (int)$id;
+        $book = $bookRepository->find($id);
 
         if (!$book) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$oldValue
+            $this->addFlash(
+                "warning",
+                "Boken kunde inte hittas!"
             );
+            return $this->redirectToRoute('book_show');
         }
 
-        // $book->setValue($value);
+        $book->setTitle($request->request->get('title'));
+        $book->setAuthor($request->request->get('author'));
+        $book->setIsbn($request->request->get('isbn'));
+        $book->setImg($request->request->get('img'));
+
         $bookRepository->save($book, true);
+
+        $this->addFlash(
+            "success",
+            "Boken är nu uppdaterad!"
+        );
 
         return $this->redirectToRoute('book_show_all');
     }

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('book_show_all')}}">
+    <span>
+        <img src="{{ asset('img/leftarrow.png') }}" alt="" style="width: 15px;">
+        Tillbaka
+    </span>
+</a>
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1> Information:</h1>
+    <div class="book">
+        <img src="{{ img }}" alt="{{ img }}" style= "width: 25%;"><br>
+        Id: {{ id }}<br>
+        Titel: {{ title }}<br>
+        Författare: {{ author}}<br>
+        ISBN: {{ isbn }}<br>
+        Bild-URL: {{ img }}<br>
+    </div>
+    <h1> Redigera:</h1>
+    <div class = "row">
+        <form method="post" action='{{ path('book_update') }}'>
+            <input type="hidden" name="title" value ="{{ title }}">
+            <input type="hidden" name="author" value = "{{ author }}">
+            <input type="hidden" name="isbn" value = "{{ isbn }}">
+            <input type="hidden" name="img" value = "{{ img }}">
+            <input type="hidden" name="id" value = "{{ id }}">
+            <input id="update" type="submit" name="do_it" value="Uppdatera information">
+        </form>
+
+        <form method="post" action='{{ path('book_delete') }}'>
+            <input type="hidden" name="title" value ="{{ title }}">
+            <input type="hidden" name="author" value = "{{ author }}">
+            <input type="hidden" name="isbn" value = "{{ isbn }}">
+            <input type="hidden" name="img" value = "{{ img }}">
+            <input type="hidden" name="id" value = "{{ id }}">
+            <input id="delete" type="submit" name="do_it" value="Radera bok">
+        </form>
+    </div>
+</div>
+{% endblock %}

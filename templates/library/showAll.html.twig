@@ -3,20 +3,46 @@
 {% block title %}Hello BookController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1> Böcker i biblioteket:</h1>
-     {% for value in books%}
-        <h1></h1>
-        <img src="{{ value.img }}" alt="{{ value.img }}" style= "width: 25%;"><br>
-        Titel: {{ value.title }}<br>
-        Författare: {{ value.author}}<br>
-        ISBN: {{ value.isbn }}<br>
-    {% endfor %}
+<a href="{{ path('library') }}">
+    <span>
+        <img src="{{ asset('img/leftarrow.png') }}" alt="" style="width: 15px;">
+        Tillbaka
+    </span>
+</a>
+
+{{ include('flash.html.twig') }}
+<h1> Böcker i biblioteket:</h1>
+<div class="row">
+    <div class="flex" style="width:70%;">
+        <div style="width:40%;">
+            {% for value in books%}
+                <a href="{{ path('book_show_one', {id: value.id}) }}">
+                    <div class="hero-image" style="background-image: url('{{value.img}}');height: 500px; border-radius: 8px; margin: 2px; border: solid black 1px; background-color: black;">
+                        <div class="hero-text">
+                            <h3 style="border-bottom: 4px double #ccc;">{{ value.title }}</h3>
+                            <h5>{{ value.author }}</h5>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div style="border: solid 1px #03791f4d; border-radius: 8px; padding: 10px; background-color: #03791f4d; float:right;">
+        <h1>Lägg till en ny bok:<h1><br>
+        <form method="post" action='{{ path('book_create_post') }}'>
+            <label style="font-size:70%;">Titel:</label>
+                <input type="text" name="title" required><br>
+            <label style="font-size:70%;">Författare:</label>
+                <input type="text" name="author" required><br>
+            <label style="font-size:70%;">ISBN:</label>
+                <input type="text" name="isbn" required><br>
+            <label style="font-size:70%;">Img-URL:</label>
+                <input type="text" name="img" required><br>
+            <input type="submit" name="do_it" value="Lägg till ny bok"><br><br>
+        </form>
+    </div>
 </div>
 
 {% endblock %}
