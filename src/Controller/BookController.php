@@ -141,7 +141,7 @@ class BookController extends AbstractController
             'id' => $book->getId()
             ];
 
-            return $this->render('library/show.html.twig', $book);
+        return $this->render('library/show.html.twig', $book);
     }
 
     #[Route('/library/update', name: 'book_update', methods: ['POST'])]
