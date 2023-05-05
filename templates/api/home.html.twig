@@ -11,24 +11,35 @@
 <ul>
     <li><a href="{{ path('quote') }}"> DAGLIGT CITAT (kmom01)</a></li>
     <br>
-    <li><a href="{{ path('api_init') }}"> RESET:A KORTLEKEN</a></li>
+    <li><a href="{{ path('api_init') }}"> RESET:A KORTLEKEN</a>
     <br>
 
     <form method="post" action="">
-        <li><input type="submit" name="show" value="VISAR BEFINTLIG SORTERAD KORTLEK"
-            onClick="this.form.action='{{ path('json_deck') }}';"
-        ></li><br>
-        <li><input type="submit" name="shuffle" value="VISAR BEFINTLIG BLANDAD KORTLEK"
-            onClick="this.form.action='{{ path('json_shuffle') }}';"
-        ></li><br>
+        <li>
+        <input style="width:25%;" type="submit" name="show" value="VISAR BEFINTLIG SORTERAD KORTLEK"
+            onClick="this.form.action='{{ path('json_deck') }}';">
+        </li><br>
+        <li>
+        <input style="width:25%;" type="submit" name="shuffle" value="VISAR BEFINTLIG BLANDAD KORTLEK"
+            onClick="this.form.action='{{ path('json_shuffle') }}';">
+        </li><br>
     </form>
+    </li><br>
     <form method="post" action='{{ path('json_draw') }}'>
         <li><label>Ange antal kort att dra:</label>
         <input type="number" name="num_cards" min="1">
-        <input type="submit" name="do_it" value="DRAR ANTAL KORT"></li><br>
+        <input  style="width:10%;" type="submit" name="do_it" value="DRA">
+        </li><br>
     </form>
-    <li><a href="{{ path('api_game') }}"> Game</a></li>
-</ul>
-<h1> Cards left in deck </h1>
 
+    <li>
+        <a href="{{ path('api_game') }}"> GAME</a><br>
+    </li><br>
+    <li>
+        <a href="{{ path('api_book_show_all') }}"> ALLA BÖCKER I BIBLIOTEKET</a>
+    </li><br>
+    <li>
+        <a href="{{ path('api_book_show_isbn', {isbn: '123-48'}) }}"> VISA BOK VIA ISBN </a>
+    </li><br>
+</ul>
 {% endblock %}

@@ -186,8 +186,11 @@ class BookController extends AbstractController
         SessionInterface $session,
         Request $request,
     ): Response {
-        $data = $session->get("book");
+        $book = $session->get("book");
         $session->set("book", "");
+        $data = [
+            'book' => $book
+        ];
         return $this->render('library/update-form.html.twig', $data);
     }
 
@@ -198,8 +201,11 @@ class BookController extends AbstractController
         SessionInterface $session,
         Request $request,
     ): Response {
-        $data = $session->get("book");
+        $book = $session->get("book");
         $session->set("book", "");
+        $data = [
+            'book' => $book
+        ];
         return $this->render('library/delete-form.html.twig', $data);
     }
 
@@ -234,5 +240,45 @@ class BookController extends AbstractController
         );
 
         return $this->redirectToRoute('book_show_all');
+    }
+
+    #[Route('/api/library/books', name: 'api_book_show_all')]
+    public function showAllBooksApi(
+        BookRepository $bookRepository
+    ): Response {
+        $data = $bookRepository
+            ->findAll();
+
+        $response = $this->json($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route('api/library/book/{isbn}', name: 'api_book_show_isbn')]
+    public function showAllBookIsbnApi(
+        BookRepository $bookRepository,
+        string $isbn,
+    ): Response {
+
+        $library = $bookRepository
+        ->findAll();
+        $data = [];
+        $id = "";
+
+        foreach ($library as $book) {
+            if ($isbn === (string)$book->getIsbn()) {
+                $id = $book->getId();
+                $data = $bookRepository
+                ->find($id);
+            }
+        };
+
+        $response = $this->json($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
     }
 }

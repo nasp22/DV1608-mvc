@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Card\DeckOfCards;
 use App\Card\CardHand;
+use App\Repository\BookRepository;
+use App\Entity\Book;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -112,6 +114,37 @@ class APIControllerJson
             'Computer current score' => $computer,
         ];
 
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+    #[Route('api/library/books', name: 'api_book_show_all')]
+    public function showAllBook(
+        BookRepository $bookRepository
+    ): Response {
+        $books = $bookRepository
+            ->findAll();
+
+        $library = [];
+
+        foreach ($books as $book) {
+            $book= [
+            'title' => $book->getTitle(),
+            'author'=> $book->getAuthor(),
+            'isbn' => $book->getIsbn(),
+            'img' => $book->getImg(),
+            'id' => $book->getId()
+            ];
+
+            $library[] = $book;
+        };
+
+        $data = [
+            'books' => $library
+        ];
+        var_dump($data);
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT

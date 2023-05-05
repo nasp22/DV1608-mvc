@@ -7,7 +7,7 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-<a href="{{ path('book_show_one', {id: id}) }}">
+<a href="{{ path('book_show_one', {id: book.id}) }}">
     <span>
         <img src="{{ asset('img/leftarrow.png') }}" alt="" style="width: 15px;">
         Tillbaka
@@ -17,17 +17,17 @@
 <div class="example-wrapper">
     <h1> Vill du verkligen radera boken med följande information:</h1>
     <form method="post" action='{{ path('book_delete_yes') }}'>
-            <label>Id: {{ id }}</label>
-                <input type="text" name="id" value = "{{ id }}" readonly><br>
+            <label>Id: </label>
+                <input type="text" name="id" value = "{{ book.id }}" readonly><br>
             <label>Titel:</label>
-                <input type="text" name="title" value = "{{ title }}" readonly><br>
+                <input type="text" name="title" value = "{{ book.title }}" readonly><br>
             <label>Författare:</label>
-                <input type="text" name="author" value = "{{ author }}" readonly><br>
+                <input type="text" name="author" value = "{{ book.author }}" readonly><br>
             <label>ISBN:</label>
-                <input type="text" name="isbn" value = "{{ isbn }}" readonly><br>
+                <input type="text" name="isbn" value = "{{ book.isbn }}" readonly><br>
             <label>Bild-URL:</label>
-                <input type="text" name="img" value = "{{ img }} " readonly><br><br>
-            <input type="hidden" name="id" value = "{{ id }}">
+                <input type="text" name="img" value = "{{ book.img }} " readonly><br><br>
+            <input type="hidden" name="id" value = "{{ book.id }}">
             <input type="submit" name="do_it" value="JA, Radera boken">
     </form>
 </div>
