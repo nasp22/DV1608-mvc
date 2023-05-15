@@ -161,6 +161,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-APIControllerJson.html#method_game"
         },                {
+            "fqsen": "\\App\\Controller\\APIControllerJson\u003A\u003AshowAllBook\u0028\u0029",
+            "name": "showAllBook",
+            "summary": "",
+            "url": "classes/App-Controller-APIControllerJson.html#method_showAllBook"
+        },                {
             "fqsen": "\\App\\Controller\\CardGameController",
             "name": "CardGameController",
             "summary": "",
@@ -385,6 +390,16 @@ Search.appendIndex(
             "name": "updateBookForm",
             "summary": "",
             "url": "classes/App-Controller-BookController.html#method_updateBookForm"
+        },                {
+            "fqsen": "\\App\\Controller\\BookController\u003A\u003AshowAllBooksApi\u0028\u0029",
+            "name": "showAllBooksApi",
+            "summary": "",
+            "url": "classes/App-Controller-BookController.html#method_showAllBooksApi"
+        },                {
+            "fqsen": "\\App\\Controller\\BookController\u003A\u003AshowAllBookIsbnApi\u0028\u0029",
+            "name": "showAllBookIsbnApi",
+            "summary": "",
+            "url": "classes/App-Controller-BookController.html#method_showAllBookIsbnApi"
         },                {
             "fqsen": "\\App\\Controller\\ProductController",
             "name": "ProductController",
