@@ -35,4 +35,11 @@ class ProductTest extends TestCase
         $exp = 00000;
         $this->assertEquals($res, $exp);
     }
+    public function testGetId():void
+    {
+        $product = new Product();
+        $res = $product->getId();
+        $exp = null;
+        $this->assertEquals($res, $exp);
+    }
 }

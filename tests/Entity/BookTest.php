@@ -51,4 +51,11 @@ class BookTest extends TestCase
         $exp = "img/hej.jpg";
         $this->assertEquals($res, $exp);
     }
+    public function testGetId():void
+    {
+        $product = new Book();
+        $res = $product->getId();
+        $exp = null;
+        $this->assertEquals($res, $exp);
+    }
 }
