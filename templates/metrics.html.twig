@@ -3,70 +3,108 @@
 {% block title %}Metrics{% endblock %}
 
 {% block body %}
-    <h2>Introduktion</h2>
-    Codestyle
-    Coverage
-    Complexity
-    Cohesion
-    Coupling
-    CRAP
-    Börja med en rubrik “Introduktion” där du förklarar de sex C:na och hur de kan påverka kodens kvalitet.
-    Exemplifiera, där det passar, med några mätvärden som är kopplad till din egen kod och ge en kort förklaring av mätvärdet
-    relaterat till kodkvalitet.
+    <div style="width: 70%;">
+        <h2>Introduktion</h2>
+        Att ha en bra kodkvalitet, "snygg kod" anses vara mer och mer viktigt.
+        Inte bara på grund av underlättande för vidareutveckling rent tidsmässigt och ekonomikst utan även för företaget eller ägarens miljöpåverkan.
+        Hur mäter man då om en kod har en god kodkvalitet ? <br>
+        I sammanhanget nämns ofta dom 6C:na vilka definerar på ett tydligt sätt parametrrarna i koden som kan mätas:
+        <h4>Codestyle</h4>
+        Koden har en viss stil och följer ett bestämt "regelverk". Ofta används verktyg för felsöka koden och ge tips eller rent ut sagt ändra kodens stil så den passar enligt bestämda
+        önskemål. I denna kurs har vi exempelvis använt oss av "composer Lint". <br> Finns det en tydlig struktur i koden underlättar detta för vidareutveckling och förståelse av koden för utvecklarna. Detta minimerar risk för errors, missförstånd och onödig tid
+        för felsökning. Det är svårt att definera en snygg kodstil, men generellt ska koden vara lättöverskådelig och följa samma regeleverk genom hela koden. Några mätparametrar inom
+        kodstil kan exempelvis vara indentationer, kommentarer samt struktur av if/else-satser.
 
-    <h2>Phpmetrics</h2>
-    Skapa en rubrik “Phpmetrics” och analysera dess rapport för din kod. Använd mätvärdena för att hitta flaskhalsar
-    och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential.
-    Visualisera med någon representativ bild från rapporten.
-    <h2>Scrutinizer</h2>
+        <h4>Coverage</h4>
+        Hur stor del/hur många rader eller scenrios av koden täcks av testerna som testar din kod? "Coverage" är ett mått som används för att definera din kod-täckning.
+        Vid en enhetstestning testas exempelvis funktioner, metoder och classers förväntade resultat med det verkliga. Genom att veta hur stor del av koden som testas
+        stärks trovärdigheten av utkomsten. Även vid vidareutveckling kan god täckning ge en stärre
+        fördel. Vid förändringar skulle detta direkt fångas upp om resultatet inte längre är det försväntade. Det är då enkelt att följa upp och åtgärda problemet.
+
+        <h4>Complexity</h4>
+        En kods komplexitet kan förklaras som kodens interaktion mellan olika enheter.
+        Fler enheter i koden ökar antalet interaktioner och med detta även risken för större påverkan vid förändring av koden.
+
+        <h4>Cohesion</h4>
+        Ett värde på hur väl sakerna i en klass hör ihop. I detta fall klassas låga värden som bra värden, vilka kan leda ett högre betyg. Man skulle kunna beskriva
+        det som hur en klass fungerar som en enhet, tillsammans med sina metoder. Ju bättre sammanhllning, destå mer visar det på att klassen med dess metoder är förstådd och genomtänkt
+        av utvecklaren. Finns en väl sammahållen metod kan denna enkelt fungera ihop med andra väl sammanhängande metoder.
+
+        <h4>Coupling</h4>
+        Här mäts kopplingen mellan olika klasser. För att hålla nere rader och metoder i respektive klass är det med fördel att använda fler klasser
+        som istället använder sig utav av varandra. Raderna och vägen till kod blir kortare och därmed enklare att hantera. Upprepande kod finns på färre platser och vid föräning minimeras antal platser som behöver påverkas.
+        Man kan i kategorin Coupling tala om 2 olika typer av Coupling:<br><br>
+        - Afferent coupling (AC):<br>
+        Utgående kopplingar är antalet kopplingar klassen använder sig utav. Med andra ord, mängden andra klasser vilka påverkas vid förändringar av denna klass.<br>
+        - Efferent koppling (EC):<br>
+        Inågående kopplingar är antalet kopplingar denna klass har till andra klasser. Med andra ord, mängden andra klasser vilka vid förändring skulle påverka denna klass.
+
+        <h4>CRAP</h4>
+        CRAP står för "Change Risk Analyzer Predictor" och är en uppskattning av den mängd arbete som förväntas krävas för att åtgärda eller hantera dåliga metoder.
+        Mätvärdet CRAP påverkas av komplexiteten hos en metod kombinerat med kodtäckningen för den metoden. Det är med andra ord okej med hög komplexitet, så länge kodtäckningen även den är hög.
+
+        <h2>Phpmetrics</h2>
+        Det första jag uppmärksammar vid granskning av rapporten är den sammanfattande bilden med cirklar som beskriver balansen mellan "Maintainability/complexity".
+        Jag noterar den sista stora röda cirkeln och läser att den motsvarar klassen "CardHand". När jag analyserar klassen CardHand noterar jag att det saknas en del kommetarer vid if-satserna.
+        Vidare tanke vkcs, varför behövs samtliga ifsater i denn ametod ? Kan jag ge respektive fall en egen metod ?
+        Förbättringsåtgärder är främst att åtgärda komplexiteten för CardHand-metoden och efter detta uttöka
+        kommentarerna och följa upp med ny enhetstester för respektive ny metod.
+        <figure>
+            <img src="{{ asset('img/phpmetrix.png') }}" alt="code intellegence" style="width:20%"><br>
+            <figcapture>Bild från rapporten</figcapture>
+        </figure>
+        <h2>Scrutinizer</h2>
         <div>
             <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-                <img src="{{ asset('img/before.jpg') }}" alt="code intellegence">
+                <figure>
+                    <img src="{{ asset('img/before.jpg') }}" alt="code intellegence" style="width:50%"><br>
+                    <figcapture>Bild från rapporten</figcapture>
+                </figure>
             </a>
         </div>
 
         <div>
-        <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-            <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/quality-score.png?b=main') }}" alt="code intellegence">
-        </a>
-    </div>
-    <div>
-        <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-            <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/code-intelligence.svg?b=main') }}" alt="code intellegence">
-        </a>
-        <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-            <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/build.png?b=main') }}" alt="Build">
-        </a>
-        <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-            <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/coverage.png?b=main') }}" alt="Build">
-        </a>
-    </div>
-    Skapa en rubrik “Scrutinizer” och analysera dess rapport för din kod. Gör på samma sätt som du gjorde med Phpmetrics:
-    Använd mätvärdena för att hitta flaskhalsar
-    och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential.
-    Visualisera med någon representativ bild från rapporten.
-    Placera samma badges i din REAEME.md.
-    I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
-     <h2>Förbättringar</h2>
-    Skapa en ny rubrik “Förbättringar” där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
+            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
+                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/quality-score.png?b=main') }}" alt="code intellegence">
+            </a>
+        </div>
+        <div>
+            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
+                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/code-intelligence.svg?b=main') }}" alt="code intellegence">
+            </a>
+            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
+                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/build.png?b=main') }}" alt="Build">
+            </a>
+            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
+                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/coverage.png?b=main') }}" alt="Build">
+            </a>
+        </div>
+        Skapa en rubrik “Scrutinizer” och analysera dess rapport för din kod. Gör på samma sätt som du gjorde med Phpmetrics:
+        Använd mätvärdena för att hitta flaskhalsar
+        och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential.
+        Visualisera med någon representativ bild från rapporten.
+        Placera samma badges i din REAEME.md.
+        I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
+        <h2>Förbättringar</h2>
+        Skapa en ny rubrik “Förbättringar” där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
 
-    Exempel på förbättringar kan vara:
-    Fixa issues
-    Öka kodtäckning
-    Fokusera på kvalitetsindex i Scrutinizer
-    Minska komplexiteten i class/metod
-    Börja med att skriva om förbättringarna, vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
-    <h2> Implemetering och Analys</h2>
-    Implementera sedan förbättringarna.
-    Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
-    Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
+        Exempel på förbättringar kan vara:
+        Fixa issues
+        Öka kodtäckning
+        Fokusera på kvalitetsindex i Scrutinizer
+        Minska komplexiteten i class/metod
+        Börja med att skriva om förbättringarna, vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
+        <h2> Implemetering och Analys</h2>
+        Implementera sedan förbättringarna.
+        Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
+        Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
 
-    <h2>Diskussion</h2>
-    Avsluta med ett stycke “Diskussion” där du diskuterar kort kring det du nyss gjort.
+        <h2>Diskussion</h2>
+        Avsluta med ett stycke “Diskussion” där du diskuterar kort kring det du nyss gjort.
 
-    Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
-    Finns det fördelar och kanske nackdelar?
-    Ser du andra möjligheter att jobba mot “clean code”?
+        Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
+        Finns det fördelar och kanske nackdelar?
+        Ser du andra möjligheter att jobba mot “clean code”?
     </div>
 
     {% endblock %}
