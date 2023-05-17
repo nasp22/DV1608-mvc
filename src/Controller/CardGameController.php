@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
-use App\Card\Player;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,7 +42,7 @@ class CardGameController extends AbstractController
         $data = [
             "deck" => $deck->getAsString()
         ];
-        $deck = $session->set("left", $deck);
+        $session->set("left", $deck);
 
         return $this->render('card/home.html.twig', $data);
     }
@@ -59,7 +58,7 @@ class CardGameController extends AbstractController
         $data = [
             "deck" => $deck->getAsString()
         ];
-        $deck = $session->set("left", $deck);
+        $session->set("left", $deck);
 
         return $this->render('api/home.html.twig', $data);
     }
@@ -74,7 +73,7 @@ class CardGameController extends AbstractController
             "deck" =>$deck->getAsString()
         ];
 
-        $deck = $session->set("left", $deck);
+        $session->set("left", $deck);
 
         return $this->render('card/deck.html.twig', $data);
     }

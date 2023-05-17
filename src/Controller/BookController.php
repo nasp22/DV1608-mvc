@@ -258,7 +258,6 @@ class BookController extends AbstractController
         $library = $bookRepository
         ->findAll();
         $data = [];
-        $id = "";
 
         foreach ($library as $book) {
             if ($isbn === (string)$book->getIsbn()) {

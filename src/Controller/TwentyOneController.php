@@ -21,7 +21,7 @@ class TwentyOneController extends AbstractController
     ): Response {
         $deck = new DeckOfCards();
         $session->set("twentyOneDeck", $deck);
-        $deck = $deck->shuffle();
+        $deck->shuffle();
         $session->set("player", 0);
         $session->set("computer", 0);
         return $this->redirectToRoute('21_start');
@@ -39,7 +39,7 @@ class TwentyOneController extends AbstractController
     ): Response {
         $deck = new DeckOfCards();
         $session->set("twentyOneDeck", $deck);
-        $deck = $deck->shuffle();
+        $deck->shuffle();
         $session->set("player", 0);
         $session->set("computer", 0);
         return $this->redirectToRoute('21_board');
@@ -57,7 +57,7 @@ class TwentyOneController extends AbstractController
         $data = [
             "deck" => $deck->getAsString()
         ];
-        $deck = $session->set("twentyOneDeck", $deck);
+        $session->set("twentyOneDeck", $deck);
 
         return $this->render('game/home.html.twig', $data);
     }
@@ -154,7 +154,6 @@ class TwentyOneController extends AbstractController
         $deck = $session->get("twentyOneDeck");
         $hand = $session->get("hand");
         $playersPoints = $session->get("player");
-        $computerPoints = $session->get("computer");
         $deckString = $deck->getValue();
 
         $computerHand = new CardHand();
@@ -173,7 +172,6 @@ class TwentyOneController extends AbstractController
         $computerHand->checkforace($computerPoints);
         $computerPoints = $computerHand->getPoints();
 
-        $hand = $hand->getAsString();
         $computerHand = $computerHand->getAsString();
 
         $newDeck = $deck->remove($computerHandArr);

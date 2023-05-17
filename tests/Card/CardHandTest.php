@@ -16,7 +16,6 @@ class CardHandTest extends TestCase
     public function testDraw():void
     {
         $deck = new DeckOfCards();
-        $card = new Card();
         $hand= new CardHand();
         $handOne= new CardHand();
 
