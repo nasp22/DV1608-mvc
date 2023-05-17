@@ -71,6 +71,11 @@ Search.appendIndex(
             "summary": "method\u0020to\u0020check\u0020for\u0020ace,\u0020returns\u0020total\u0020point\u0020of\u0020the\u0020hand",
             "url": "classes/App-Card-CardHand.html#method_checkforace"
         },                {
+            "fqsen": "\\App\\Card\\CardHand\u003A\u003Aace\u0028\u0029",
+            "name": "ace",
+            "summary": "adds\u0020score\u0020if\u0020aces\u0020in\u0020hand",
+            "url": "classes/App-Card-CardHand.html#method_ace"
+        },                {
             "fqsen": "\\App\\Card\\DeckOfCards",
             "name": "DeckOfCards",
             "summary": "class\u0020for\u0020DeckofCards",
@@ -125,6 +130,21 @@ Search.appendIndex(
             "name": "checkresult",
             "summary": "method\u0020to\u0020check\u0020result,\u0020returns\u0020message",
             "url": "classes/App-Card-Result.html#method_checkresult"
+        },                {
+            "fqsen": "\\App\\Card\\Result\u003A\u003Awin\u0028\u0029",
+            "name": "win",
+            "summary": "method\u0020set\u0020message\u0020winning",
+            "url": "classes/App-Card-Result.html#method_win"
+        },                {
+            "fqsen": "\\App\\Card\\Result\u003A\u003Alost\u0028\u0029",
+            "name": "lost",
+            "summary": "method\u0020set\u0020message\u0020loosing",
+            "url": "classes/App-Card-Result.html#method_lost"
+        },                {
+            "fqsen": "\\App\\Card\\Result\u003A\u003Afat\u0028\u0029",
+            "name": "fat",
+            "summary": "method\u0020set\u0020message\u0020fat",
+            "url": "classes/App-Card-Result.html#method_fat"
         },                {
             "fqsen": "\\App\\Card\\Result\u003A\u003A\u0024message",
             "name": "message",

@@ -129,7 +129,6 @@ class BookController extends AbstractController
     public function showBookById(
         BookRepository $bookRepository,
         int $id,
-        Request $request
     ): Response {
         $book = $bookRepository->find($id);
 
@@ -146,7 +145,6 @@ class BookController extends AbstractController
 
     #[Route('/library/update', name: 'book_update', methods: ['POST'])]
     public function updateBook(
-        BookRepository $bookRepository,
         Request $request,
         SessionInterface $session
     ): Response {
@@ -164,7 +162,6 @@ class BookController extends AbstractController
 
     #[Route('/library/delete', name: 'book_delete', methods: ['POST'])]
     public function deleteBook(
-        BookRepository $bookRepository,
         Request $request,
         SessionInterface $session
     ): Response {
@@ -182,9 +179,7 @@ class BookController extends AbstractController
 
     #[Route('/library/update', name: 'book_update_get')]
     public function updateBookGet(
-        BookRepository $bookRepository,
         SessionInterface $session,
-        Request $request,
     ): Response {
         $book = $session->get("book");
         $session->set("book", "");
@@ -197,9 +192,7 @@ class BookController extends AbstractController
 
     #[Route('/library/delete', name: 'book_delete_get')]
     public function deleteBookGet(
-        BookRepository $bookRepository,
-        SessionInterface $session,
-        Request $request,
+        SessionInterface $session
     ): Response {
         $book = $session->get("book");
         $session->set("book", "");

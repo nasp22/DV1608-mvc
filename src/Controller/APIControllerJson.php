@@ -144,7 +144,6 @@ class APIControllerJson
         $data = [
             'books' => $library
         ];
-        var_dump($data);
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
             $response->getEncodingOptions() | JSON_PRETTY_PRINT

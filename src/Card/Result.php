@@ -27,27 +27,51 @@ class Result
     * @return array<int, string> $this->message
     */
     public function checkresult(int $computerPoints, int $playersPoints): array
-    {
+    {   /**
+        * if fat, winning or loosing, set message and return
+        */
         if ($computerPoints > 21) {
-            $this->message = ['success', 'You Won!'];
+            $this->win();
         } elseif ($computerPoints == 21) {
-            $this->message = ['warning', 'You lost!'];
+            $this->lost();
         } elseif ($playersPoints == 21) {
             $this->message = ['success', 'You Won!'];
         } elseif ($computerPoints > $playersPoints) {
-            $this->message = ['warning', 'You lost!'];
+            $this->lost();
         } elseif ($playersPoints > 21) {
-            $this->message = ['warning', 'You lost!'];
+            $this->lost();
         } if ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
-            $this->message = ['warning', 'You lost!'];
+            $this->lost();
         } if ($playersPoints < 21 && $computerPoints < 21 && $computerPoints < $playersPoints) {
-            $this->message = ['success', 'You Won!'];
+            $this->win();
         } elseif ($playersPoints == $computerPoints) {
-            $this->message = ['warning', 'You lost!'];
+            $this->lost();
         } elseif ($playersPoints == 500) {
-            $this->message = ['warning', 'You got over 21 and you lost the game!'];
+            $this->fat();
         }
 
         return $this->message;
+    }
+
+    /**
+    * method set message winning
+    */
+    public function win(): void
+    {
+        $this->message = ['success', 'You Won!'];
+    }
+    /**
+    * method set message loosing
+    */
+    public function lost(): void
+    {
+        $this->message = ['warning', 'You lost!'];
+    }
+    /**
+    * method set message fat
+    */
+    public function fat(): void
+    {
+        $this->message = ['warning', 'You got over 21 and you lost the game!'];
     }
 }

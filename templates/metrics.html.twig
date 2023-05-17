@@ -45,55 +45,58 @@
 
         <h2>Phpmetrics</h2>
         Det första jag uppmärksammar vid granskning av rapporten är den sammanfattande bilden med cirklar som beskriver balansen mellan "Maintainability/complexity".
-        Jag noterar den sista stora röda cirkeln och läser att den motsvarar klassen "CardHand". När jag analyserar klassen CardHand noterar jag att det saknas en del kommetarer vid if-satserna.
-        Vidare tanke vkcs, varför behövs samtliga ifsater i denn ametod ? Kan jag ge respektive fall en egen metod ?
+        Jag noterar den sista stora röda cirkeln och läser att den motsvarar klassen "CardHand". När jag analyserar klassen CardHand noterar jag att det saknas en
+        del kommetarer vid if-satserna i sista metoden..
+        Vidare tanke väcks, varför behövs samtliga if-sater i denna metod ? Kan jag ge respektive fall en egen metod ?
         Förbättringsåtgärder är främst att åtgärda komplexiteten för CardHand-metoden och efter detta uttöka
         kommentarerna och följa upp med ny enhetstester för respektive ny metod.
         <figure>
+            <figcapture><h3>Före-Bild phpMetrics<h3></figcapture>
             <img src="{{ asset('img/phpmetrix.png') }}" alt="code intellegence" style="width:20%"><br>
-            <figcapture>Bild från rapporten</figcapture>
         </figure>
         <h2>Scrutinizer</h2>
-        <div>
-            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-                <figure>
-                    <img src="{{ asset('img/before.jpg') }}" alt="code intellegence" style="width:50%"><br>
-                    <figcapture>Bild från rapporten</figcapture>
-                </figure>
-            </a>
-        </div>
 
-        <div>
+        Jag blir glatt överraskad när jag ser resultatet från första rapporten. Den ger ett betyg om 6.94 och både code-intellegence och build passerar.
+        Jag noterar aytt coverage kan förbättras med vet att detta endast ligger i Controller då både Car doch CardHand har över 90% kodtäckning. Flaskhalsar
+        borde ligga i dom nya klasserna efter kmom05, Book och Product.
+        Dessa saknar nog både kommentarer och enhetstester. Dessa blir sjävklara flaskhalsar att ornda till. Jag noterar även en del issues där jag missat ta bort utskrift
+        av "var_Dump" och en del kod som ej används. Då dom länkade scutinizer-badges i README är Live-länkar visas nedan även en print.screen på hur rapporten såg ut före
+        implementering av åtgärder, med startvärde 6.94.
+        <figure>
+            <figcapture>
+            <h3>"Före"-bild Scrutinizer:</h3>
+            </figcapture>
             <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/quality-score.png?b=main') }}" alt="code intellegence">
+                <img src="{{ asset('img/before.jpg') }}" alt="code intellegence" style="width:50%"><br>
             </a>
-        </div>
-        <div>
-            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
+        </figure>
+
+        <figure>
+            <figcapture>
+                <h3>"live"-bilder Scrutinizer:</h3>
+            </figcapture><br>
+            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/"><br>
+                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/quality-score.png?b=main') }}" alt="scrutinizer quality score"><br>
+                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/coverage.png?b=main') }}" alt="Coverage">
                 <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/code-intelligence.svg?b=main') }}" alt="code intellegence">
-            </a>
-            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
                 <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/build.png?b=main') }}" alt="Build">
             </a>
-            <a href="https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/">
-                <img src="{{ asset('https://scrutinizer-ci.com/g/nasp22/DV1608-mvc/badges/coverage.png?b=main') }}" alt="Build">
-            </a>
-        </div>
-        Skapa en rubrik “Scrutinizer” och analysera dess rapport för din kod. Gör på samma sätt som du gjorde med Phpmetrics:
-        Använd mätvärdena för att hitta flaskhalsar
-        och svaga punkter i din kod (minst 3 stycken). Du vill hitta kod som har förbättringspotential.
-        Visualisera med någon representativ bild från rapporten.
-        Placera samma badges i din REAEME.md.
-        I ovan analys så kopplar du dina “findings” till 6C. Använd gärna något ytterligare mättal som du finner relevant och intressant.
-        <h2>Förbättringar</h2>
-        Skapa en ny rubrik “Förbättringar” där du väljer minst 3 förbättringar som du vill göra med din kod (gärna fler).
+        </figure>
 
-        Exempel på förbättringar kan vara:
-        Fixa issues
-        Öka kodtäckning
-        Fokusera på kvalitetsindex i Scrutinizer
-        Minska komplexiteten i class/metod
-        Börja med att skriva om förbättringarna, vad du tänker göra, varför du väljer dem och hur du tror det kommer påverka mätvärdena för kvalitet.
+        <h2>Förbättringar</h2>
+        Detta är beskrivet en del i ovan rubriker men sammafattningsvis ska följande åtgärdes implementeras:<br><br>
+        - Minska komplexiteten i CardHand genom fördelning av fler metoder<br>
+        - Tilldela kommentarer CardHand<br>
+        - Enhetstester till CardHands nya metoder<br>
+        - Kommentarer till klasserna Book och Product<br>
+        - Enhetstester till klasserna Book och Product<br>
+        - Åtgärda en del issues, exempelvis oanvända variablar samt utskrift av "var_dump"<br><br>
+
+        Förväntingar på phpMetrics är att bilden med cirklarna ska ge ett result med en mindre samt ej röd cirkel gällande klassen CardHand. Förhoppning finns
+        att värdet för scrutinizer ska öka samt att coverage ska få högre procentsats.
+        Troligen kommer inte procenten öka drastiskt på Coverage då Contorller drar ned snittet. Däremot vet jag att jag har nästintill 100% coverage på samtliga av mina egna
+        skapade klasser och metoder.
+
         <h2> Implemetering och Analys</h2>
         Implementera sedan förbättringarna.
         Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
@@ -105,6 +108,22 @@
         Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
         Finns det fördelar och kanske nackdelar?
         Ser du andra möjligheter att jobba mot “clean code”?
+
+        <div class="row">
+        <figure>
+            <figcapture>
+                <h3>Före-Bild phpMetrics</h3>
+            </figcapture>
+            <img src="{{ asset('img/phpmetrix.png') }}" alt="php before" style="width:50%">
+        </figure>
+
+        <figure>
+            <figcapture>
+                <h3>Efter-Bild phpMetrics</h3>
+            </figcapture>
+            <img src="{{ asset('img/phpmetricsa.png') }}" alt="php after" style="width:50%"
+        </figure>
+        </div>
     </div>
 
-    {% endblock %}
+{% endblock %}

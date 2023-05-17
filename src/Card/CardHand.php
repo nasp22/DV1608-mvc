@@ -76,32 +76,34 @@ class CardHand extends DeckOfCards
 
         return $hand;
     }
-
     /**
      * method to check for ace, returns total point of the hand
      */
     public function checkforace(int $points): void
-    {
+    {   /**
+        * if ace of any color in hand
+        */
         if (intval($points) > 21 && in_array("ace_of_spades", $this->getAsString())) {
             $index = array_search("ace_of_spades", array_values($this->getAsString()));
-            $aceS = $this->value[$index];
-            $aceS->points = 1;
-            $points = $this->getPoints();
+            $this->ace($index);
         } if (intval($points) > 21 && in_array("ace_of_hearts", $this->getAsString())) {
             $index = array_search("ace_of_hearts", array_values($this->getAsString()));
-            $aceH = $this->value[$index];
-            $aceH->points = 1;
-            $points = $this->getPoints();
+            $this->ace($index);
         } if (intval($points)> 21 && in_array("ace_of_diamonds", $this->getAsString())) {
             $index = array_search("ace_of_diamonds", array_values($this->getAsString()));
-            $aceD = $this->value[$index];
-            $aceD->points = 1;
-            $points = $this->getPoints();
+            $this->ace($index);
         } if (intval($points) > 21 && in_array("ace_of_clubs", $this->getAsString())) {
             $index = array_search("ace_of_clubs", array_values($this->getAsString()));
-            $aceC = $this->value[$index];
-            $aceC->points = 1;
-            $points = $this->getPoints();
+            $this->ace($index);
         };
+    }
+    /**
+     * adds score if aces in hand
+     */
+    public function ace(int $index): void
+    {
+        $aceS = $this->value[$index];
+        $aceS->points = 1;
+        $points = $this->getPoints();
     }
 }
