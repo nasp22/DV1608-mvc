@@ -152,7 +152,6 @@ class TwentyOneController extends AbstractController
         SessionInterface $session
     ): Response {
         $deck = $session->get("twentyOneDeck");
-        $hand = $session->get("hand");
         $playersPoints = $session->get("player");
         $deckString = $deck->getValue();
 

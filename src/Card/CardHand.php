@@ -86,16 +86,16 @@ class CardHand extends DeckOfCards
         */
         if (intval($points) > 21 && in_array("ace_of_spades", $this->getAsString())) {
             $index = array_search("ace_of_spades", array_values($this->getAsString()));
-            $this->ace($index);
+            $this->ace((int)$index);
         } if (intval($points) > 21 && in_array("ace_of_hearts", $this->getAsString())) {
             $index = array_search("ace_of_hearts", array_values($this->getAsString()));
-            $this->ace($index);
+            $this->ace((int)$index);
         } if (intval($points)> 21 && in_array("ace_of_diamonds", $this->getAsString())) {
             $index = array_search("ace_of_diamonds", array_values($this->getAsString()));
-            $this->ace($index);
+            $this->ace((int)$index);
         } if (intval($points) > 21 && in_array("ace_of_clubs", $this->getAsString())) {
             $index = array_search("ace_of_clubs", array_values($this->getAsString()));
-            $this->ace($index);
+            $this->ace((int)$index);
         };
     }
     /**
@@ -103,8 +103,7 @@ class CardHand extends DeckOfCards
      */
     public function ace(int $index): void
     {
-        $aceS = $this->value[$index];
-        $aceS->points = 1;
-        $points = $this->getPoints();
+        $ace = $this->value[$index];
+        $ace->points = 1;
     }
 }
