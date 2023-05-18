@@ -56,8 +56,8 @@
         </figure>
         <h2>Scrutinizer</h2>
 
-        Jag blir glatt överraskad när jag ser resultatet från första rapporten. Den ger ett betyg om 6.94 och både code-intellegence och build passerar.
-        Jag noterar aytt coverage kan förbättras med vet att detta endast ligger i Controller då både Car doch CardHand har över 90% kodtäckning. Flaskhalsar
+        Jag blir överraskad när jag ser resultatet från första rapporten. Den ger ett betyg om 6.4 vilket ansågs ganska lågt. Men både code-intellegence och build passerar grönt utan problem, vilket kändes roligt.
+        Jag noterar att coverage kan förbättras med vet att detta endast ligger i Controller då både Card och CardHand har över 90% kodtäckning. Flaskhalsar
         borde ligga i dom nya klasserna efter kmom05, Book och Product.
         Dessa saknar nog både kommentarer och enhetstester. Dessa blir sjävklara flaskhalsar att ornda till. Jag noterar även en del issues där jag missat ta bort utskrift
         av "var_Dump" och en del kod som ej används. Då dom länkade scutinizer-badges i README är Live-länkar visas nedan även en print.screen på hur rapporten såg ut före
@@ -98,7 +98,13 @@
         skapade klasser och metoder.
 
         <h2> Implemetering och Analys</h2>
-
+        Resultat efter implementering av förändringar i mätverkyget phpmetrics visas som en förändring av den sista röda cirklen som förväntat. Cirkeln visas nu som en gul cirkel.
+        Resultatet efter åtgärder av olika issues i Scrutinizer visar till en början förvånande ingen förändring trots relativt stora genomförda förändringar.
+        Efter letande på discord upptäcks det att jag med
+        fördel borde excluderat /tools vilka hade en majorotet med kritiska åtgärder som behövde åtgärdas.
+        Efter exkludering av  /tools visadese ett mycket bättre resultat, dock gjorde detta det svårt att veta exakt hur mycket min egna åtgärd i
+        min kod förändrades då det i dåläget motsvarande en väldigt liten procent av totalen och vad startvärdet egentligen var är omöjligt att riktigt veta.
+        <h3>Förändring i bilder:</h3>
         <div class="row">
             <figure>
                 <figcapture>
@@ -114,17 +120,60 @@
                 <img src="{{ asset('img/phpmetricsa.png') }}" alt="php after" style="width:50%"
             </figure>
         </div>
-        Implementera sedan förbättringarna.
-        Analysera därefter rapporterna från phpmetrics och Scrutinizer och notera de nya mätvärdena.
-        Gör det tydligt hur mätvärdena såg ut innan och efter dina förbättringar.
+
+        <div class="row">
+            <figure>
+                <figcapture>
+                    <h3>Före-Bild Scrutinizer (Ink /tools)</h3>
+                </figcapture>
+                <img src="{{ asset('img/before.jpg') }}" alt="code intellegence" style="width:70%">
+            </figure>
+            <figure>
+                <figcapture>
+                    <h3>Efter-Bild Scrutinizer (Ink /tools)</h3>
+                </figcapture>
+                <img src="{{ asset('img/after.jpg') }}" alt="php after" style="width:70%">
+            </figure>
+        </div>
+        <figure>
+    <figcapture>
+                <h3>Efter-Bild Scrutinizer (Ink /tools)</h3>
+            </figcapture>
+            <img src="{{ asset('img/innantools.jpg') }}" alt="php after" style="width:40%">
+        </figure>
+        <figure>
+            <figcapture>
+                <h3>Efter-Bild Scutinizer (/tools exkulderat)</h3>
+            </figcapture>
+            <img src="{{ asset('img/result.jpg') }}" alt="php after" style="width:80%"
+        </figure>
 
         <h2>Diskussion</h2>
-        Avsluta med ett stycke “Diskussion” där du diskuterar kort kring det du nyss gjort.
+        Till en början förstod jag nog inte hur bra min kod egentligen var, då hade jag från början förstott att något inte var helt rätt. När resultatet från scutinizer visade
+        6.94 blev jag glad och stolt
+        och fortsatte sedan rapporten. Jag kunde inte heller se så många fel som jag själv kan påverka och trodde då att min implemenringtng skulle ge ett nytt slutbetyg på kanske
+        runt 8-9p.
+        Efter att jag noterade att min implementering inte påverkade resutlatet blev jag misstänksam. Jag noterade då att min egen kod var i extrem
+        minoritet mot det som inkluderas i /tools vilka enligt Scrutinizer innehöll nästan 8000 major issues. Hur mycket jag än skulle förändra min egen kod så var den
+        fortfarande i sådan minoritet att det inte skulle påverka slutresultatet. Jag letade upp en tidiagre diskussion i Discord och lyckades sedan excludera filerna i /tools.
+        Efter en ny analys med Srutinizer visades istället ett betyg på 9.4. Det var en stor förändring och nyfikenhet väcktes då såklart över hur mycket mina åtgärder påverkade
+        betyget och vilken var min slutpoäng egentligen om jag hade exkluderat /tools från början. Jag tror att min poäng hade legat runt 7-8 utan /tools.
+        Lärdom är att höra mig för, fråga och prata med andra studenter, vad är rimligt ? <br>
 
-        Kan man aktivt jobba med kodkvalitet och “clean code” på detta sättet?
-        Finns det fördelar och kanske nackdelar?
-        Ser du andra möjligheter att jobba mot “clean code”?
+        Min coverage ökade med endast en ynka procent. Detta då controller här ligger som majoritet. Jag testade att excludera controller och då fick jag en ökning på ca 73%, men då jag hellre ser riktiga siffror tar jag inte med detta.
+        Jag vet att min egna skrivna klasser ligger på +90%. Nästa steg skulle i sådant fall vara att försöka testa controller och även Repository. <br<
 
+        Förändingen i phpMetrics gav resultat enligt förväntning. Åtgärden hos metoden resulterade i en gul cirkel och jag är nöjd med resultatet. Jag tycker det var bilden
+        på ett tydligt sätt visar reltionen mellan storleken, complexiteten och underhåll. Jag som är estetiskt lagd ser gärna sådana här beskrivande bilder. Det hjälper att se för att sedan förstå förändingarna lättare hos mig. <br>
+
+        Jag tror att arbeta enligt clean code är till en stor fördel, speciellt på större företag där flera avdelningar och personalteam utvecklar tillsammans.
+        När man arbetar i ett team tror jag att det är en stor fördel att samtliga som påverkar vet vad det är som gäller och alla har ett regelverk att följa.
+        Det sparar företaget tid och pengar med mindre felsökning och troligen mindre antal fel. I större kod med stora framtidplaner där den ska utvecklas under längre tid tror jag bara det är fördelaktigt att arbtea med clean code.
+        Jag kan tänka mig att nackdelar kan vara att även detta är tidskrävande på sitt sätt. Ska det utföras en mindree avancerad kod som ej ska utvecklas så kan tiden att
+        efterspela clean-code inte alls kanske vara värt det.
+        Jag som extremt kreativ person tycker om att sväva iväg lite och testa mina egna saker. Att strikt arbeta efter regelverk kan jag tänka mig påverkar utecklingen av kod.
+        Hur lär vi oss nya saker? Ofta är det genom misstag och om vi inte får möjlighet att stöta på dessa tror jag att det blir svårt med utveckling. Det vore ändå lite tråkigt
+        om samtliga utvecklare tillslut sitter och göra samma saker och forskningen inte kommer frammåt pga den aspekten. Språket hos oss utvecklas hela tiden pga av att vi själva förändrara den under tiden,
+        skulle någon vara där och rätta våra munnar konstant skulle vi inte komma på nya kortare ord som faktiskt sparat oss "tid" och "energi".
     </div>
-
 {% endblock %}
