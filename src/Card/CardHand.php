@@ -82,7 +82,7 @@ class CardHand extends DeckOfCards
     public function checkforace(int $points): void
     {   /**
         * if ace of any color in hand, set points
-        * @var int $index
+        *
         */
         if (intval($points) > 21 && in_array("ace_of_spades", $this->getAsString())) {
             $index = array_search("ace_of_spades", array_values($this->getAsString()));
