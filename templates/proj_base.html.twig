@@ -13,22 +13,33 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        <header class="site-header" style="background-image: url({{ asset('img/header.jpg') }})">
-        </header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="{{ path('home') }}"> << Report</a></li>
-                <li><a href="{{ path('home') }}"> About</a></li>
-                <li><a href="{{ path('proj_init') }}"> Spela </a></li>
-                <li><a href="{{ path('home') }}"> Regler </a></li>
-                <li><a href="{{ path('home') }}"> Doc -API </a></li>
-            </ul>
+    <body class="blackjackbody">
+        <nav class="navbarreport">
+                <ul class="backlinkdiv">
+                    <li><a href="{{ path('home') }}"> << TILLBAKA TILL REPORT <<</a></li>
+                </ul>
         </nav>
-    <main>
+        <header class="hero-image" style="background-image: url('https://images.pexels.com/photos/6664128/pexels-photo-6664128.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); height: 500px;">
+            <div class="hero-text">
+                <h1>Black Jack</h1>
+                <a href="{{ path('proj_init') }}">
+                    <button class="button">
+                        Nytt Spel!
+                    </button>
+                </a>
+                <nav class="navblackjack cards">
+                    <ul class="cardlinksdiv">
+                        <a href="{{ path('proj_about') }}"> <li> About </li></a>
+                        <a href="{{ path('proj_rules') }}"> <li> Regler  </li></a>
+                        <a href="{{ path('proj_api_init') }}"> <li> Doc -API  </li></a>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    <main class=blackjackmain">
         {% block body %}{% endblock %}
     </main>
-    <footer>
+    <footer class="blackjackfooter">
         {% block footer %}
             &copy; Nadja Spångberg
         {% endblock %}

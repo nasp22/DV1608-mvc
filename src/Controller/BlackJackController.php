@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BlackJackController extends AbstractController
 {
     #[Route("/proj/init", name: "proj_init")]
-    public function twentyoneinit(
+    public function blackjackinit(
         SessionInterface $session
     ): Response {
         $deck = new BlackJackDeckOfCards();
@@ -33,7 +33,7 @@ class BlackJackController extends AbstractController
     }
 
     #[Route("/proj", name: "proj_start")]
-    public function twentyonehome(
+    public function blackjackhome(
         SessionInterface $session
     ): Response {
         $deck = $session->get("BlackJackDeck");
@@ -46,19 +46,35 @@ class BlackJackController extends AbstractController
         ];
         $session->set("BlackJackDeck", $deck);
 
-        return $this->render('proj/home.html.twig', $data);
+        return $this->redirectToRoute('proj_new');
     }
 
     #[Route("/proj/newGame", name: "proj_new")]
-    public function twentyonenew(
+    public function blackjacknew(
         SessionInterface $session
     ): Response {
         return $this->render('proj/setalias.html.twig');
     }
 
 
+    #[Route("/proj/rules", name: "proj_rules")]
+    public function blackjackrules(
+        SessionInterface $session
+    ): Response {
+        return $this->render('proj/rules.html.twig');
+    }
+
+
+    #[Route("/proj/about", name: "proj_about")]
+    public function blackjackabout(
+        SessionInterface $session
+    ): Response {
+        return $this->render('proj/about.html.twig');
+    }
+
+
     #[Route("/proj/rematch", name: "proj_rematch")]
-    public function twentyonerematch(
+    public function blackjackrematch(
         SessionInterface $session
     ): Response {
         $player =$session->get("player");
@@ -87,7 +103,7 @@ class BlackJackController extends AbstractController
     }
 
     #[Route("/proj/setalias", name: "proj_setalias")]
-    public function twentyonealias(
+    public function blackjackalias(
         SessionInterface $session,
         Request $request,
     ): Response {
@@ -106,7 +122,7 @@ class BlackJackController extends AbstractController
 
 
     #[Route("/proj/sethands", name: "proj_sethandsquantity")]
-    public function twentyonehandsquantity(
+    public function blackjackhandsquantity(
         SessionInterface $session,
         Request $request,
     ): Response {
@@ -132,7 +148,7 @@ class BlackJackController extends AbstractController
     }
 
     #[Route("/proj/bet", name: "proj_bet")]
-    public function twentyonebet(
+    public function blackjackbet(
         SessionInterface $session
     ): Response {
         $handsquantity = $session->get("handsquantity");
@@ -251,7 +267,7 @@ class BlackJackController extends AbstractController
     }
 
     #[Route("/proj/stay", name: "proj_stay", methods: ['POST'])]
-    public function twentyonestay(
+    public function blackjackstay(
         Request $request,
         SessionInterface $session
     ): Response {
@@ -265,7 +281,7 @@ class BlackJackController extends AbstractController
     }
 
     #[Route("/proj/betsmade", name: "proj_betsmade", methods: ['POST'])]
-    public function twentyonebetsmade(
+    public function blackjackbetsmade(
         Request $request,
         SessionInterface $session
     ): Response {
@@ -412,6 +428,7 @@ class BlackJackController extends AbstractController
         return $this->redirectToRoute('proj_dealer');
         }
 
+
         #[Route("/proj/dealer", name: "proj_dealer")]
         public function dealer(
             SessionInterface $session
@@ -469,12 +486,14 @@ class BlackJackController extends AbstractController
 
         for ($x = 1; $x <= sizeof($resultArr); $x++) {
             if ($resultArr[$x] == "Vinst!") {
-                $resultPot += $bets[$x];
+                $resultPot += (intVal($bets[$x])*2);
+            } if ($resultArr[$x] == "Oavgjort!") {
+                $resultPot += intVal($bets[$x]);
             }
         }
 
         $wallet = $player->coins;
-        $player->coins = $wallet + ($resultPot*2);
+        $player->coins = $wallet + $resultPot;
 
         $session->set("player", $player);
 
@@ -492,8 +511,24 @@ class BlackJackController extends AbstractController
             "computerHand" => $computerHand,
             "computerPoints" => $computerPoints,
             "result" => $resultArr,
-            "resultPot" => ($resultPot*2)
+            "resultPot" => $resultPot
         ];
         return $this->render('proj/dealer.html.twig', $data);
+    }
+    #[Route("/proj/api", name: 'proj_api_init', methods: ['GET'])]
+    public function blackjackapi(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $deck = new BlackJackDeckOfCards();
+        $session->set("BlackJackDeck", $deck);
+        $deck->shuffle();
+        $session->set("player", new BlackJackPlayer);
+        $session->set('handsquantity', 1);
+        $session->set("computer", 0);
+        $session->set("turn", 0);
+        $session->set("bets", []);
+        $session->set("betsmade", 0);
+        return $this->render('proj/api.html.twig');
     }
 }

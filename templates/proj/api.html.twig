@@ -1,0 +1,79 @@
+{% extends "proj_base.html.twig" %}
+
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+
+
+<div>
+    <h1>
+        JSON API PROJEKT
+    </h1>
+    <div style="padding:2%; border-bottom: dotted 4px black; width: 50%;">
+        <div>
+            <h2> 1. Dealer - Visa hand och poäng </h2>
+            <p> Klicka på knappen för att i JSON-format visa en dealer-runda med dess poäng.</p>
+        </div>
+        <a href={{ path('proj_api_dealer') }}>
+            <button style="padding:2%;">
+                VISA DEALER-RUNDA
+            </button>
+        </a>
+    </div>
+    <div style="padding:2%; border-bottom: dotted 4px black; width: 50%;">
+        <div>
+            <h2> 2. Spelare - Alias</h2>
+            <p> Fyll i valfritt alias nedan för att visa classen "BlackJackPlayer" med information i JSON-format".</p>
+        </div>
+        <div>
+            <form method="post" action="{{ path('proj_api_player') }}">
+                <label>Fyll i valfritt alias för spelare:</label>
+                <input type="text" name="alias" required>
+                <input type="submit" value="BlackJackPlayer i JSON-format" >
+            </form>
+        </div>
+    </div>
+    <div style="padding:2%; border-bottom: dotted 4px black; width: 50%;">
+        <div>
+            <h2> 3. Spelare - Händer</h2>
+            <p> Fyll i valfritt antal händer (1-3st) nedan för att visa händerna för en spelare ("BlackJackPlayer->hands) i JSON-format".</p>
+        </div>
+        <div style="padding:2%;">
+            <form method="post" action="{{ path('proj_api_hands') }}">
+                <label>Fyll i antal händer (1-3):</label>
+                <input type="number" name="hands" required max=3 min=1>
+                <input type="submit" value="BlackJackPlayer->hands i JSON-format" >
+            </form>
+        </div>
+    </div>
+     <div style="padding:2%; border-bottom: dotted 4px black; width: 50%;">
+        <div>
+            <h2> 4. Spel - Resultat </h2>
+            <p> Fyll i valfri poäng för dealer och spelare och se resultat:(1-3st) nedan för att visa händerna för en spelare ("BlackJackPlayer->hands) i JSON-format".</p>
+        </div>
+        <div style="padding:2%;">
+            <form method="post" action="{{ path('proj_api_result') }}">
+                <label>Fyll i valfri poäng för dealern:</label>
+                <input type="number" name="dealer" required min=4><br>
+                <label>Fyll i valfri poäng för spelare:</label>
+                <input type="number" name="player" required min=4>
+                <input type="submit" value="Se resultat i JSON-format" >
+            </form>
+        </div>
+    </div>
+    <div style="padding:2%; border-bottom: dotted 4px black; width: 50%;">
+        <div>
+            <h2> 4. Spel - Visa kortlek</h2>
+            <p> Dela ut två kort och se kvarvarande kortlek: </p>
+        </div>
+        <div style="padding:2%;">
+            <form method="post" action="{{ path('proj_api_deck') }}">
+                <input type="hidden" name="cards" value=2 required><br>
+                <input type="submit" value="Dela ut och se kvarvarande kortlek i JSON-format" >
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

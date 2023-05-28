@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "proj_base.html.twig" %}
 
 
 {% block title %}Card Game{% endblock %}
@@ -7,13 +7,13 @@
 
 
 <div class = "board">
+    <h2>Okej {{ playername }}...  Hur många händer vill du spela? (1-3) </h2>
     <h1>
         <img src="../../img/dealer.png" alt="sealer" style= "width: 15%;">
-        <span>Okej {{ playername }}...  Hur många händer vill du spela? (1-3) </span>
     </h1>
     <form method="post" action="{{ path('proj_sethandsquantity') }}">
         <label>Fyll i antal händer:</label>
-        <input type="nunber" name="handsquantity" required max=3 min=1>
+        <input type="number" name="handsquantity" required max=3 min=1>
         <input type="submit" value="Vidare ->" >
     </form>
 </div>

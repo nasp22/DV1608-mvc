@@ -24,17 +24,12 @@ class BlackJackPlayer
     */
     public string $alias;
     /**
-    * this->stay, to know if stayed
-    */
-    public bool $stay;
-    /**
     * construct method to set name and points
     */
-    public function __construct(string $alias = "player", array $points = [], int $coins = 500,  bool $stay=false, array $hands=[])
+    public function __construct(string $alias = "player", array $points = [], int $coins = 500, array $hands=[])
     {
         $this->points = $points;
-        $this->coins = $coins;
-        $this->stay = $stay;
+        $this->coins = $coins;;
         $this->hands = $hands;
         $this->alias = $alias;
     }

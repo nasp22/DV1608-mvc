@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "proj_base.html.twig" %}
 
 
 {% block title %}Card Game{% endblock %}
@@ -10,14 +10,12 @@
     <h1>
         <img src="../../img/dealer.png" alt="sealer" style= "width: 15%;">
     </h1>
-    <img src="../../img/back.jpg" alt="card" style= "width: 5%;">
-    <img src="../../img/back.jpg" alt="card" style= "width: 5%;">
     <h1>
         <img src="../../img/player3.png" alt="sealer" style= "width: 15%;">
         Coins left: {{ coins }}
     </h1>
     <div>
-        <h3> Vad vill du satsa? </h3>
+        <h2> Hur mycket vill du satsa/hand? </h2>
         <p> Minimum = 5 coins </p>
         <form method="post" action="{{ path('proj_betsmade') }}">
             {% for i in range(0, handsquantity-1) %}

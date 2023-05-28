@@ -1,0 +1,63 @@
+{% extends "proj_base.html.twig" %}
+
+{% block title %}Card Game{% endblock %}
+
+{% block body %}
+<h1>Spelregler - BlackJack </h1>
+
+<div style= "border:red dotted 2px; border-radius: 8px; padding:1%; max-width:40%;">
+    <h2> Symbolförteckning </h2>
+        <img src="{{ asset('img/back.jpg') }}" alt="" style="width: 15%;"> DRA KORT
+        <img src="{{ asset('img/stop.png') }}" alt="" style="width: 20%;"> STANNA
+        <img src="{{ asset('img/restart.png') }}" alt="" style="width: 20%;"> NY RUNDA
+</div>
+
+<h3>Grunderna i blackjack</h3>
+<ul>
+    <li> Blackjack går ut på att få så nära 21 poäng som möjligt, utan att gå över. </li>
+</ul>
+<ul>
+    <li> Du spelar mot dealern. </li>
+</ul>
+<ul>
+    <li> Varje hand får två kort till att börja med och får sedan besluta själva om de vill ha fler kort eller stanna. </li>
+</ul>
+<ul>
+    <li> Ess är värt 11 eller 1 poäng, beroende på vad du har på hand i övrigt. </li>
+</ul>
+<ul>
+    <li> Kung, Dam, Knekt är alla värda 10 poäng. </li>
+</ul>
+<ul>
+    <li> Övriga kort är värt samma poäng som kortets siffra </li>
+</ul>
+
+<h4>Grundregler satta enligt <a href="https://blackjack-sverige.se/regler-blackjack/">https://blackjack-sverige.se/regler-blackjack/</a>:</h4>
+
+<h3>Så här spelar man:</h3>
+<p>
+Grunden i blackjack är att varje spelare börjar med att lägga in en insats per hand för att gå med i spelets runda.
+På denna webbplats är minimun-insatsen 5 Coronas. Därefter så får alla spelare som lagt in sin insats två kort var som är öppna och synliga även för övriga
+spelare och dealern.
+</p>
+<p>
+Varje spelare får sedan välja hur de vill agera, vilket i grunden är två val; antingen stanna på den poängen de har eller dra ett kort.
+Genom att stanna hoppas spelaren på att den totala poängen äre bättre än dealerns eller att dealern blir fet (får över 21 p). Detta gör att spelaren vinner.
+Genom att dra ett till kort så läggs den poängen till den befintliga. Spelaren kan sedan välja att stanna eller dra ytterligare ett kort. Blir spelaren fet förlorar den automatiskt.
+När samtliga händer gjort sian val och har sin poäng gör även dealern sitt val.
+</p>
+
+<h3>Regler för dealern :</h3>
+<p>
+Dealern får inte stanna under 17 p.
+Ess räknas som 11 så länge det totala värdet inte går över 21, men annars som 1. Så om dealern har har ess och 6 så blir värdet 17
+och den måste stanna, men om det är två ess så är den istället för 22 på 12.
+</p>
+
+<h3>Vem vinner?</h3>
+<p>
+Grundregeln är att slå dealern för att vinna. Vid vinst vinner spelaren tillbaka sin insats x2 och vid förlust förloras insaten.
+Blir det oavgjort får spelaren tillbaka insatsen. Går spelaren över 21 så förlorar den sin instats.
+</p>
+
+{% endblock %}

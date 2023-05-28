@@ -1,66 +1,57 @@
 {% extends "proj_base.html.twig" %}
 
-
 {% block title %}Card Game{% endblock %}
 
 {% block body %}
 
-<div class = "board">
+<div class = "blackjackboard">
     <h1>
         <img src="../../img/dealer.png" alt="sealer" style= "width: 15%;">
     </h1>
-    <div class="hand style= "margin: 5%;">
-        <div class="row">
-            <img src="../../img/back.jpg" alt="card" style= "width: 10%; margin:2%;">
-            <img src="../../img/back.jpg" alt="card" style= "width: 10%; margin:2%;">
-        </div>
+    <div class="row">
+        <img src="../../img/back.jpg" alt="card" style= "width: 5%; margin:2%;">
+        <img src="../../img/back.jpg" alt="card" style= "width: 5%; margin:2%;">
     </div>
-
     <div class="row">
         {% for i in range(0, handsquantity-1) %}
-            <div class="hand style= "margin: 5%;">
-                <h3> <img src="../../img/coins.png" alt="coins" style= "width: 15%; style="margin: 0 auto;"> Insats: {{bets[i+1]}} </h3>
-                <div>
-                    <h2> Hand {{i+1}}</h2>
-                    <h1 class="row">
-                        {% for card in hands[i] %}
-                                <img src="../../img/cards/{{ card }}.png" alt="{{ hands[i][0] }}" style= "width: 15%; margin:2%;">
-                        {%endfor%}
-                    </h1 class"row">
-                     {% if stay[i] == "false" %}
-                        {% if fat[i] == "false" %}
-                            <h3> Nuvarande Värde: {{ points[i]}}</h3>
-                        {%else%}
-                            <h3> Nuvarande Värde: {{ points[i]}}</h3>
-                            <h2 style="color:red;">FET!</h2>
-                            <h3 style="color:#fff;">Värde: {{ points[i]}}</h3>
-                        {%endif%}
+            <div class="hand" style= "border: yellow solid 2px; border-radius: 8px; padding:1%; margin:2%;">
+                <h2> Hand {{i+1}} : {{ points[i]}}p</h2>
+                <h3><img src="../../img/coins.png" alt="coins" style= "width: 5%;"> Insats: {{bets[i+1]}} </h3>
+                <div class="row">
+                    {% for card in hands[i] %}
+                            <img src="../../img/cards/{{ card }}.png" alt="{{ hands[i][0] }}" style="max-height:15%; max-width:15%; margin:1%;">
+                    {%endfor%}
+                </div>
+                {% if stay[i] == "false" %}
+                    {% if fat[i] == "false" %}
                     {%else%}
-                        <h3> Nuvarande Värde: {{ points[i]}}</h3>
-                        <h2 style="color:yellow;">STANNAT!</h2>
+                        <h2 style="color:red;">FET!</h2>
                         <h3 style="color:#fff;">Värde: {{ points[i]}}</h3>
                     {%endif%}
-                    {% if turn == i %}
-                        <div style= "border:red dotted 2px; border-radius: 8px; padding:5%; margin:5%;">
-                            <h3 style="color:#fff;"> Hand {{i+1}}, Din tur! </h3><h3>Vad vill du göra?</h3>
-                            <div class="row">
-                                <form method="post" action="{{ path('proj_draw') }}">
-                                    <input type="hidden" name="choice" value="{{ turn}}">
-                                    <input type="image" name="choice" value="{{ turn}}" alt="stay" src="{{ asset('img/back.jpg') }}" style="width: 20%;">
-                                </form>
-                                <form method="post" action="{{ path('proj_stay') }}">
-                                    <input type="hidden" name="stay" value="{{ turn }}">
-                                    <input type="image" name="stay" value="{{ turn }}" alt="stay" src="{{ asset('img/stop.png') }}" style="width: 60%;">
-                                </form>
-                            </div>
+                {%else%}
+                    <h2 style="color:yellow;">STANNAT!</h2>
+                    <h3 style="color:#fff;">Värde: {{ points[i]}}</h3>
+                {%endif%}
+                {% if turn == i %}
+                    <div style= "border:red dotted 2px; border-radius: 8px; padding:5%;">
+                        <h3 style="color:#fff;"> Hand {{i+1}}, Din tur! </h3><h3>Vad vill du göra?</h3>
+                        <div class="row">
+                            <form method="post" action="{{ path('proj_draw') }}">
+                                <input type="hidden" name="choice" value="{{ turn}}">
+                                <input type="image" name="choice" value="{{ turn}}" alt="stay" src="{{ asset('img/back.jpg') }}" style="width: 20%;">
+                            </form>
+                            <form method="post" action="{{ path('proj_stay') }}">
+                                <input type="hidden" name="stay" value="{{ turn }}">
+                                <input type="image" name="stay" value="{{ turn }}" alt="stay" src="{{ asset('img/stop.png') }}" style="width: 60%;">
+                            </form>
                         </div>
-                    {%endif%}
-                </div>
+                    </div>
+                {%endif%}
             </div>
         {% endfor %}
     </div>
 
-        <div class="row">
+    <div class="row">
         <div style= "width: 100%;">
             <h1>
             <img src="../../img/player3.png" alt="dealer" style= "width: 15%;"> {{alias}}

@@ -30,24 +30,33 @@ class BlackJackResult
     {   /**
         * if fat, winning or loosing, set message and return
         */
-        if ($computerPoints > 21) {
+
+        if ($computerPoints == $playersPoints ) {
+            $this->equal();
+            return $this->message;
+        }
+
+        if ($computerPoints == 21 &&  $playersPoints !=21) {
+            $this->lost();
+            return $this->message;
+        } elseif ($playersPoints == 21 &&  $computerPoints !=21) {
             $this->win();
-        } elseif ($computerPoints == 21) {
+            return $this->message;
+        }
+
+        if ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
             $this->lost();
-        } elseif ($playersPoints == 21) {
-            $this->message = 'Vinst!';
-        } elseif ($computerPoints > $playersPoints) {
-            $this->lost();
-        } elseif ($playersPoints > 21) {
-            $this->lost();
-        } if ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
-            $this->lost();
-        } if ($playersPoints < 21 && $computerPoints < 21 && $computerPoints < $playersPoints) {
+            return $this->message;
+        } elseif ($playersPoints < 21 && $computerPoints < 21 && $computerPoints > $playersPoints) {
             $this->win();
-        } elseif ($playersPoints == $computerPoints) {
+            return $this->message;
+        } elseif ($playersPoints < 21 && $computerPoints > 21) {
+            $this->win();
+            return $this->message;
+        }
+
+        if ($playersPoints > 21) {
             $this->lost();
-        } elseif ($playersPoints == 500) {
-            $this->fat();
         }
 
         return $this->message;
@@ -65,13 +74,13 @@ class BlackJackResult
     */
     public function lost(): void
     {
-        $this->message = 'Förlust!';
+        $this->message = 'Förlust';
     }
     /**
     * method set message fat
     */
-    public function fat(): void
+    public function equal(): void
     {
-        $this->message = 'You got over 21 and you lost the game!';
+        $this->message = 'Oavgjort!';
     }
 }

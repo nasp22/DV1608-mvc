@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "proj_base.html.twig" %}
 
 
 {% block title %}Card Game{% endblock %}
@@ -9,7 +9,7 @@
 <div class = "board">
     <h1>
         <img src="../../img/dealer.png" alt="sealer" style= "width: 15%;">
-        <span>Välkommen! Vad heter du ? </span>
+        <h2>Välkommen! Vad heter du ? </h2>
     </h1>
     <form method="post" action="{{ path('proj_setalias') }}">
         <label>Fyll i ditt namn:</label>

@@ -25,6 +25,8 @@ class BlackJackDeckOfCards
         $this->BlackJack = false;
         $colors = ["_of_spades", "_of_hearts", "_of_diamonds", "_of_clubs"];
         $numbers = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
+        // $colors = ["_of_spades", "_of_hearts", "_of_diamonds", "_of_clubs"];
+        // $numbers = ["2","8"];
 
         foreach ($colors as $color) {
             foreach ($numbers as $number) {

@@ -5,7 +5,7 @@
 
 {% block body %}
 
-<div class = "board">
+<div class = "blackjackboard">
     <h1>
         <img src="../../img/dealer.png" alt="sealer" style= "width: 15%;">
     </h1>
@@ -13,27 +13,27 @@
     {% for card in computerHand %}
         <img src="../../img/cards/{{ card }}.png" alt="{{ card }}" style= "width: 15%; margin:2%;">
     {%endfor%}
-    <br><br><br><br><br><br>
-    <div class="row">
-        {% for i in range(0, handsquantity-1) %}
-            <div class="hand style= "margin: 5%;">
-                    <h2> {{result[i+1]}}</h2>
-                    <h3><img src="../../img/coins.png" alt="coins" style= "width: 5%;"> Insats: {{bets[i+1]}} </h3>
-                    <h2> Hand {{i+1}}</h2>
-                    <h2 class="row">
-                        {% for card in hands[i] %}
-                                <img src="../../img/cards/{{ card }}.png" alt="{{ hands[i][0] }}" style= "width: 8vh; margin:2%;">
-                        {%endfor%}
-                    </h2 class"row">
-                    <h3 style="color:#fff;">Värde: {{ points[i]}}</h3>
-            </div>
-        {% endfor %}
-    </div>
+    <br>
+        <div class="row">
+            {% for i in range(0, handsquantity-1) %}
+                <div class="hand" style= "border: yellow solid 2px; border-radius: 8px; padding:1%; margin:2%;">
+                        <h3><img src="../../img/coins.png" alt="coins" style= "width: 5%;"> Insats: {{bets[i+1]}} </h3>
+                        <h2> Hand {{i+1}} => {{result[i+1]}}</h2>
+                        <h2 class="row">
+                            {% for card in hands[i] %}
+                                    <img src="../../img/cards/{{ card }}.png" alt="{{ hands[i][0] }}" style= "width: 8vh; margin:2%;">
+                            {%endfor%}
+                        </h2>
+                        <h3 style="color:#fff;">Värde: {{ points[i]}}</h3>
+                </div>
+            {% endfor %}
+        </div>
+
     <div style= "width: 100%;">
         <h1><img src="../../img/player3.png" alt="dealer" style= "width: 15%;">{{alias}}</h1>
         <h2><img src="../../img/coins.png" alt="coins" style= "width: 5%;"> + {{resultPot}} </h2>
         <h2><img src="../../img/wallet.png" alt="coins" style= "width: 5%;"> Coronor kvar: {{coins}}</h2>
-        <a href="{{ path('proj_rematch') }}"> <img src="{{ asset('img/restart.png') }}" alt="" style="border-radius: 8px; width: 10%;"></a>
+        <a href="{{ path('proj_rematch') }}"> <img src="{{ asset('img/restart.png') }}" alt="" style="border-radius: 8px; width: 8%;"></a>
     </div>
 </div>
 

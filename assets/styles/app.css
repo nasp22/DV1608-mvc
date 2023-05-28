@@ -5,7 +5,7 @@ body {
 
 main {
     --s: 10px;
-    padding: 2rem;
+    padding: 1rem;
     margin: 0 auto;
     max-width: 80%;
     align-items: center;
@@ -14,6 +14,7 @@ main {
 
 .center {
     text-align: center;
+    text-decoration: none;
 }
 
 .frame {
@@ -322,4 +323,86 @@ input[type=submit]:hover {
 .button:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+.navblackjack ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navblackjack a {
+    float: left;
+}
+
+.cardlinksdiv a{
+    background: #612f2f;
+    border: solid #fff 2px;
+    margin: 6px;
+    border-radius: 4px;
+    height: 150px;
+    width: 100px;
+}
+
+.navblackjack a li{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navblackjack a:hover {
+    background-color: #691313;
+    height: 160px;
+    width: 110px;
+}
+
+.cards ul a {
+    font-size: medium;
+    margin: 4px;
+}
+
+.blackjackmain {
+    background-color: #0c0a0a;
+}
+
+.blackjackbody {
+    background-color: #0c0a0a;
+}
+
+.blackjackfooter {
+    background-color: #0c0a0a;
+}
+
+.navbarreport a{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #666;
+}
+
+.navbarreport li{
+    list-style-type: none;
+}
+
+.blackjackmain {
+    padding:2%;
+}
+
+.blackjackboard {
+    padding: 2%;
+    background-color: rgb(1, 99, 1);
+    border-radius: 8px;
+    margin: 2%;
+    text-decoration: none;
+
+}
+
+.border {
+    border: solid 2px black;
+    padding: 2%;
+    border-radius: 8px;
 }
