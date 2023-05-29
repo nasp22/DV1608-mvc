@@ -90,6 +90,7 @@ class BlackJackController extends AbstractController
         $session->set("turn", 0);
         $session->set("bets", []);
         $session->set("betsmade", 0);
+        var_dump($session->get("betsmade"));
 
         $data = [
             "playername" => $player->alias,
@@ -419,7 +420,7 @@ class BlackJackController extends AbstractController
             $turn = $session->get("turn");
             $handsleft = $session->get("handsleft");
             $betsmade= $session->get("betsmade");
-
+            var_dump($betsmade);
             $hands = $player->hands;
             $points = $player->points;
             $alias = $player->alias;
