@@ -23,7 +23,7 @@ class BlackJackController extends AbstractController
         $deck = new BlackJackDeckOfCards();
         $session->set("BlackJackDeck", $deck);
         $deck->shuffle();
-        $session->set("player", new BlackJackPlayer);
+        $session->set("player", new BlackJackPlayer());
         $session->set('handsquantity', 1);
         $session->set("computer", 0);
         $session->set("turn", 0);
@@ -41,9 +41,6 @@ class BlackJackController extends AbstractController
             return $this->redirectToRoute('proj_init');
         }
 
-        $data = [
-            "deck" => $deck->getAsString()
-        ];
         $session->set("BlackJackDeck", $deck);
 
         return $this->redirectToRoute('proj_new');
@@ -59,7 +56,6 @@ class BlackJackController extends AbstractController
 
     #[Route("/proj/rules", name: "proj_rules")]
     public function blackjackrules(
-        SessionInterface $session
     ): Response {
         return $this->render('proj/rules.html.twig');
     }
@@ -67,7 +63,6 @@ class BlackJackController extends AbstractController
 
     #[Route("/proj/about", name: "proj_about")]
     public function blackjackabout(
-        SessionInterface $session
     ): Response {
         return $this->render('proj/about.html.twig');
     }
@@ -80,7 +75,7 @@ class BlackJackController extends AbstractController
         $player =$session->get("player");
         $alias = $player->alias;
         $coins = $player->coins;
-        $playerNew = new BlackJackPlayer;
+        $playerNew = new BlackJackPlayer();
         $playerNew->alias = $alias;
         $playerNew->coins = $coins;
 
@@ -139,7 +134,7 @@ class BlackJackController extends AbstractController
             $handPoints = $hand->getPoints();
             $player->hands[] = $hand;
             $player->points[] = $handPoints;
-          }
+        }
 
         $session->set("handsleft", $player->hands);
         $session->set("player", $player);
@@ -164,8 +159,6 @@ class BlackJackController extends AbstractController
     #[Route("/proj/board", name: "proj_board")]
     public function board(
         SessionInterface $session,
-        Request $request,
-
     ): Response {
 
         $turn = $session->get("turn");
@@ -194,7 +187,8 @@ class BlackJackController extends AbstractController
         foreach ($handsleft as $hand) {
             if ($hand->stay == true) {
                 $stayToData[] = "true";
-            } else {
+            }
+            else {
                 $stayToData[] = "false";
             }
         }
@@ -230,9 +224,6 @@ class BlackJackController extends AbstractController
         $deck = $session->get("BlackJackDeck");
 
         $turn = $session->get("turn");
-        $handsquantity = $session->get("handsquantity");
-        $bets = $session->get("bets");
-        $betsmade = $session->get("betsmade");
         $player = $session->get("player");
         $handsleft = $session->get("handsleft");
 
@@ -285,37 +276,33 @@ class BlackJackController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-    $bets = $session->get("bets");
-    $betsmade = $session->get("betsmade");
-    $handsquantity = $session->get("handsquantity");
+        $bets = $session->get("bets");
+        $betsmade = $session->get("betsmade");
+        $handsquantity = $session->get("handsquantity");
+        for ( $x = 0; $x <= $handsquantity-1; $x++) {
+            $hand = $x+1;
+            $bet = $request->request->get(StrVal($hand));
+            $bets[$hand] = $bet;
+            $betsmade += $bet;
+        }
 
-    for ($x = 0; $x <= $handsquantity-1; $x++) {
-        $bet = $request->request->get($x+1);
-        $hand = $x+1;
-        $bets[$hand] = $bet;
-        $betsmade += $bet;
-    }
+        $session->set("bets", $bets);
+        $player = $session->get("player");
 
-    $session->set("bets", $bets);
-    $player = $session->get("player");
+        $playersCoins = $player->coins;
+        $playersCoins = $playersCoins - $betsmade;
+        $player->coins = $playersCoins;
+        $session->set("betsmade", $betsmade);
 
-    $playersCoins = $player->coins;
-    $playersCoins = $playersCoins - $betsmade;
-    $player->coins = $playersCoins;
-    $session->set("betsmade", $betsmade);
-
-    return $this->redirectToRoute('proj_board');
+        return $this->redirectToRoute('proj_board');
     }
 
     #[Route("/proj/turn", name: "proj_turn")]
     public function turn(
         SessionInterface $session,
-        Request $request,
     ): Response {
         $turn = $session->get("turn");
         $handsquantity = $session->get("handsquantity");
-        $player = $session->get("player");
-        $handsleft = $session->get("handsleft");
 
         $turn += 1;
         $session->set("turn", $turn);
@@ -325,12 +312,11 @@ class BlackJackController extends AbstractController
         } else {
             return $this->redirectToRoute('proj_computer');
         }
-     }
+    }
 
     #[Route("/proj/player", name: "proj_player")]
     public function player(
         SessionInterface $session,
-        Request $request,
     ): Response {
         $turn = $session->get("turn");
         $handsleft = $session->get("handsleft");
@@ -346,6 +332,7 @@ class BlackJackController extends AbstractController
         $handsToData = [];
         $pointsToData = [];
         $stayToData = [];
+        $fetToData  =[];
         foreach ($hands as $hand) {
             $handsToData[] = $hand->getAsString();
         }
@@ -393,17 +380,9 @@ class BlackJackController extends AbstractController
         $deck = $session->get("BlackJackDeck");
         $deckString = $deck->getValue();
 
-        $turn = $session->get("turn");
-        $handsleft = $session->get("handsleft");
-        $handsquantity = $session->get("handsquantity");
-        $player = $session->get("player");
-        $bets = $session->get("bets");
-        $betsmade = $session->get("betsmade");
-
         $computerHand = new BlackJackCardHand();
         $computerHandArr = $computerHand->draw(2, $deckString);
         $computerHand->setValue($computerHandArr);
-
         $computerPoints = $computerHand->getPoints();
         $session->set("computer", $computerPoints);
 
@@ -426,7 +405,7 @@ class BlackJackController extends AbstractController
         $session->set("computerHand", $computerHand);
 
         return $this->redirectToRoute('proj_dealer');
-        }
+    }
 
 
         #[Route("/proj/dealer", name: "proj_dealer")]
@@ -434,87 +413,88 @@ class BlackJackController extends AbstractController
             SessionInterface $session
         ): Response {
 
-        $computerPoints = $session->get("computer");
-        $computerHand = $session->get("computerHand");
-        $turn = $session->get("turn");
-        $handsleft = $session->get("handsleft");
-        $handsquantity = $session->get("handsquantity");
-        $player = $session->get("player");
-        $bets = $session->get("bets");
-        $betsmade = $session->get("betsmade");
+            $computerPoints = $session->get("computer");
+            $computerHand = $session->get("computerHand");
+            $handsquantity = $session->get("handsquantity");
+            $player = $session->get("player");
+            $turn = $session->get("turn");
+            $handsleft = $session->get("handsleft");
+            $betsmade= $session->get("betsmade");
 
-        $hands = $player->hands;
-        $points = $player->points;
-        $alias = $player->alias;
+            $hands = $player->hands;
+            $points = $player->points;
+            $alias = $player->alias;
 
-        $handsToData = [];
-        $pointsToData = [];
-        $stayToData = [];
+            $handsToData = [];
+            $pointsToData = [];
+            $stayToData = [];
+            $fetToData = [];
 
-        foreach ($hands as $hand) {
-            $handsToData[] = $hand->getAsString();
-        }
-
-        foreach ($points as $point) {
-            $pointsToData[] = $point;
-        }
-
-        foreach ($handsleft as $hand) {
-            if ($hand->stay === true) {
-                $stayToData[] = "true";
-            } else {
-                $stayToData[] = "false";
+            foreach ($hands as $hand) {
+                $handsToData[] = $hand->getAsString();
             }
-        }
 
-        foreach ($handsleft as $hand) {
-            if ($hand->fat === true) {
-                $fetToData[] = "true";
-            } else {
-                $fetToData[] = "false";
+            foreach ($points as $point) {
+                $pointsToData[] = $point;
             }
-        }
-        $result = new BlackJackResult();
 
-        $resultPot = 0;
-
-        for ($x = 1; $x <= sizeof($pointsToData); $x++) {
-            $message = $result->checkresult($computerPoints, $pointsToData[$x-1]);
-            $resultArr[$x] = $message;
-        };
-
-
-        for ($x = 1; $x <= sizeof($resultArr); $x++) {
-            if ($resultArr[$x] == "Vinst!") {
-                $resultPot += (intVal($bets[$x])*2);
-            } if ($resultArr[$x] == "Oavgjort!") {
-                $resultPot += intVal($bets[$x]);
+            foreach ($handsleft as $hand) {
+                if ($hand->stay === true) {
+                    $stayToData[] = "true";
+                } else {
+                    $stayToData[] = "false";
+                }
             }
+
+            foreach ($handsleft as $hand) {
+                if ($hand->fat === true) {
+                    $fetToData[] = "true";
+                } else {
+                    $fetToData[] = "false";
+                }
+            }
+            $result = new BlackJackResult();
+            $resultArr = [];
+            $resultPot = 0;
+
+            for ($x = 1; $x <= sizeof($pointsToData); $x++) {
+                $message = $result->checkresult($computerPoints, $pointsToData[$x-1]);
+                $resultArr[$x] = $message;
+            };
+
+            $bets = $session->get("bets");
+
+            for ($x = 1; $x <= sizeof($resultArr); $x++) {
+                if ($resultArr[$x] == "Vinst!") {
+                    $resultPot += (intVal($bets[$x])*2);
+                } if ($resultArr[$x] == "Oavgjort!") {
+                    $resultPot += intVal($bets[$x]);
+                }
+            }
+
+            $wallet = $player->coins;
+            $player->coins = $wallet + $resultPot;
+
+            $session->set("player", $player);
+
+            $data = [
+                "alias" => $alias,
+                "hands" => $handsToData,
+                "points" => $pointsToData,
+                "handsquantity" => $handsquantity,
+                "coins" => $player->coins,
+                "bets" => $bets,
+                "turn" => $turn,
+                "betsmade" => $betsmade,
+                "stay" => $stayToData,
+                "fat" => $fetToData,
+                "computerHand" => $computerHand,
+                "computerPoints" => $computerPoints,
+                "result" => $resultArr,
+                "resultPot" => $resultPot
+            ];
+            return $this->render('proj/dealer.html.twig', $data);
         }
-
-        $wallet = $player->coins;
-        $player->coins = $wallet + $resultPot;
-
-        $session->set("player", $player);
-
-        $data = [
-            "alias" => $alias,
-            "hands" => $handsToData,
-            "points" => $pointsToData,
-            "handsquantity" => $handsquantity,
-            "coins" => $player->coins,
-            "bets" => $bets,
-            "turn" => $turn,
-            "betsmade" => $betsmade,
-            "stay" => $stayToData,
-            "fat" => $fetToData,
-            "computerHand" => $computerHand,
-            "computerPoints" => $computerPoints,
-            "result" => $resultArr,
-            "resultPot" => $resultPot
-        ];
-        return $this->render('proj/dealer.html.twig', $data);
-    }
     #[Route("/proj/api", name: 'proj_api_init', methods: ['GET'])]
     public function blackjackapi(
         Request $request,
@@ -523,7 +503,7 @@ class BlackJackController extends AbstractController
         $deck = new BlackJackDeckOfCards();
         $session->set("BlackJackDeck", $deck);
         $deck->shuffle();
-        $session->set("player", new BlackJackPlayer);
+        $session->set("player", new BlackJackPlayer());
         $session->set('handsquantity', 1);
         $session->set("computer", 0);
         $session->set("turn", 0);

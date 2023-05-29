@@ -14,8 +14,6 @@ class BlackJackCardHand extends BlackJackDeckOfCards
 {
     /**
     * method to draw cards, returns array with cards
-    * @param array<int, array<int, string>> $deck
-    * @return array<int, Card> $handArr
     */
     public function draw(int $number, array $deck): array
     {

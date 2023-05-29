@@ -1,3 +1,24 @@
+### clone and start with Sympfony
+
+CLONE
+
+ Go to the root of the course repo
+rsync -av example/symfony me/kmom01
+cd me/kmom01/symfony
+
+
+INSTALL
+
+composer create-project symfony/website-skeleton app
+cd app
+composer require webapp
+composer show
+
+RUN
+php -S localhost:8888 -t public
+
+
+
 Metrics in the mvc course
 =========================
 
@@ -207,23 +228,3 @@ Add the [config file](https://github.com/dbwebb-se/mvc/blob/main/example/scrutin
 ```
 curl -s https://raw.githubusercontent.com/dbwebb-se/mvc/main/example/scrutinizer/.scrutinizer.yml > .scrutinizer.yml
 ```
-
-
-
-Add to GitHub Actions
--------------------------
-
-There is a quick start showing you the details.
-
-* [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart)
-
-Here is the fast track.
-
-Create the directory and add the [config file](https://github.com/mosbth/mvc-metrics/blob/main/.github/workflows/main.yml).
-
-```
-mkdir --parents .github/workflows
-curl -s https://raw.githubusercontent.com/mosbth/mvc-metrics/main/.github/workflows/main.yml > .github/workflows/main.yml
-```
-
-The actions will be run on your next commit.

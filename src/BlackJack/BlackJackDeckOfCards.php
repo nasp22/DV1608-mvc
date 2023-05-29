@@ -11,9 +11,24 @@ class BlackJackDeckOfCards
 {
     /**
     * array to hold value
-    * @var array<int, Card> $value
+    * @var array<int, BlackJackCard> $value
     */
     public array $value;
+    /**
+     * construct method
+     */
+
+    /**
+    * Boolean to show if stay or not $stay
+    */
+    public bool $stay;
+
+    /**
+    * Boolean to show if fat or not $fat
+    */
+    public bool $fat;
+
+
     /**
      * construct method
      */
@@ -22,7 +37,6 @@ class BlackJackDeckOfCards
         $this->value = [];
         $this->stay = false;
         $this->fat = false;
-        $this->BlackJack = false;
         $colors = ["_of_spades", "_of_hearts", "_of_diamonds", "_of_clubs"];
         $numbers = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
         // $colors = ["_of_spades", "_of_hearts", "_of_diamonds", "_of_clubs"];
@@ -74,10 +88,7 @@ class BlackJackDeckOfCards
         }
         return $values;
     }
-    /**
-    * method to set specific value of deck
-    * @param array<int, Card> $cards
-    */
+
     public function setValue(array $cards): void
     {
         $values = [];
@@ -86,11 +97,7 @@ class BlackJackDeckOfCards
         }
         $this->value = $values;
     }
-    /**
-    * method to remove specific card/cards from deck
-    * @param array<int, Card> $cards
-    * @return array<int, Card> $values
-    */
+
     public function remove(array $cards): array
     {
         $handArr=[];

@@ -102,9 +102,9 @@ class BookController extends AbstractController
         Request $request,
     ): Response {
 
-        $id = $request->request->get('id');
-        $id = (int)$id;
-        $book = $bookRepository->find($id);
+        $idid = $request->request->get('id');
+        $idid = (int)$idid;
+        $book = $bookRepository->find($idid);
 
         if (!$book) {
             $this->addFlash(
@@ -128,9 +128,9 @@ class BookController extends AbstractController
     #[Route('/library/show/{id}', name: 'book_show_one')]
     public function showBookById(
         BookRepository $bookRepository,
-        int $id,
+        int $idid,
     ): Response {
-        $book = $bookRepository->find($id);
+        $book = $bookRepository->find($idid);
 
         $book= [
             'title' => $book->getTitle(),
@@ -208,9 +208,9 @@ class BookController extends AbstractController
         Request $request,
     ): Response {
 
-        $id = $request->request->get('id');
-        $id = (int)$id;
-        $book = $bookRepository->find($id);
+        $idid = $request->request->get('id');
+        $idid = (int)$idid;
+        $book = $bookRepository->find($idid);
 
         if (!$book) {
             $this->addFlash(
@@ -261,9 +261,9 @@ class BookController extends AbstractController
 
         foreach ($library as $book) {
             if ($isbn === (string)$book->getIsbn()) {
-                $id = $book->getId();
+                $idid = $book->getId();
                 $data = $bookRepository
-                ->find($id);
+                ->find($idid);
             }
         };
 

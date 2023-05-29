@@ -24,14 +24,14 @@ class BlackJackResult
     * method to check result, returns message
     * @param int $computerPoints
     * @param int $playersPoints
-    * @return array<int, string> $this->message
+    * @return string $this->message
     */
     public function checkresult(int $computerPoints, int $playersPoints): string
     {   /**
         * if fat, winning or loosing, set message and return
         */
 
-        if ($computerPoints == $playersPoints ) {
+        if ($computerPoints == $playersPoints) {
             $this->equal();
             return $this->message;
         }
@@ -47,7 +47,7 @@ class BlackJackResult
         if ($playersPoints < 21 && $computerPoints < 21 && $playersPoints < $computerPoints) {
             $this->lost();
             return $this->message;
-        } elseif ($playersPoints < 21 && $computerPoints < 21 && $computerPoints > $playersPoints) {
+        } elseif ($playersPoints < 21 && $computerPoints < 21 && $playersPoints > $computerPoints) {
             $this->win();
             return $this->message;
         } elseif ($playersPoints < 21 && $computerPoints > 21) {

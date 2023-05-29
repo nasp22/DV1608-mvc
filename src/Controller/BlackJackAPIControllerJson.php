@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\BlackJack\BlackJackResult;
 use App\BlackJack\BlackJackDeckOfCards;
 use App\BlackJack\BlackJackCardHand;
@@ -13,7 +14,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class BlackJackAPIControllerJson
-
 {
     #[Route("/proj/api/player", name: 'proj_api_player', methods: ['POST'])]
     public function jsonPlayer(
@@ -48,7 +48,7 @@ class BlackJackAPIControllerJson
             $handPoints = $hand->getPoints();
             $player->hands[] = $hand;
             $player->points[] = $handPoints;
-          }
+        }
 
         $response = new JsonResponse($player->hands);
         $response->setEncodingOptions(
@@ -63,13 +63,6 @@ class BlackJackAPIControllerJson
     ): Response {
         $deck = $session->get("BlackJackDeck");
         $deckString = $deck->getValue();
-
-        $turn = $session->get("turn");
-        $handsleft = $session->get("handsleft");
-        $handsquantity = $session->get("handsquantity");
-        $player = $session->get("player");
-        $bets = $session->get("bets");
-        $betsmade = $session->get("betsmade");
 
         $computerHand = new BlackJackCardHand();
         $computerHandArr = $computerHand->draw(2, $deckString);
@@ -105,7 +98,6 @@ class BlackJackAPIControllerJson
 
     #[Route("/proj/api/result", name: 'proj_api_result', methods: ['POST'])]
     public function jsonResult(
-        SessionInterface $session,
         Request $request,
     ): Response {
         $player = $request->request->get("player");
@@ -125,7 +117,6 @@ class BlackJackAPIControllerJson
     }
     #[Route("/proj/api/deck", name: "proj_api_deck", methods: ['POST'])]
     public function jsonDraw(
-        SessionInterface $session,
         Request $request
     ): Response {
         $deck = new BlackJackDeckOfCards();
@@ -150,53 +141,4 @@ class BlackJackAPIControllerJson
         );
         return $response;
     }
-
-    // #[Route("/api/game", name: "api_game", methods: ['GET'])]
-    // public function game(
-    //     SessionInterface $session
-    // ): Response {
-    //     $player = $session->get("player");
-    //     $computer =  $session->get("computer");
-
-    //     $data = [
-    //         'Player current score' => $player,
-    //         'Computer current score' => $computer,
-    //     ];
-
-    //     $response = new JsonResponse($data);
-    //     $response->setEncodingOptions(
-    //         $response->getEncodingOptions() | JSON_PRETTY_PRINT
-    //     );
-    //     return $response;
-    // }
-    // #[Route('api/library/books', name: 'api_book_show_all')]
-    // public function showAllBook(
-    //     BookRepository $bookRepository
-    // ): Response {
-    //     $books = $bookRepository
-    //         ->findAll();
-
-    //     $library = [];
-
-    //     foreach ($books as $book) {
-    //         $book= [
-    //         'title' => $book->getTitle(),
-    //         'author'=> $book->getAuthor(),
-    //         'isbn' => $book->getIsbn(),
-    //         'img' => $book->getImg(),
-    //         'id' => $book->getId()
-    //         ];
-
-    //         $library[] = $book;
-    //     };
-
-    //     $data = [
-    //         'books' => $library
-    //     ];
-    //     $response = new JsonResponse($data);
-    //     $response->setEncodingOptions(
-    //         $response->getEncodingOptions() | JSON_PRETTY_PRINT
-    //     );
-    //     return $response;
-    // }
 }
