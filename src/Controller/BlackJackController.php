@@ -187,8 +187,7 @@ class BlackJackController extends AbstractController
         foreach ($handsleft as $hand) {
             if ($hand->stay == true) {
                 $stayToData[] = "true";
-            }
-            else {
+            } else {
                 $stayToData[] = "false";
             }
         }
@@ -279,7 +278,7 @@ class BlackJackController extends AbstractController
         $bets = $session->get("bets");
         $betsmade = $session->get("betsmade");
         $handsquantity = $session->get("handsquantity");
-        for ( $x = 0; $x <= $handsquantity-1; $x++) {
+        for ($x = 0; $x <= $handsquantity-1; $x++) {
             $hand = $x+1;
             $bet = $request->request->get(StrVal($hand));
             $bets[$hand] = $bet;

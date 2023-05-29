@@ -668,7 +668,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackCardHand",
             "name": "BlackJackCardHand",
-            "summary": "class\u0020for\u0020CardHand",
+            "summary": "class\u0020for\u0020BlackJackCardHand",
             "url": "classes/App-BlackJack-BlackJackCardHand.html"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackCardHand\u003A\u003Adraw\u0028\u0029",
@@ -698,7 +698,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards",
             "name": "BlackJackDeckOfCards",
-            "summary": "class\u0020for\u0020DeckofCards",
+            "summary": "class\u0020for\u0020BlackJackDeckofCards",
             "url": "classes/App-BlackJack-BlackJackDeckOfCards.html"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards\u003A\u003A__construct\u0028\u0029",
@@ -723,12 +723,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards\u003A\u003AsetValue\u0028\u0029",
             "name": "setValue",
-            "summary": "method\u0020to\u0020set\u0020specific\u0020value\u0020of\u0020deck",
+            "summary": "",
             "url": "classes/App-BlackJack-BlackJackDeckOfCards.html#method_setValue"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards\u003A\u003Aremove\u0028\u0029",
             "name": "remove",
-            "summary": "method\u0020to\u0020remove\u0020specific\u0020card\/cards\u0020from\u0020deck",
+            "summary": "",
             "url": "classes/App-BlackJack-BlackJackDeckOfCards.html#method_remove"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards\u003A\u003A\u0024value",
@@ -736,9 +736,19 @@ Search.appendIndex(
             "summary": "array\u0020to\u0020hold\u0020value",
             "url": "classes/App-BlackJack-BlackJackDeckOfCards.html#property_value"
         },                {
+            "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards\u003A\u003A\u0024stay",
+            "name": "stay",
+            "summary": "Boolean\u0020to\u0020show\u0020if\u0020stay\u0020or\u0020not\u0020\u0024stay",
+            "url": "classes/App-BlackJack-BlackJackDeckOfCards.html#property_stay"
+        },                {
+            "fqsen": "\\App\\BlackJack\\BlackJackDeckOfCards\u003A\u003A\u0024fat",
+            "name": "fat",
+            "summary": "Boolean\u0020to\u0020show\u0020if\u0020fat\u0020or\u0020not\u0020\u0024fat",
+            "url": "classes/App-BlackJack-BlackJackDeckOfCards.html#property_fat"
+        },                {
             "fqsen": "\\App\\BlackJack\\BlackJackDrawException",
             "name": "BlackJackDrawException",
-            "summary": "Exception\u0020class\u0020for\u0020CardHand",
+            "summary": "Exception\u0020class\u0020for\u0020BlackJackCardHand",
             "url": "classes/App-BlackJack-BlackJackDrawException.html"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackPlayer",
@@ -750,21 +760,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "construct\u0020method\u0020to\u0020set\u0020name\u0020and\u0020points",
             "url": "classes/App-BlackJack-BlackJackPlayer.html#method___construct"
-        },                {
-            "fqsen": "\\App\\BlackJack\\BlackJackPlayer\u003A\u003AgetName\u0028\u0029",
-            "name": "getName",
-            "summary": "method\u0020to\u0020get\u0020name",
-            "url": "classes/App-BlackJack-BlackJackPlayer.html#method_getName"
-        },                {
-            "fqsen": "\\App\\BlackJack\\BlackJackPlayer\u003A\u003AgetPoints\u0028\u0029",
-            "name": "getPoints",
-            "summary": "method\u0020to\u0020get\u0020points",
-            "url": "classes/App-BlackJack-BlackJackPlayer.html#method_getPoints"
-        },                {
-            "fqsen": "\\App\\BlackJack\\BlackJackPlayer\u003A\u003AsetPoints\u0028\u0029",
-            "name": "setPoints",
-            "summary": "method\u0020to\u0020set\u0020points",
-            "url": "classes/App-BlackJack-BlackJackPlayer.html#method_setPoints"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackPlayer\u003A\u003AgetAsString\u0028\u0029",
             "name": "getAsString",
@@ -786,9 +781,14 @@ Search.appendIndex(
             "summary": "this\u002D\u003Ename,\u0020to\u0020hold\u0020name",
             "url": "classes/App-BlackJack-BlackJackPlayer.html#property_alias"
         },                {
+            "fqsen": "\\App\\BlackJack\\BlackJackPlayer\u003A\u003A\u0024coins",
+            "name": "coins",
+            "summary": "this\u002D\u003Ecoins,\u0020to\u0020hold\u0020coins",
+            "url": "classes/App-BlackJack-BlackJackPlayer.html#property_coins"
+        },                {
             "fqsen": "\\App\\BlackJack\\BlackJackResult",
             "name": "BlackJackResult",
-            "summary": "class\u0020for\u0020Result",
+            "summary": "class\u0020for\u0020BlackJackResult",
             "url": "classes/App-BlackJack-BlackJackResult.html"
         },                {
             "fqsen": "\\App\\BlackJack\\BlackJackResult\u003A\u003A__construct\u0028\u0029",

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use App\BlackJack\BlackJackDrawException;
 
 /**
- * class for CardHand
+ * class for BlackJackCardHand
  */
 class BlackJackCardHand extends BlackJackDeckOfCards
 {

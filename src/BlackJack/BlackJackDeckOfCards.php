@@ -5,7 +5,7 @@ namespace App\BlackJack;
 use App\BlackJack\BlackJackCard;
 
 /**
- * class for DeckofCards
+ * class for BlackJackDeckofCards
  */
 class BlackJackDeckOfCards
 {

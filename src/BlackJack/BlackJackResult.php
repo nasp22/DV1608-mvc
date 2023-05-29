@@ -3,7 +3,7 @@
 namespace App\BlackJack;
 
 /**
- * class for Result
+ * class for BlackJackResult
  */
 class BlackJackResult
 {
