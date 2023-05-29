@@ -162,6 +162,60 @@
                     faktiskt siffra som visar förbättingen av betyget.
                 </p>
                 <h2 id="kmom10">kmom10</h2>
+                <h3>Krav 1, 2, 3 - Webbplats</h3>
+                <p>Fokus för detta projekt var skapande av ett BlackJack-spel. Det kan ses som en vidareutveckling av det redan befintliga spelet 21,
+                vilken även går att spela på report-sidan. Spelet ( /proj) nås via navbar i reportsidan och navigerar besöken direkt in i ”casinot”.
+                Gällande innehåll och utseende på ”nya” webbsidan skapades en egen stil genom separat fil som ”base.html.twig” med namn ”proj_base.html.twig”.
+                Denna fick egen layout på navbar, header, footer. En Hero-bild välkomnar besökaren och ger fler alternativ som att spela BlackJack omedelbart eller
+                läsa igenom dess regler, JSON api. Målet för webbsidans layout var att det skulle kännas som att besökaren kliver in i ett casino. Detta anses vara
+                uppnått i och med kombinationen av mörkare färger, enkelhet och talande hero-bild.
+                </p>
+                <p>
+                Stor del av grunden kunde inspireras från det tidigare spelet 21. Klassen BlackJackPlayer var den klass sticker ut
+                och förändrade koden markant sedan tidigare. Denna klass håller spelarens händer, poäng, coins samt sätter fat och stay till ”true/false” om
+                denne har valt att stanna eller fått poäng över 21p och automatiskt förlorar (blir fet). Denna klass har gjort att det även nu i efterhand
+                skulle vara relativt enkelt att implementera så att man även kan vara fler än bara en spelare och att varje spelare då även kan ha 1-3 händer var.
+                </p>
+                <p>
+                Detta BlackJack-spel spelas med grundläggande regler vilka förklaras i proj/rules. Under fliken ”about” (proj/about) presenteras
+                webbsidans syfte och ger en kort introduktion till projektet. I projektet finns ett git-repo mot https://github.com/nasp22/DV1608-mvc.
+                Detta repo innehåller hela kursens uppgifter och övningar vilka uppdaterats kontinuerligt under kursaens gång. Denna innehåller även en README-fil
+                vilken förklarar hur en ny Symfony-webbsida startas upp och klonas. I README finns badges vilka är klickbara och leder till Scrutinizer
+                rapporter för build, coverage och quality. Kodtäckning hamnar på 98% och ger ett mycket glädjande resultat.
+                Det är mycket givande och roligt att skapa tester då detta till och från är riktigt klurigt,
+                men samtidigt tillfredsställande när det tillslut går från rött till grönt så tydligt som det gör vid kontroll genom doc/coverage/index.html.
+                </p>
+                <h3>Krav 4 – JSON API (opitionellt)</h3>
+                <p>
+                På sidan proj/api finns länkar att besöka för att ta del av JASON-API. Den första visar en runda för dealern vilken spelar automatiskt så
+                fort spelaren har spelat färdigt samtliga av sina händer. Den andra visar en skapad klass ”BackJackPlayer” med satt Alias. Önskat Alias skapas
+                genom formulär och hämtas i route med request för att sedan sättas genom $player->alias($alias). Vidare kan besökaren välja att se API för dom
+                händer som spelaren besitter. Önskat antal händer skapas genom formulär och hämtas i route med request för att sedan sättas genom
+                $player->hands($handsquantity). Fjärde sätts även den genom request och var mycket användbar vid utvecklingen av spelet BlackJack.
+                Här testat ett förväntat resultat efter vilka poäng dealern respektive spelaren besitter. Här kunde resultat-klassen uvecklas vidare genom testning och det var mycket fördelaktigt att snabbt kunna se om utkomsten blev som förväntat eller om klassen BlackJackResult behövde utvecklas vidare.
+                Femte och sista JSON-api:t som går att besöka är att visa kortleken efter det att 2 kort har dragits.
+                Detta är det som sker efter utdelning av en hand. I api:et visas både dom två dragna korten men också dom 50 kvarvarande korten i kortleken efter
+                draget.
+                </p>
+                <h3>Allmänt</h3>
+                <p>
+                I slutändan är resultatet i enighet med hur det förväntades, om inte lite bättre. Jag trodde inte jag skulle hinna med att lämna in ett fungerande spel då jag inte riktigt fick ordning på tidigare routes (spelet 21) och kunde inte hitta felen. Jag försökte för mycket att återanvända koden istället för att skapa ny från början. Jag lade därmed ganska mycket tid på att först den gamla koden istället. När jag väl förstod att det är mer lönsamt att göra om och göra rätt från början och jag hade flödet i huvudet gick allt som på räls igen. Nu efterhand var det bara fördelaktigt att samtlig kod fick skrivas om och ”renskrivas”. Utkomsten blev mycket bättre och nu anses koden vara lätt att vidareutveckla och arbeta med om det skull behövas. Jag hade inte varit tillräckligt tydlig i mitt tidigare skapande och det var svårt för mig att helt förstå vad respektive route gjorde och vart i koden man var.
+                    Jag har alltid svårt att släppa det estetiska och kräver lite ordning både i desigen och i logiken i kodens ordning. Därmed lades även mycket tid och utmaning på designen och layout. Enligt mig kan detta räknas som en lite extra krävade opptionellt krav. För egen del spelar det ingen roll om det räknas med i betyget eller inte, utan jag vet att utan en tilltalade design hade jag ändå inte varit nöjd nog för att kunna lämna in.
+                Jag tycker att projektet var i rimlig svårighetsgrad. Jag hade själv en uppförsbacke i starten då jag hade fel tänk från början och kodens utformning från tidigare kmom inte riktigt passade in. När jag som sagt förstått detta, tänkt om, fått en bild hur koden borde se ut samt utfört den ändringen blev det som förväntat.
+                </p>
+               <h3>
+                Avslutningsvis
+                </h3>
+                <p>
+                Detta har varit en roligt kurs men för min egen del utmanade. Detta är såklart en del av det roliga men det har varit en del många krav till
+                och från vissa veckor och jag har ibland inte riktigt förstått hur jag egentligen har hunnit med. Jag har dock under hela perioden varit fast
+                besluten att aldrig lämna in sent eller otillräckligt. Jag har givit det hela dagar, långa nätter och allt min engagemang.
+                Jag är nöjd med min insats, önskar såklart att jag skulle hunnit utföra fler optionella krav men trots det är jag riktigt nöjd.
+                Jag vet att jag har gjort mitt allt och bästa. Jag är även extremt nöjd med utseendet på webbsidan och logiken i navigering under spelts gång.
+                </p><p>
+                Handledningen har varit bra som vanligt. Jag har egentligen ingenting att tillägga mer än att det har fungerat bra. Jag har inte kunnat medverka på föreläsningarna (pga barn/arbete) under denna kurs, men anser att materialet som laddas upp på youtube/GitHub och som publiceras/diskuteras i Discord har varit mer än tillräcklig för att förstå och hänga med. Jag känner även alltid att jag får svar på mina frågor snabbt och smidigt.
+                Jag ger kursen ett slutbetyg på 9p och skulle därmed verkligen rekomendera kursen till vänner/kollegor.
+                </p>
             </article>
         </div>
 {% endblock %}

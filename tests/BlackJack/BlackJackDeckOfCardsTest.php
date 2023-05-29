@@ -120,6 +120,7 @@ class BlackJackDeckOfCardsTest extends TestCase
         $res = ["2", "_of_spades"];
         $exp = $card->getValue();
         $this->assertEquals($res, $exp);
+
         $res = $deck->remove($cards);
         $exp = [];
         $this->assertEquals($res, $exp);

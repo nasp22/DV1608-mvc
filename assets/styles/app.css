@@ -300,6 +300,21 @@ input[type=submit]:hover {
     margin: 5px;
 }
 
+.play {
+    border-radius: 4px;
+    background-color: #274215bd;
+    color: #FFFFFF;
+    text-align: center;
+    border: solid 2px #fff;
+    border-radius: 50%;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
 .button span {
     cursor: pointer;
     display: inline-block;
